@@ -1,10 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import DemoRedux from "./pages/DemoRedux";
+import Routers from "./routers/Routers";
 
 function App() {
-  return <DemoRedux />;
+  return (
+    <BrowserRouter>
+      <Routers />
+    </BrowserRouter>
+  );
 }
 
 export default App;

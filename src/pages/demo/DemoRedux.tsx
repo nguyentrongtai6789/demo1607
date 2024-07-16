@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { decrement, increment } from "../redux/slice";
+import { RootState } from "../../redux/store";
+import { decrement, increment } from "../../redux/slice";
 
 export const DemoRedux: FunctionComponent = (props) => {
   const count = useSelector((state: RootState) => state.counterReducer.value);
