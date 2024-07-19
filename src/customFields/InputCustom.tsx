@@ -13,6 +13,9 @@ export const InputCustom: React.FC<InputCustomProps> = ({
   isRequired,
   label,
   styleWrapper,
+  placeholder,
+  disabled,
+  allowClear,
   ...rest
 }) => {
   return (
@@ -21,7 +24,13 @@ export const InputCustom: React.FC<InputCustomProps> = ({
         <span>
           {label || ""} {isRequired && <span style={{ color: "red" }}>*</span>}
         </span>
-        <Input {...field} {...rest} />
+        <Input
+          {...field}
+          {...rest}
+          placeholder={placeholder}
+          allowClear={allowClear}
+          disabled={disabled}
+        />
         <div>
           {errors[field.name] && touched[field.name] && (
             <span

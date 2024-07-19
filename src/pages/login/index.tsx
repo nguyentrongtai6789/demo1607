@@ -1,54 +1,71 @@
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Input } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { FunctionComponent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ButtonCustom from "../../customFields/ButtonCustom";
 import { InputCustom } from "../../customFields/InputCustom";
+import { handleLogin } from "../../redux/authActions";
+import { AppDispatch, RootState } from "../../redux/store";
 import { ILoginValues } from "./interface";
 import "./styles.scss";
+import { handleLogout } from "../../redux/authSlice";
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export const Login: FunctionComponent = (props) => {
-  return (
+  const { loading, userInfo, userToken } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  const dispatch = useAppDispatch();
+
+  return loading ? (
     <>
-      <div className="login-page" style={{ textAlign: "center" }}>
-        <div className="login-form">
-          <Formik
-            initialValues={{
-              username: "",
-              matKhau: "",
-            }}
-            onSubmit={(values: ILoginValues) => {
-              console.log(values);
-            }}
-          >
-            {(propsFormik: FormikProps<ILoginValues>) => {
-              const { values, setValues, setFieldValue } = propsFormik;
-              return (
-                <Form>
-                  <Field
-                    component={InputCustom}
-                    name={"username"}
-                    placeholder={"Tên đăng nhập"}
-                  />
-                  <Field
-                    component={Input.Password}
-                    name={"matKhau"}
-                    placeholder={"Mật khẩu"}
-                    isRequired
-                    iconRender={(passwordVisible: boolean) =>
-                      passwordVisible ? (
-                        <EyeTwoTone />
-                      ) : (
-                        <EyeInvisibleOutlined />
-                      )
-                    }
-                  />
-                  <button type="submit">Đăng nhập</button>
-                </Form>
-              );
-            }}
-          </Formik>
-        </div>
+      <p>Loading....</p>
+    </>
+  ) : !userToken ? (
+    <div className="login-page" style={{ textAlign: "center" }}>
+      <div className="login-form">
+        <Formik
+          initialValues={{
+            username: "",
+            password: "",
+          }}
+          onSubmit={(values: ILoginValues) => {
+            dispatch(handleLogin(values));
+          }}
+        >
+          {(propsFormik: FormikProps<ILoginValues>) => {
+            const { values, setValues, setFieldValue } = propsFormik;
+            return (
+              <Form>
+                <Field
+                  component={InputCustom}
+                  name={"username"}
+                  placeholder={"Tên đăng nhập"}
+                />
+                <Field
+                  component={InputCustom}
+                  name={"password"}
+                  disabled={false}
+                  placeholder={"Mật khẩu"}
+                />
+                <ButtonCustom htmlType="submit">Đăng nhập</ButtonCustom>
+              </Form>
+            );
+          }}
+        </Formik>
       </div>
+    </div>
+  ) : (
+    <>
+      <ButtonCustom
+        htmlType="submit"
+        onClick={() => {
+          dispatch(handleLogout());
+        }}
+      >
+        Đăng xuất
+      </ButtonCustom>
     </>
   );
 };
