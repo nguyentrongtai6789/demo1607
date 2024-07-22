@@ -1,13 +1,16 @@
+import { Select } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import ButtonCustom from "../../customFields/ButtonCustom";
 import { InputCustom } from "../../customFields/InputCustom";
 import { handleLogin } from "../../redux/authActions";
-import { handleLogout } from "../../redux/authSlice";
+import { handleChangeLanguage, handleLogout } from "../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { ILoginValues } from "./interface";
 import "./styles.scss";
+import { LanguageOptions } from "../../i18n/i18n";
 
 export const Login: FunctionComponent = (props) => {
   const { loading, userInfo, userToken } = useSelector(
@@ -15,6 +18,8 @@ export const Login: FunctionComponent = (props) => {
   );
 
   const dispatch = useAppDispatch();
+
+  const { t } = useTranslation();
 
   return loading ? (
     <>
@@ -39,15 +44,25 @@ export const Login: FunctionComponent = (props) => {
                 <Field
                   component={InputCustom}
                   name={"username"}
-                  placeholder={"Tên đăng nhập"}
+                  placeholder={t("username")}
                 />
                 <Field
                   component={InputCustom}
                   name={"password"}
                   disabled={false}
-                  placeholder={"Mật khẩu"}
+                  placeholder={t("password")}
                 />
-                <ButtonCustom htmlType="submit">Đăng nhập</ButtonCustom>
+                <ButtonCustom htmlType="submit">{t("log in")}</ButtonCustom>
+                <div>
+                  <Select
+                    options={LanguageOptions}
+                    placeholder={t("select languague")}
+                    style={{ width: 200 }}
+                    onChange={(value: string) =>
+                      dispatch(handleChangeLanguage(value))
+                    }
+                  />
+                </div>
               </Form>
             );
           }}
@@ -62,9 +77,10 @@ export const Login: FunctionComponent = (props) => {
           dispatch(handleLogout());
         }}
       >
-        Đăng xuất
+        {t("log in")}
       </ButtonCustom>
     </>
   );
 };
+
 export default Login;
