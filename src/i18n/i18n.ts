@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LOGIN from "../pages/login/index.json";
 
 export enum ELanguages {
   English = "English",
@@ -9,7 +10,7 @@ export enum ELanguages {
 export const languages = {
   en: ELanguages.English,
   vi: ELanguages.Vietnamese,
-};
+} as const;
 
 interface ILanguageOptions {
   value: keyof typeof languages;
@@ -25,26 +26,18 @@ export const LanguageOptions: ILanguageOptions[] = [
     value: "vi",
     label: ELanguages.Vietnamese,
   },
-];
+] as const;
 
-const resources = {
+export const resources = {
   en: {
-    translation: {
-      username: "Username",
-      password: "Password",
-      "log in": "Log in",
-      "select languague": "Select languague",
-    },
+    login: LOGIN.en,
   },
   vi: {
-    translation: {
-      username: "Tên đăng nhập",
-      password: "Mật khẩu",
-      "log in": "Đăng nhập",
-      "select languague": "Chọn ngôn ngữ",
-    },
+    login: LOGIN.vi,
   },
-};
+} as const;
+
+export const defaultNS = "login";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -53,6 +46,8 @@ i18n
     // (tip move them in a JSON file and import them,
     // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     resources,
+    ns: ["login"],
+    defaultNS: defaultNS,
     lng: "en", // if you're using a language detector, do not define the lng option
     fallbackLng: "en",
     interpolation: {

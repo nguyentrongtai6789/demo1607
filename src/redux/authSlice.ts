@@ -14,7 +14,7 @@ export const initialState: IAuthState = {
   userInfo: {}, // for user object
   userToken: localStorage.getItem("userToken") || null,
   language: (localStorage.getItem("language") ||
-    "vi") as keyof typeof languages,
+    "en") as keyof typeof languages,
 };
 
 export const handleLogout = createAction("auth/handleLogout");

@@ -1,0 +1,14 @@
+{
+  "en": {
+    "username": "Username",
+    "password": "Password",
+    "log in": "Log in",
+    "select languague": "Select languague"
+  },
+  "vi": {
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "log in": "Đăng nhập",
+    "select languague": "Chọn ngôn ngữ"
+  }
+}
