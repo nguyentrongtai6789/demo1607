@@ -3,8 +3,8 @@ import { Field, Form, Formik, FormikProps } from "formik";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ButtonCustom from "../../customFields/ButtonCustom";
-import { InputCustom } from "../../customFields/InputCustom";
+import ButtonCustom from "../../customAntd/ButtonCustom";
+import { InputCustom } from "../../customAntd/InputCustom";
 import { LanguageOptions } from "../../i18n/i18n";
 import { handleLogin } from "../../redux/authActions";
 import { handleChangeLanguage, handleLogout } from "../../redux/authSlice";
@@ -21,11 +21,7 @@ export const Login: FunctionComponent = (props) => {
 
   const { t } = useTranslation("login");
 
-  return loading ? (
-    <>
-      <p>Loading....</p>
-    </>
-  ) : !userToken ? (
+  return (
     <div className="login-page" style={{ textAlign: "center" }}>
       <div className="login-form">
         <Formik
@@ -69,17 +65,6 @@ export const Login: FunctionComponent = (props) => {
         </Formik>
       </div>
     </div>
-  ) : (
-    <>
-      <ButtonCustom
-        htmlType="submit"
-        onClick={() => {
-          dispatch(handleLogout());
-        }}
-      >
-        {t("log in")}
-      </ButtonCustom>
-    </>
   );
 };
 
