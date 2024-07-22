@@ -1,15 +1,13 @@
 import { Field, Form, Formik, FormikProps } from "formik";
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ButtonCustom from "../../customFields/ButtonCustom";
 import { InputCustom } from "../../customFields/InputCustom";
 import { handleLogin } from "../../redux/authActions";
-import { AppDispatch, RootState } from "../../redux/store";
+import { handleLogout } from "../../redux/authSlice";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { ILoginValues } from "./interface";
 import "./styles.scss";
-import { handleLogout } from "../../redux/authSlice";
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export const Login: FunctionComponent = (props) => {
   const { loading, userInfo, userToken } = useSelector(
