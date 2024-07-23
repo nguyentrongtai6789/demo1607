@@ -72,19 +72,32 @@ export const Login: React.FC = (props) => {
                   component={InputCustom}
                   name={"username"}
                   placeholder={t("username")}
+                  size="middle"
                 />
                 <Field
                   component={InputCustom}
                   name={"password"}
                   disabled={false}
                   placeholder={t("password")}
+                  size="middle"
                 />
-                <ButtonCustom htmlType="submit">{t("log in")}</ButtonCustom>
+                <ButtonCustom htmlType="submit" width="100px">
+                  {t("log in")}
+                </ButtonCustom>
                 <div>
                   <Select
                     options={LanguageOptions}
                     placeholder={t("select languague")}
-                    style={{ width: 200 }}
+                    style={{
+                      width: 150,
+                      marginTop: "5px",
+                      // height: "25px",
+                      // position: "fixed",
+                      // top: 10,
+                      // right: 10,
+                    }}
+                    size="small"
+                    // dropdownStyle={{ height: "25px" }}
                     onChange={(value: string) =>
                       dispatch(handleChangeLanguage(value))
                     }

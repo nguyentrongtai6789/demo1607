@@ -7,6 +7,8 @@ import "./index.css";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import "../src/styles/loading.scss";
+import "../src/styles/button.scss";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

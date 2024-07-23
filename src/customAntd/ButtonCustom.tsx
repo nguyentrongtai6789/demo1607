@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import { ButtonHTMLType } from "antd/es/button";
+import { SizeType } from "antd/es/config-provider/SizeContext";
 import React from "react";
 interface Props {
   border?: string;
@@ -10,6 +11,7 @@ interface Props {
   radius?: string;
   width?: string;
   htmlType?: ButtonHTMLType;
+  size?: SizeType;
 }
 
 const ButtonCustom: React.FC<Props> = ({
@@ -21,18 +23,22 @@ const ButtonCustom: React.FC<Props> = ({
   radius,
   width,
   htmlType,
+  size,
+  ...rest
 }) => {
   return (
     <Button
+      size={size ? size : "small"}
       onClick={onClick}
       style={{
         backgroundColor: color,
         border,
-        borderRadius: radius,
-        height,
+        borderRadius: radius ? radius : "none",
+        height: height ? height : "25px",
         width,
       }}
       htmlType={htmlType}
+      {...rest}
     >
       {children}
     </Button>

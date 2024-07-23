@@ -1,10 +1,12 @@
 import { Input, InputProps } from "antd";
+import { SizeType } from "antd/es/config-provider/SizeContext";
 import { ErrorMessage, FieldProps } from "formik";
 
 export interface InputCustomProps extends FieldProps, Omit<InputProps, "form"> {
   isRequired?: boolean;
   label?: string;
   styleWrapper?: React.CSSProperties;
+  size?: SizeType;
 }
 
 export const InputCustom: React.FC<InputCustomProps> = ({
@@ -16,6 +18,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
   placeholder,
   disabled,
   allowClear,
+  size,
   ...rest
 }) => {
   return (
@@ -30,6 +33,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           placeholder={placeholder}
           allowClear={allowClear}
           disabled={disabled}
+          size={size ? size : "small"}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
