@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import axios, { AxiosError } from "axios";
+import NotificationCustom from "../customAntd/NotificationCustom";
 export interface ILoginPayload {
   username: string;
   password: string;
@@ -7,16 +8,19 @@ export interface ILoginPayload {
 
 export const handleLogin = createAsyncThunk(
   "login/action",
-  (values: ILoginPayload, { rejectWithValue }) => {
+  async (values: ILoginPayload, { rejectWithValue }) => {
     try {
-      if (values.username === "username" && values.password === "password") {
-        localStorage.setItem("userToken", "agsldhalhds2398e3bjabsdl");
-        return { pass: 1, userToken: "agsldhalhds2398e3bjabsdl" };
-      } else {
-        return { pass: 2, userToken: null };
+      const res = await axios.post("http://localhost:8080/api/login", values);
+      if (res.status === 200) {
+        NotificationCustom("login successfully", "success");
       }
-    } catch (error) {
-      return rejectWithValue("Xảy ra lỗi");
+    } catch (error: any) {
+      if (error?.response?.status === 401) {
+        NotificationCustom("wrong password or username", "error");
+      }
+      if (error?.code === AxiosError.ERR_NETWORK) {
+        NotificationCustom("network error", "error");
+      }
     }
   }
 );

@@ -3,12 +3,18 @@
     "username": "Username",
     "password": "Password",
     "log in": "Log in",
-    "select languague": "Select languague"
+    "select languague": "Select languague",
+    "network error": "Network error",
+    "login successfully": "Login successfully",
+    "wrong password or username": "Wrong password or username"
   },
   "vi": {
     "username": "Tên đăng nhập",
     "password": "Mật khẩu",
     "log in": "Đăng nhập",
-    "select languague": "Chọn ngôn ngữ"
+    "select languague": "Chọn ngôn ngữ",
+    "network error": "Lỗi kết nối mạng",
+    "login successfully": "Đăng nhập thành công",
+    "wrong password or username": "Tài khoản hoặc mật khẩu không đúng"
   }
 }

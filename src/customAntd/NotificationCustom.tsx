@@ -6,9 +6,11 @@ import {
 } from "@ant-design/icons";
 import { notification } from "antd";
 import { IconType } from "antd/es/notification/interface";
+import { useTranslation } from "react-i18next";
+import LOGIN from "../pages/login/index.json";
 
 const NotificationCustom = (
-  description: string,
+  description: keyof typeof LOGIN.en,
   type?: IconType,
   duration?: number
 ) => {

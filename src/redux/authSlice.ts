@@ -7,6 +7,7 @@ interface IAuthState {
   userInfo: any;
   userToken: string | null;
   language: keyof typeof languages;
+  countLoading: number;
 }
 
 export const initialState: IAuthState = {
@@ -15,6 +16,7 @@ export const initialState: IAuthState = {
   userToken: localStorage.getItem("userToken") || null,
   language: (localStorage.getItem("language") ||
     "en") as keyof typeof languages,
+  countLoading: 0,
 };
 
 export const handleLogout = createAction("auth/handleLogout");
@@ -22,6 +24,10 @@ export const handleLogout = createAction("auth/handleLogout");
 export const handleChangeLanguage = createAction<string>(
   "auth/handleChangeLanguage"
 );
+
+export const handleLoading = createAction("auth/handleLoading");
+
+export const loadingCancel = createAction("auth/loadingCancel");
 
 const authSlice = createSlice({
   name: "auth",
@@ -37,6 +43,18 @@ const authSlice = createSlice({
       localStorage.setItem("language", action.payload);
       state.language = action.payload;
     },
+    handleLoading: (state: IAuthState, action) => {
+      state.loading = true;
+      state.countLoading = state.countLoading + 1;
+      console.log(state.loading);
+    },
+    loadingCancel: (state: IAuthState, action) => {
+      state.countLoading = state.countLoading - 1;
+      if (state.countLoading === 0) {
+        state.loading = false;
+      }
+      console.log(state.loading);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -45,7 +63,7 @@ const authSlice = createSlice({
       })
       .addCase(handleLogin.fulfilled, (state: IAuthState, { payload }) => {
         state.loading = false;
-        state.userToken = payload.userToken;
+        // state.userToken = payload.userToken;
       })
       .addCase(handleLogin.rejected, (state: IAuthState, action) => {
         state.loading = false;

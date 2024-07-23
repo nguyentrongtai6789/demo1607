@@ -15,13 +15,15 @@ function App() {
     i18n.changeLanguage(language);
   };
 
+  const { loading } = useSelector((state: RootState) => state.auth);
+
   useEffect(() => {
     changeLanguage(language);
   }, [language]);
 
   return (
     <BrowserRouter>
-      <Routers />
+      {loading ? <div>loading....</div> : <Routers />}
     </BrowserRouter>
   );
 }

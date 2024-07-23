@@ -22,13 +22,13 @@ class Services {
       },
       function (error: AxiosError) {
         if (error?.response?.status === 401) {
-          NotificationCustom(
-            "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
-            "error"
-          );
+          // NotificationCustom(
+          //   "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
+          //   "error"
+          // );
         }
         if (error?.code === AxiosError.ERR_NETWORK) {
-          NotificationCustom("Lỗi kết nối mạng", "error");
+          // NotificationCustom("Lỗi kết nối mạng", "error");
         }
         return Promise.reject(error);
       }
