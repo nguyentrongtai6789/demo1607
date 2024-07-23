@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { HashLoader } from "react-spinners";
 
 function App() {
   const { language } = useSelector((state: RootState) => state.auth);
@@ -23,7 +24,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loading ? <div>loading....</div> : <Routers />}
+      <Routers />
+      {loading && (
+        <div className="loading-wrapper">
+          <HashLoader size={35} color="black" />
+        </div>
+      )}
     </BrowserRouter>
   );
 }

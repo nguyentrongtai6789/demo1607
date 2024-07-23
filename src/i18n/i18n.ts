@@ -10,7 +10,7 @@ export enum ELanguages {
 export const languages = {
   en: ELanguages.English,
   vi: ELanguages.Vietnamese,
-} as const;
+};
 
 interface ILanguageOptions {
   value: keyof typeof languages;
@@ -26,7 +26,7 @@ export const LanguageOptions: ILanguageOptions[] = [
     value: "vi",
     label: ELanguages.Vietnamese,
   },
-] as const;
+];
 
 export const resources = {
   en: {
@@ -35,7 +35,7 @@ export const resources = {
   vi: {
     login: LOGIN.vi,
   },
-} as const;
+};
 
 export const defaultNS = "login";
 
