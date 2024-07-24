@@ -1,6 +1,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import { languages } from "../i18n/i18n";
 import { handleLogin } from "./authActions";
+import httpMethod from "../config/httpMethod";
 
 interface IAuthState {
   loading: boolean;
@@ -29,6 +30,8 @@ export const handleLoading = createAction("auth/handleLoading");
 
 export const loadingCancel = createAction("auth/loadingCancel");
 
+export const loginSuccess = createAction<any>("auth/loginSuccess");
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -46,14 +49,18 @@ const authSlice = createSlice({
     handleLoading: (state: IAuthState, action) => {
       state.loading = true;
       state.countLoading = state.countLoading + 1;
-      console.log(state.loading);
     },
     loadingCancel: (state: IAuthState, action) => {
       state.countLoading = state.countLoading - 1;
       if (state.countLoading === 0) {
         state.loading = false;
       }
-      console.log(state.loading);
+    },
+    loginSuccess: (state: IAuthState, action) => {
+      localStorage.setItem("userToken", action.payload.token);
+      state.userInfo = action.payload;
+      state.userToken = action.payload.token;
+      httpMethod.attachTokenToHeader(action.payload.token);
     },
   },
   extraReducers: (builder) => {

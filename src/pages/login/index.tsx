@@ -1,33 +1,30 @@
-import { notification, Select } from "antd";
+import { Input, Select } from "antd";
+import { AxiosError } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
-import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
+import NotificationCustom from "../../customAntd/NotificationCustom";
 import { LanguageOptions } from "../../i18n/i18n";
-import { handleLogin } from "../../redux/authActions";
 import {
   handleChangeLanguage,
   handleLoading,
-  handleLogout,
   loadingCancel,
+  loginSuccess,
 } from "../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { ILoginValues } from "./interface";
 import "./styles.scss";
-import NotificationCustom from "../../customAntd/NotificationCustom";
-import httpMethod from "../../config/httpMethod";
-import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = (props) => {
-  const { loading, userInfo, userToken } = useSelector(
-    (state: RootState) => state.auth
-  );
-
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation("login");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -37,7 +34,9 @@ export const Login: React.FC = (props) => {
         values
       );
       if (res.status === 200) {
-        NotificationCustom("login successfully", "success");
+        NotificationCustom(t("login successfully"), "success");
+        dispatch(loginSuccess(res.data));
+        navigate("/trang-chu");
       }
     } catch (error: any) {
       console.log(error);
@@ -75,11 +74,14 @@ export const Login: React.FC = (props) => {
                   size="middle"
                 />
                 <Field
-                  component={InputCustom}
-                  name={"password"}
+                  component={Input.Password}
                   disabled={false}
                   placeholder={t("password")}
                   size="middle"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setFieldValue("password", event.target.value);
+                  }}
+                  style={{ marginBottom: "5px" }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
                   {t("log in")}

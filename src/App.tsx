@@ -27,7 +27,7 @@ function App() {
       <Routers />
       {loading && (
         <div className="loading-wrapper">
-          <HashLoader size={35} color="black" />
+          <HashLoader size={35} color="red" />
         </div>
       )}
     </BrowserRouter>
