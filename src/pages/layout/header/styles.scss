@@ -9,8 +9,6 @@
   background: #b21909;
   transition: all 0s ease-in-out !important;
   .ant-space {
-    //css dropdown phần menu header
-
     .ant-dropdown-trigger {
       color: aliceblue;
       font-weight: 600;
@@ -41,7 +39,7 @@
     }
     .ant-dropdown-menu-item-only-child {
       &:hover {
-        background: rgb(136, 136, 136);
+        background: rgb(220, 217, 217);
       }
     }
   }

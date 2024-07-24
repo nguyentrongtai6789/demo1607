@@ -8,14 +8,20 @@ import { RootState } from "./redux/store";
 import Routers from "./routers/Routers";
 
 function App() {
-  const { language, loading } = useSelector((state: RootState) => state.auth);
+  const { language, loading, userToken } = useSelector(
+    (state: RootState) => state.auth
+  );
+
   const { i18n } = useTranslation();
+
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
+
   useEffect(() => {
     changeLanguage(language);
   }, [language]);
+
   return (
     <BrowserRouter>
       <Routers />

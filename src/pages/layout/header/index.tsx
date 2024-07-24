@@ -5,35 +5,45 @@ import { UserOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
-import { handleLogout } from "../../../redux/authSlice";
+import { handleChangeLanguage, handleLogout } from "../../../redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { spawn } from "child_process";
+import { LanguageOptions, languages } from "../../../i18n/i18n";
 
 export default () => {
+  const { t, i18n } = useTranslation("header");
+
   const menuQuanLy: MenuProps["items"] = [
     {
       label: (
-        <a href="https://www.antgroup.com">Tạo yêu cầu đối sánh sinh trắc</a>
+        <a href="https://www.antgroup.com">
+          {t("Create a biometric match request")}
+        </a>
       ),
       key: "0",
     },
     {
       label: (
-        <a href="https://www.aliyun.com">Nhận kết quả đối sánh sinh trắc</a>
+        <a href="https://www.aliyun.com">{t("Get biometric match results")}</a>
       ),
       key: "1",
     },
     {
       label: (
         <a href="https://www.aliyun.com">
-          Gửi kết quả đối sánh sinh trắc sang phần mềm Quản lý, xử lý hồ sơ số
-          hoá
+          {t(
+            "Send biometric matching results to digital document management and processing software"
+          )}
         </a>
       ),
       key: "3",
     },
     {
       label: (
-        <a href="https://www.aliyun.com">Quản lý yêu cầu đối sánh sinh trắc</a>
+        <a href="https://www.aliyun.com">
+          {t("MANAGING BIOMETRIC MATCHING REQUESTS")}
+        </a>
       ),
       key: "4",
     },
@@ -43,7 +53,9 @@ export default () => {
     {
       label: (
         <a href="https://www.antgroup.com">
-          ĐỐI SOÁT LẠI THÔNG TIN CÔNG DÂN VỚI HỆ THỐNG căn cước công dân
+          {t(
+            "RECONTROLLING CITIZEN INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM"
+          )}
         </a>
       ),
       key: "0",
@@ -51,7 +63,9 @@ export default () => {
     {
       label: (
         <a href="https://www.aliyun.com">
-          ĐỐI SOÁT THÔNG TIN ĐỐI TƯỢNG VỚI HỆ THỐNG căn cước công dân
+          {t(
+            "CONTROL OF SUBJECT INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM"
+          )}
         </a>
       ),
       key: "1",
@@ -59,8 +73,9 @@ export default () => {
     {
       label: (
         <a href="https://www.aliyun.com">
-          ĐỐI SOÁT THÔNG TIN CÔNG DÂN VỚI HỆ THỐNG CƠ SỞ DỮ LIỆU QUỐC GIA VỀ DÂN
-          CƯ
+          {t(
+            "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM"
+          )}
         </a>
       ),
       key: "3",
@@ -68,8 +83,9 @@ export default () => {
     {
       label: (
         <a href="https://www.aliyun.com">
-          GỬI HỒ SƠ CMND 9 SỐ SAU KHI PHÊ DUYỆT HỢP NHẤT SANG PHẦM MỀM KHAI THÁC
-          DỮ LIỆU
+          {t(
+            "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+          )}
         </a>
       ),
       key: "4",
@@ -78,7 +94,9 @@ export default () => {
 
   //thông tin user:
 
-  const { language, userInfo } = useSelector((state: RootState) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+
+  const currentLanguage = languages[i18n.language as keyof typeof languages];
 
   const dispatch = useAppDispatch();
 
@@ -86,16 +104,48 @@ export default () => {
 
   const menuAvatar: MenuProps["items"] = [
     {
-      label: `Tên cán bộ: ${userInfo.username}`,
+      label: (
+        <span>
+          {t("username")}: {userInfo.username}
+        </span>
+      ),
       key: "0",
+      type: "group",
     },
     {
-      label: `Nhóm quyền:`,
+      label: `${t("author")}:`,
       key: "1",
+      type: "group",
     },
     {
-      label: `Ngôn ngữ: ${language}`,
+      label: `${t("language")}: ${currentLanguage}`,
       key: "2",
+      children: [
+        {
+          key: "2-1",
+          label: (
+            <span
+              onClick={() =>
+                dispatch(handleChangeLanguage(LanguageOptions[0].value))
+              }
+            >
+              {LanguageOptions[0].label}
+            </span>
+          ),
+        },
+        {
+          key: "2-2",
+          label: (
+            <span
+              onClick={() =>
+                dispatch(handleChangeLanguage(LanguageOptions[1].value))
+              }
+            >
+              {LanguageOptions[1].label}
+            </span>
+          ),
+        },
+      ],
     },
     {
       label: (
@@ -104,36 +154,14 @@ export default () => {
             dispatch(handleLogout());
             navigate("/login");
           }}
+          width="100%"
         >
-          Đăng xuất
+          {t("log out")}
         </ButtonCustom>
       ),
       key: "3",
     },
   ];
-
-  //   const handleDropdownVisibleChange = (dropdownId: number) => {
-  //     const dropdownElements = document.querySelectorAll(
-  //       `[class*="header-menu-"]`
-  //     ) as NodeListOf<HTMLElement>;
-
-  //     console.log(dropdownElements.length);
-
-  //     dropdownElements.forEach((element) => {
-  //       if (!element.classList.contains(`header-menu-${dropdownId}`)) {
-  //         element.style.color = "aliceblue";
-  //         element.style.textDecoration = "unset";
-  //       }
-  //     });
-
-  //     const dropdownElement = document.getElementsByClassName(
-  //       `header-menu-${dropdownId}`
-  //     )[0] as HTMLElement;
-  //     if (dropdownElement) {
-  //       dropdownElement.style.color = "yellow";
-  //       dropdownElement.style.textDecoration = "underline";
-  //     }
-  //   };
 
   return (
     <Header>
@@ -150,11 +178,11 @@ export default () => {
           className=""
         >
           <span className="header-menu-1">
-            Quản lý yêu cầu đối sánh sinh trắc
+            {t("MANAGING BIOMETRIC MATCHING REQUESTS")}
           </span>
         </Dropdown>
         <Dropdown menu={{ items: menuXuLy }} trigger={["click"]} arrow={true}>
-          <span className="header-menu-2">Xử lý hồ sơ</span>
+          <span className="header-menu-2">{t("PROCESSING OF DOCUMENTS")}</span>
         </Dropdown>
       </Space>
       <Dropdown

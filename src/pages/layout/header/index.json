@@ -1,0 +1,32 @@
+{
+  "en": {
+    "log out": "Log out",
+    "username": "Username",
+    "author": "Author",
+    "language": "Language",
+    "Create a biometric match request": "Create a biometric match request",
+    "Get biometric match results": "Get biometric match results",
+    "Send biometric matching results to digital document management and processing software": "Send biometric matching results to digital document management and processing software",
+    "MANAGING BIOMETRIC MATCHING REQUESTS": "MANAGING BIOMETRIC MATCHING REQUESTS",
+    "PROCESSING OF DOCUMENTS": "PROCESSING OF DOCUMENTS",
+    "RECONTROLLING CITIZEN INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM": "RECONTROLLING CITIZEN INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM",
+    "CONTROL OF SUBJECT INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM": "CONTROL OF SUBJECT INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM",
+    "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM": "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM",
+    "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE": "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+  },
+  "vi": {
+    "log out": "Đăng xuất",
+    "username": "Tên cán bộ",
+    "author": "Nhóm quyền",
+    "language": "Ngôn ngữ",
+    "Create a biometric match request": "Tạo yêu cầu đối sánh sinh trắc",
+    "Get biometric match results": "Nhận kết quả đối sánh sinh trắc",
+    "Send biometric matching results to digital document management and processing software": "Gửi kết quả đối sánh sinh trắc sang phần mềm Quản lý, xử lý hồ sơ số hoá",
+    "MANAGING BIOMETRIC MATCHING REQUESTS": "Quản lý yêu cầu đối sánh sinh trắc",
+    "PROCESSING OF DOCUMENTS": "Xử lý hồ sơ",
+    "RECONTROLLING CITIZEN INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM": "ĐỐI SOÁT LẠI THÔNG TIN CÔNG DÂN VỚI HỆ THỐNG căn cước công dân",
+    "CONTROL OF SUBJECT INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM": "Đối soát lại thông tin đối tượng với hệ thống căn cước công dân",
+    "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM": "ĐỐI SOÁT THÔNG TIN CÔNG DÂN VỚI HỆ THỐNG CƠ SỞ DỮ LIỆU QUỐC GIA VỀ DÂN CƯ",
+    "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE": "GỬI HỒ SƠ CMND 9 SỐ SAU KHI PHÊ DUYỆT HỢP NHẤT SANG PHẦM MỀM KHAI THÁC DỮ LIỆU"
+  }
+}
