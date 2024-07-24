@@ -1,0 +1,48 @@
+.ant-layout-header {
+  color: "#fff";
+  height: 64px;
+  padding-inline: 48;
+  line-height: unset;
+  background-color: "none";
+  background: "none";
+  display: flex;
+  background: #b21909;
+  transition: all 0s ease-in-out !important;
+  .ant-space {
+    //css dropdown phần menu header
+
+    .ant-dropdown-trigger {
+      color: aliceblue;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: uppercase;
+      &:hover {
+        text-decoration: underline;
+        color: yellow;
+        cursor: pointer;
+      }
+    }
+  }
+  .avatar-dropdown {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+}
+
+.ant-dropdown {
+  padding: unset;
+  .ant-dropdown-menu {
+    padding: unset;
+    .ant-dropdown-menu-title-content {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .ant-dropdown-menu-item-only-child {
+      &:hover {
+        background: rgb(136, 136, 136);
+      }
+    }
+  }
+}
