@@ -2,29 +2,30 @@ import { Input, Select } from "antd";
 import { AxiosError } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
-import { LanguageOptions } from "../../i18n/i18n";
+import { LanguageOptions, languages } from "../../i18n/i18n";
 import {
   handleChangeLanguage,
   handleLoading,
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { ILoginValues } from "./interface";
 import "./styles.scss";
-import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { t } = useTranslation("login");
+  const { t, i18n } = useTranslation("login");
 
   const navigate = useNavigate();
+
+  const currentLanguage = languages[i18n.language as keyof typeof languages];
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -89,7 +90,7 @@ export const Login: React.FC = (props) => {
                 <div>
                   <Select
                     options={LanguageOptions}
-                    placeholder={t("select languague")}
+                    placeholder={currentLanguage}
                     style={{
                       width: 150,
                       marginTop: "5px",

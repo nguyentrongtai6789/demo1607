@@ -8,15 +8,13 @@ import { useEffect } from "react";
 import { HashLoader } from "react-spinners";
 
 function App() {
-  const { language } = useSelector((state: RootState) => state.auth);
+  const { language, loading } = useSelector((state: RootState) => state.auth);
 
   const { i18n } = useTranslation();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
-
-  const { loading } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     changeLanguage(language);

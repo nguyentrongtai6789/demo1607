@@ -5,7 +5,7 @@ const DemoRedux = lazy(() => import("../pages/demo/DemoRedux"));
 
 const Demo2 = lazy(() => import("../pages/demo/Demo2"));
 
-const TrangChu = lazy(() => import("../pages/trangChu"));
+const TrangChu = lazy(() => import("../pages/layout"));
 
 const DemoRouters: RouteObject[] = [
   {
