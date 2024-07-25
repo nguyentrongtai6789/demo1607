@@ -4,7 +4,6 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import NotificationCustom from "../customAntd/NotificationCustom";
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
@@ -33,12 +32,15 @@ class Services {
         return Promise.reject(error);
       }
     );
+    this.attachTokenToHeader("");
   }
 
   //gắn token vào header request:
   attachTokenToHeader(token: string) {
+    const tokenTest =
+      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMzMxODYwMDY2NjYiLCJkb252aSI6eyJpZCI6MywibG9naW4iOiIwMzMxODYwMDY2NjYiLCJmaXJzdE5hbWUiOm51bGwsImxhc3ROYW1lIjpudWxsLCJlbWFpbCI6bnVsbCwiYWN0aXZhdGVkIjp0cnVlLCJsYW5nS2V5IjpudWxsLCJpbWFnZVVybCI6bnVsbCwiZGlhQ2hpbmhJZCI6MSwibG9haVRrIjpudWxsLCJkb25WaUlkIjoxMTcyOCwiY2FuQm9JZCI6MywicGhvbmdCYW5JZCI6bnVsbCwiY2FwWHVMeSI6IlciLCJ0ZW5Eb25WaSI6IkPhu6VjIEPhuqNuaCBzw6F0IFFMSEMgduG7gSBUVFhIIFThuqFpIFRXIEjDoCBO4buZaSIsInRlbkNhbkJvIjoiQ8OhbiBi4buZIEEiLCJxdWFuTHkiOiJOIiwidHJ1eUNhcElkIjoxMjQ1NiwibWVzc2FnZSI6bnVsbCwiYWxsb3dEbFRvS2hhaSI6dHJ1ZSwiYWxsb3dEbENkQ2NjZCI6dHJ1ZSwiYWxsb3dEbER0Q2NjZCI6dHJ1ZSwiYWxsb3dEbENkRGFuQ3UiOnRydWUsImFsbG93RGxEdERhbkN1Ijp0cnVlLCJjaHVjVnUiOiJjw6FuIGLhu5kgIiwiYWRtaW4iOnRydWV9LCJleHAiOjIwMzY3NDEzMjB9.QO69BBgdMIlMP2RTV1UsBWpIOoZncEj5OLyj0V2eAzML7hpF_MB2KlvbnGkOtYn5tzuJSUSgO9FjmJFYllE0Cw";
     this.axios.interceptors.request.use(function (config: any) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${tokenTest}`;
       return config;
     });
   }

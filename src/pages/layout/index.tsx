@@ -1,32 +1,22 @@
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from "@ant-design/icons";
-import {
-  Button,
   Col,
   DatePicker,
   DatePickerProps,
   Input,
   Layout,
-  Menu,
-  MenuProps,
   Row,
   Select,
   SelectProps,
   TimePicker,
   TimePickerProps,
 } from "antd";
-import Sider from "antd/es/layout/Sider";
 import React, { useState } from "react";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import { Field, Form, Formik, FormikProps } from "formik";
+import { SelectCustom } from "../../customAntd/SelectCustom";
+import { SelectDonViCustom } from "../../customAntd/SelectDonViCustom";
 
 export default () => {
   const { Content } = Layout;
@@ -109,72 +99,77 @@ export default () => {
                 <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
                 <div className="search-form">
                   <div className="search-from-title">Điều kiện tìm kiếm</div>
-                  <Row>
-                    <Col span={6}>
-                      <div>Đơn vị</div>
-                      <Select
-                        mode="multiple"
-                        placeholder="Chọn đơn vị"
-                        // defaultValue={["a10", "c12"]}
-                        onChange={handleChange}
-                        style={{ width: "100%" }}
-                        options={options}
-                        size="small"
-                        allowClear={true}
-                      />
-                    </Col>
-                    <Col span={4}>
-                      <div>Số CMND</div>
-                      <Input placeholder="" size="small" title="abcd" />
-                    </Col>
-                    <Col span={4}>
-                      <div>Họ và tên</div>
-                      <Input size="small" />
-                    </Col>
-                    <Col span={4}>
-                      <div>Ngày sinh</div>
-                      <div style={{ width: "100%", display: "flex" }}>
-                        <div style={{ width: "40%" }}>
-                          <Select value={type} onChange={setType} size="small">
-                            <Option value="date">Date</Option>
-                            <Option value="week">Week</Option>
-                            <Option value="month">Month</Option>
-                            <Option value="quarter">Quarter</Option>
-                            <Option value="year">Year</Option>
-                          </Select>
-                        </div>
-                        <div style={{ width: "60%", marginLeft: "3px" }}>
-                          <PickerWithType
-                            type={type}
-                            onChange={(value) => console.log(value)}
-                          />
-                        </div>
-                      </div>
-                    </Col>
-                    <Col span={4}>
-                      <div>Ngày nhận hồ sơ</div>
-                      <div>
-                        <RangePicker
-                          disabledDate={disabled7DaysDate}
-                          picker="date"
-                          format="DD/MM/YYYY"
-                        />
-                      </div>
-                    </Col>
-                    <Col span={2}>
-                      <div>Giới tính</div>
-                      <div>
-                        <Select
-                          size="small"
-                          allowClear={true}
-                          options={[
-                            { value: 1, label: "Nam" },
-                            { value: 2, label: "Nữ" },
-                          ]}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
+                  <Formik initialValues={{ gioiTinh: "" }} onSubmit={() => {}}>
+                    {(propsFormik: FormikProps<any>) => {
+                      const { values, setValues, setFieldValue } = propsFormik;
+                      return (
+                        <Form>
+                          <Row>
+                            <Col span={7}>
+                              <Field
+                                component={SelectDonViCustom}
+                                api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
+                                label={"Đơn vị"}
+                                name={"donViId"}
+                                isRequired
+                              />
+                            </Col>
+                            <Col span={4}>
+                              <div>Số CMND</div>
+                              <Input placeholder="" size="small" title="abcd" />
+                            </Col>
+                            <Col span={4}>
+                              <div>Họ và tên</div>
+                              <Input size="small" />
+                            </Col>
+                            <Col span={4}>
+                              <div>Ngày sinh</div>
+                              <div style={{ width: "100%", display: "flex" }}>
+                                <div style={{ width: "40%" }}>
+                                  <Select
+                                    value={type}
+                                    onChange={setType}
+                                    size="small"
+                                  >
+                                    <Option value="date">Date</Option>
+                                    <Option value="month">Month</Option>
+                                    <Option value="year">Year</Option>
+                                  </Select>
+                                </div>
+                                <div
+                                  style={{ width: "60%", marginLeft: "3px" }}
+                                >
+                                  <PickerWithType
+                                    type={type}
+                                    onChange={(value) => console.log(value)}
+                                  />
+                                </div>
+                              </div>
+                            </Col>
+                            <Col span={5}>
+                              <div>Ngày nhận hồ sơ</div>
+                              <div>
+                                <RangePicker
+                                  disabledDate={disabled7DaysDate}
+                                  picker="date"
+                                  format="DD/MM/YYYY"
+                                />
+                              </div>
+                            </Col>
+                            <Col span={2}>
+                              <Field
+                                component={SelectCustom}
+                                api={"danh-muc-gioi-tinh"}
+                                label={"Giới tính"}
+                                name={"gioiTinh"}
+                                // defaultValue={4}
+                              />
+                            </Col>
+                          </Row>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
                 </div>
               </Content>
             </div>
