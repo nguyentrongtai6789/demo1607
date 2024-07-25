@@ -1,6 +1,6 @@
 .ant-menu {
   height: 100%;
-  background: #e7dfab !important;
+  background: #e7dfab;
   text-transform: uppercase;
   max-width: 300px;
   font-weight: 600;
@@ -9,6 +9,9 @@
   }
   .ant-menu-item-icon {
     color: black !important;
+  }
+  .ant-menu-inline {
+    background: #e7dfab !important;
   }
 }
 .collaps-menu-button {

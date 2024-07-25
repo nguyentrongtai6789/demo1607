@@ -49,7 +49,7 @@ export default () => {
       icon: <MailOutlined />,
       children: [
         {
-          key: "1",
+          key: "11",
           label: (
             <Tooltip
               title={t("Create a biometric match request")}
@@ -61,7 +61,7 @@ export default () => {
           ),
         },
         {
-          key: "2",
+          key: "12",
           label: (
             <Tooltip
               title={t("Get biometric match results")}
@@ -73,7 +73,7 @@ export default () => {
           ),
         },
         {
-          key: "3",
+          key: "13",
           label: (
             <Tooltip
               placement="topLeft"
@@ -96,7 +96,7 @@ export default () => {
       icon: <AppstoreOutlined />,
       children: [
         {
-          key: "1",
+          key: "21",
           label: (
             <Tooltip
               placement="topLeft"
@@ -112,7 +112,7 @@ export default () => {
           ),
         },
         {
-          key: "2",
+          key: "22",
           label: (
             <Tooltip
               placement="topLeft"
@@ -123,28 +123,28 @@ export default () => {
             >
               {t(
                 "CONTROL OF SUBJECT INFORMATION WITH THE CITIZEN IDENTIFICATION SYSTEM"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "23",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM"
+              )}
+            >
+              {t(
+                "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM"
               )}
             </Tooltip>
           ),
         },
         {
           key: "3",
-          label: (
-            <Tooltip
-              placement="topLeft"
-              overlayStyle={{ textTransform: "uppercase" }}
-              title={t(
-                "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM"
-              )}
-            >
-              {t(
-                "CONTROL CITIZEN INFORMATION WITH THE NATIONAL POPULATION DATABASE SYSTEM"
-              )}
-            </Tooltip>
-          ),
-        },
-        {
-          key: "4",
           label: (
             <Tooltip
               placement="topLeft"
@@ -169,7 +169,7 @@ export default () => {
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
-          theme="dark"
+          theme="light"
           inlineCollapsed={collapsed}
           items={items}
         />
