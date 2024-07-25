@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LOGIN from "../pages/login/index.json";
 import HEADER from "../pages/layout/header/index.json";
+import SIDEBAR_MENU from "../pages/layout/sidebar/index.json";
 
 export enum ELanguages {
   English = "English",
@@ -33,10 +34,12 @@ export const resources = {
   en: {
     login: LOGIN.en,
     header: HEADER.en,
+    sidebarMenu: SIDEBAR_MENU.en,
   },
   vi: {
     login: LOGIN.vi,
     header: HEADER.vi,
+    sidebarMenu: SIDEBAR_MENU.vi,
   },
 };
 
@@ -49,7 +52,7 @@ i18n
     // (tip move them in a JSON file and import them,
     // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     resources,
-    ns: ["login", "header"],
+    ns: ["login", "header", "sidebarMenu"],
     defaultNS: defaultNS,
     lng: "en", // if you're using a language detector, do not define the lng option
     fallbackLng: "en",
