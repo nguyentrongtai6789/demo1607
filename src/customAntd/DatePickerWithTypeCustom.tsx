@@ -1,13 +1,9 @@
-import {
-  DatePicker,
-  DatePickerProps,
-  Select,
-  TimePicker,
-  TimePickerProps,
-} from "antd";
+import { DatePicker, DatePickerProps, Select } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { FieldProps } from "formik";
-import { useState } from "react";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -24,9 +20,10 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
   label,
   styleWrapper,
   size,
+  onChange,
   ...rest
 }) => {
-  type PickerType = "time" | "date";
+  type PickerType = "date" | "month" | "year";
 
   const { Option } = Select;
 
@@ -37,22 +34,74 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
     onChange,
   }: {
     type: PickerType;
-    onChange: TimePickerProps["onChange"] | DatePickerProps["onChange"];
+    onChange: any;
   }) => {
-    if (type === "time") return <TimePicker onChange={onChange} />;
-    if (type === "date")
-      return <DatePicker onChange={onChange} format={"DD/MM/YYYY"} {...rest} />;
-    if (type === "month")
+    const formattedValue = field.value
+      ? dayjs(
+          field.value,
+          type === "date"
+            ? "DD/MM/YYYY"
+            : type === "month"
+            ? "MM/YYYY"
+            : type === "year"
+            ? "YYYY"
+            : ""
+        )
+      : null;
+    if (type === "date") {
+      return (
+        <DatePicker
+          onChange={onChange}
+          format={"DD/MM/YYYY"}
+          value={formattedValue}
+          {...rest}
+        />
+      );
+    }
+    if (type === "month") {
       return (
         <DatePicker
           onChange={onChange}
           format={"MM/YYYY"}
-          {...rest}
+          value={formattedValue}
           placeholder="Select month"
+          picker={type}
+          {...rest}
         />
       );
-    return <DatePicker picker={type} onChange={onChange} {...rest} />;
+    }
+    if (type === "year") {
+      return (
+        <DatePicker
+          picker={type}
+          value={formattedValue}
+          onChange={onChange}
+          {...rest}
+        />
+      );
+    }
+    return <></>;
   };
+
+  const handleOnChange = (value: any) => {
+    const formatValue = value.format(
+      type === "date"
+        ? "DD/MM/YYYY"
+        : type === "month"
+        ? "MM/YYYY"
+        : type === "year"
+        ? "YYYY"
+        : ""
+    );
+    const changeEvent = {
+      target: {
+        name: field.name,
+        value: formatValue || "",
+      },
+    };
+    field.onChange(changeEvent);
+  };
+
   return (
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
@@ -61,17 +110,27 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
         </span>
         <div style={{ width: "100%", display: "flex" }}>
           <div style={{ width: "40%" }}>
-            <Select value={type} onChange={setType} size={size || "small"}>
+            <Select
+              value={type}
+              onChange={(value) => {
+                setType(value);
+                const changeEvent = {
+                  target: {
+                    name: field.name,
+                    value: "",
+                  },
+                };
+                field.onChange(changeEvent);
+              }}
+              size={size || "small"}
+            >
               <Option value="date">Date</Option>
               <Option value="month">Month</Option>
               <Option value="year">Year</Option>
             </Select>
           </div>
           <div style={{ width: "60%", marginLeft: "3px" }}>
-            <PickerWithType
-              type={type}
-              onChange={(value) => console.log(value)}
-            />
+            <PickerWithType type={type} onChange={handleOnChange || onChange} />
           </div>
         </div>
       </div>

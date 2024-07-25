@@ -31,11 +31,12 @@ const ButtonCustom: React.FC<Props> = ({
       size={size ? size : "small"}
       onClick={onClick}
       style={{
-        backgroundColor: color,
-        border,
+        backgroundColor: color ? color : "#e7dfab ",
+        border: border ? border : "1px solid grey",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",
-        width,
+        width: width ? width : "100px",
+        fontWeight: "600",
       }}
       htmlType={htmlType}
       {...rest}

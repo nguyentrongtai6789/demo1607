@@ -135,7 +135,7 @@ export default () => {
                           </Row>
                           <Row>
                             <Space
-                              size={50}
+                              size={100}
                               style={{
                                 width: "100%",
                                 justifyContent: "center",
