@@ -26,6 +26,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
   allowClear,
   size,
   api,
+  onChange,
   ...rest
 }) => {
   const [options, setOptions] = useState<SelectProps["options"]>([]);
@@ -49,6 +50,16 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
       });
   }, [api]);
 
+  const handleOnChange = (value: any) => {
+    const changeEvent = {
+      target: {
+        name: field.name,
+        value: value,
+      },
+    };
+    field.onChange(changeEvent);
+  };
+
   return (
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
@@ -64,6 +75,8 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
           size={size ? size : "small"}
           options={options}
           loading={loading}
+          onChange={handleOnChange || onChange}
+          value={field.value}
           filterOption={(input, option) =>
             ((option?.label as string) ?? ("" as string))
               .toLowerCase()

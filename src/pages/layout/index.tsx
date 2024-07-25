@@ -8,6 +8,8 @@ import { SelectDonViCustom } from "../../customAntd/SelectDonViCustom";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import { DatePickerWithRangeCustom } from "../../customAntd/DatePickerWithRangeCustom";
+import ButtonCustom from "../../customAntd/ButtonCustom";
 
 export default () => {
   const { Content } = Layout;
@@ -27,18 +29,6 @@ export default () => {
     height: "100%",
   };
 
-  const disabled7DaysDate: DatePickerProps["disabledDate"] = (
-    current,
-    { from }
-  ) => {
-    if (from) {
-      return Math.abs(current.diff(from, "days")) >= 7;
-    }
-    return false;
-  };
-
-  const { RangePicker } = DatePicker;
-
   return (
     <div>
       <Layout style={layoutStyle}>
@@ -54,7 +44,12 @@ export default () => {
                 <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
                 <div className="search-form">
                   <div className="search-from-title">Điều kiện tìm kiếm</div>
-                  <Formik initialValues={{ gioiTinh: "" }} onSubmit={() => {}}>
+                  <Formik
+                    initialValues={{ gioiTinh: "" }}
+                    onSubmit={(values: any) => {
+                      console.log(values);
+                    }}
+                  >
                     {(propsFormik: FormikProps<any>) => {
                       const { values, setValues, setFieldValue } = propsFormik;
                       return (
@@ -131,26 +126,28 @@ export default () => {
                               />
                             </Col>
                             <Col span={8}>
-                              <div>Ngày nhập hồ sơ</div>
-                              <div style={{ width: "100%" }}>
-                                <Space direction="vertical">
-                                  <RangePicker
-                                    picker="date"
-                                    disabledDate={disabled7DaysDate}
-                                    id={{
-                                      start: "startInput",
-                                      end: "endInput",
-                                    }}
-                                    onFocus={(_, info) => {
-                                      console.log("Focus:", info.range);
-                                    }}
-                                    onBlur={(_, info) => {
-                                      console.log("Blur:", info.range);
-                                    }}
-                                  />
-                                </Space>
-                              </div>
+                              <Field
+                                component={DatePickerWithRangeCustom}
+                                name={"ngayNhapHoSo"}
+                                label={"Ngày nhập hồ sơ"}
+                              />
                             </Col>
+                          </Row>
+                          <Row>
+                            <Space
+                              size={50}
+                              style={{
+                                width: "100%",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <ButtonCustom htmlType="submit">
+                                Liệt kê
+                              </ButtonCustom>
+                              <ButtonCustom htmlType="reset">
+                                Xoá điều kiện
+                              </ButtonCustom>
+                            </Space>
                           </Row>
                         </Form>
                       );

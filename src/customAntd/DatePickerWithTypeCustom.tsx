@@ -61,7 +61,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
         </span>
         <div style={{ width: "100%", display: "flex" }}>
           <div style={{ width: "40%" }}>
-            <Select value={type} onChange={setType} size="small">
+            <Select value={type} onChange={setType} size={size || "small"}>
               <Option value="date">Date</Option>
               <Option value="month">Month</Option>
               <Option value="year">Year</Option>

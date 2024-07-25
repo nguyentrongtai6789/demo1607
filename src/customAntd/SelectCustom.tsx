@@ -24,6 +24,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
   placeholder,
   disabled,
   allowClear,
+  onChange,
   size,
   api,
   ...rest
@@ -49,6 +50,16 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
       });
   }, [api]);
 
+  const handleOnChange = (value: any) => {
+    const changeEvent = {
+      target: {
+        name: field.name,
+        value: value,
+      },
+    };
+    field.onChange(changeEvent);
+  };
+
   return (
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
@@ -63,6 +74,8 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
           size={size ? size : "small"}
           options={options}
           loading={loading}
+          onChange={handleOnChange || onChange}
+          value={field.value}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
