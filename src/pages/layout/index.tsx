@@ -1,22 +1,13 @@
-import {
-  Col,
-  DatePicker,
-  DatePickerProps,
-  Input,
-  Layout,
-  Row,
-  Select,
-  SelectProps,
-  TimePicker,
-  TimePickerProps,
-} from "antd";
-import React, { useState } from "react";
+import { Col, DatePicker, DatePickerProps, Layout, Row, Space } from "antd";
+import { Field, Form, Formik, FormikProps } from "formik";
+import React from "react";
+import { DatePickerWithTypeCustom } from "../../customAntd/DatePickerWithTypeCustom";
+import { InputCustom } from "../../customAntd/InputCustom";
+import { SelectCustom } from "../../customAntd/SelectCustom";
+import { SelectDonViCustom } from "../../customAntd/SelectDonViCustom";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
-import { Field, Form, Formik, FormikProps } from "formik";
-import { SelectCustom } from "../../customAntd/SelectCustom";
-import { SelectDonViCustom } from "../../customAntd/SelectDonViCustom";
 
 export default () => {
   const { Content } = Layout;
@@ -36,41 +27,6 @@ export default () => {
     height: "100%",
   };
 
-  const options: SelectProps["options"] = [];
-
-  for (let i = 10; i < 36; i++) {
-    options.push({
-      value: i.toString(36) + i,
-      label: i.toString(36) + i,
-    });
-  }
-
-  const handleChange = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
-
-  type PickerType = "time" | "date";
-
-  const [type, setType] = useState<PickerType>("date");
-
-  const { Option } = Select;
-
-  const PickerWithType = ({
-    type,
-    onChange,
-  }: {
-    type: PickerType;
-    onChange: TimePickerProps["onChange"] | DatePickerProps["onChange"];
-  }) => {
-    if (type === "time") return <TimePicker onChange={onChange} />;
-    if (type === "date")
-      return <DatePicker onChange={onChange} format={"DD/MM/YYYY"} />;
-    if (type === "month")
-      return <DatePicker onChange={onChange} format={"MM/YYYY"} />;
-
-    return <DatePicker picker={type} onChange={onChange} />;
-  };
-
   const disabled7DaysDate: DatePickerProps["disabledDate"] = (
     current,
     { from }
@@ -78,7 +34,6 @@ export default () => {
     if (from) {
       return Math.abs(current.diff(from, "days")) >= 7;
     }
-
     return false;
   };
 
@@ -105,7 +60,7 @@ export default () => {
                       return (
                         <Form>
                           <Row>
-                            <Col span={7}>
+                            <Col span={8}>
                               <Field
                                 component={SelectDonViCustom}
                                 api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
@@ -115,55 +70,86 @@ export default () => {
                               />
                             </Col>
                             <Col span={4}>
-                              <div>Số CMND</div>
-                              <Input placeholder="" size="small" title="abcd" />
+                              <Field
+                                component={InputCustom}
+                                name={"soCmnd"}
+                                label={"Số CMND"}
+                              />
                             </Col>
                             <Col span={4}>
-                              <div>Họ và tên</div>
-                              <Input size="small" />
+                              <Field
+                                component={InputCustom}
+                                name={"soCmnd"}
+                                label={"Họ và tên"}
+                              />
                             </Col>
                             <Col span={4}>
-                              <div>Ngày sinh</div>
-                              <div style={{ width: "100%", display: "flex" }}>
-                                <div style={{ width: "40%" }}>
-                                  <Select
-                                    value={type}
-                                    onChange={setType}
-                                    size="small"
-                                  >
-                                    <Option value="date">Date</Option>
-                                    <Option value="month">Month</Option>
-                                    <Option value="year">Year</Option>
-                                  </Select>
-                                </div>
-                                <div
-                                  style={{ width: "60%", marginLeft: "3px" }}
-                                >
-                                  <PickerWithType
-                                    type={type}
-                                    onChange={(value) => console.log(value)}
-                                  />
-                                </div>
-                              </div>
+                              <Field
+                                component={DatePickerWithTypeCustom}
+                                name={"ngaySinh"}
+                                label={"Ngày sinh"}
+                              />
                             </Col>
-                            <Col span={5}>
-                              <div>Ngày nhận hồ sơ</div>
-                              <div>
-                                <RangePicker
-                                  disabledDate={disabled7DaysDate}
-                                  picker="date"
-                                  format="DD/MM/YYYY"
-                                />
-                              </div>
-                            </Col>
-                            <Col span={2}>
+                            <Col span={4}>
                               <Field
                                 component={SelectCustom}
                                 api={"danh-muc-gioi-tinh"}
                                 label={"Giới tính"}
                                 name={"gioiTinh"}
-                                // defaultValue={4}
                               />
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col span={4}>
+                              <Field
+                                component={SelectCustom}
+                                api={"danh-muc-pham-vi-tim-kiem"}
+                                label={"Phạm vi tìm kiếm"}
+                                name={"phamViTimKiem"}
+                                isRequired
+                              />
+                            </Col>
+                            <Col span={4}>
+                              <Field
+                                component={InputCustom}
+                                label={"Họ tên cha"}
+                                name={"hoTenCha"}
+                              />
+                            </Col>
+                            <Col span={4}>
+                              <Field
+                                component={InputCustom}
+                                label={"Họ tên mẹ"}
+                                name={"hoTenMe"}
+                              />
+                            </Col>
+                            <Col span={4}>
+                              <Field
+                                component={InputCustom}
+                                label={"Họ tên vợ chồng"}
+                                name={"hoTenVoChong"}
+                              />
+                            </Col>
+                            <Col span={8}>
+                              <div>Ngày nhập hồ sơ</div>
+                              <div style={{ width: "100%" }}>
+                                <Space direction="vertical">
+                                  <RangePicker
+                                    picker="date"
+                                    disabledDate={disabled7DaysDate}
+                                    id={{
+                                      start: "startInput",
+                                      end: "endInput",
+                                    }}
+                                    onFocus={(_, info) => {
+                                      console.log("Focus:", info.range);
+                                    }}
+                                    onBlur={(_, info) => {
+                                      console.log("Blur:", info.range);
+                                    }}
+                                  />
+                                </Space>
+                              </div>
                             </Col>
                           </Row>
                         </Form>
