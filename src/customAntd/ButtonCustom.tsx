@@ -35,7 +35,7 @@ const ButtonCustom: React.FC<Props> = ({
         border: border ? border : "1px solid grey",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",
-        width: width ? width : "100px",
+        width: width ? width : "120px",
         fontWeight: "600",
       }}
       htmlType={htmlType}

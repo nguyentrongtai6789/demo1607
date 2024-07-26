@@ -1,5 +1,7 @@
 {
   "en": {
+    "expand menu": "EXPAND MENU",
+    "collapse menu": "COLLAPSE MENU",
     "log out": "Log out",
     "username": "Username",
     "author": "Author",
@@ -15,6 +17,8 @@
     "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE": "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
   },
   "vi": {
+    "expand menu": "MỞ RỘNG MENU",
+    "collapse menu": "THU GỌN MENU",
     "log out": "Đăng xuất",
     "username": "Tên cán bộ",
     "author": "Nhóm quyền",

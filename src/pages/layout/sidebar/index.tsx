@@ -31,7 +31,7 @@ export default () => {
       ),
       label: (
         <div onClick={toggleCollapsed}>
-          {collapsed ? "Mở rộng menu" : "Thu gọn menu"}
+          {collapsed ? t("expand menu") : t("collapse menu")}
         </div>
       ),
     },

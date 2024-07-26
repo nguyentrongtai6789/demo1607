@@ -1,0 +1,32 @@
+{
+  "en": {
+    "unit": "Unit",
+    "identity card number": "Identity card number",
+    "fullname": "Fullname",
+    "date of birth": "date of birth",
+    "gender": "Gender",
+    "search range": "Search range",
+    "father's full name": "Father's full name",
+    "mother's full name": "Mother's full name",
+    "full name of husband or wife": "Full name of husband or wife",
+    "date of entry": "Date of entry",
+    "SEARCH CONDITIONS": "SEARCH CONDITIONS",
+    "listed": "Listed",
+    "Delete condition": "Delete condition"
+  },
+  "vi": {
+    "unit": "Đơn vị",
+    "identity card number": "Số Chứng minh nhân dân",
+    "fullname": "Họ và tên",
+    "date of birth": "Ngày sinh",
+    "gender": "Giới tính",
+    "search range": "Phạm vi tìm kiếm",
+    "father's full name": "Họ tên cha",
+    "mother's full name": "Họ tên mẹ",
+    "full name of husband or wife": "Họ tên vợ chồng",
+    "date of entry": "Ngày nhập hồ sơ",
+    "SEARCH CONDITIONS": "ĐIỀU KIỆN TÌM KIẾM",
+    "listed": "Liệt kê",
+    "Delete condition": "Xoá điều kiện"
+  }
+}

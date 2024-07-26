@@ -10,6 +10,7 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 import { DatePickerWithRangeCustom } from "../../customAntd/DatePickerWithRangeCustom";
 import ButtonCustom from "../../customAntd/ButtonCustom";
+import { useTranslation } from "react-i18next";
 
 export default () => {
   const { Content } = Layout;
@@ -29,6 +30,8 @@ export default () => {
     height: "100%",
   };
 
+  const { t } = useTranslation(["dictionnary"]);
+
   return (
     <div>
       <Layout style={layoutStyle}>
@@ -43,7 +46,9 @@ export default () => {
               <Content style={contentStyle}>
                 <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
                 <div className="search-form">
-                  <div className="search-from-title">Điều kiện tìm kiếm</div>
+                  <div className="search-from-title">
+                    {t("SEARCH CONDITIONS")}
+                  </div>
                   <Formik
                     initialValues={{ gioiTinh: "" }}
                     onSubmit={(values: any) => {
@@ -59,7 +64,7 @@ export default () => {
                               <Field
                                 component={SelectDonViCustom}
                                 api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
-                                label={"Đơn vị"}
+                                label={t("unit")}
                                 name={"donViId"}
                                 isRequired
                               />
@@ -68,28 +73,28 @@ export default () => {
                               <Field
                                 component={InputCustom}
                                 name={"soCmnd"}
-                                label={"Số CMND"}
+                                label={t("identity card number")}
                               />
                             </Col>
                             <Col span={4}>
                               <Field
                                 component={InputCustom}
                                 name={"hoVaTen"}
-                                label={"Họ và tên"}
+                                label={t("dictionnary:fullname")}
                               />
                             </Col>
                             <Col span={4}>
                               <Field
                                 component={DatePickerWithTypeCustom}
                                 name={"ngaySinh"}
-                                label={"Ngày sinh"}
+                                label={t("date of birth")}
                               />
                             </Col>
                             <Col span={4}>
                               <Field
                                 component={SelectCustom}
                                 api={"danh-muc-gioi-tinh"}
-                                label={"Giới tính"}
+                                label={t("gender")}
                                 name={"gioiTinh"}
                               />
                             </Col>
@@ -99,7 +104,7 @@ export default () => {
                               <Field
                                 component={SelectCustom}
                                 api={"danh-muc-pham-vi-tim-kiem"}
-                                label={"Phạm vi tìm kiếm"}
+                                label={t("search range")}
                                 name={"phamViTimKiem"}
                                 isRequired
                               />
@@ -107,28 +112,28 @@ export default () => {
                             <Col span={4}>
                               <Field
                                 component={InputCustom}
-                                label={"Họ tên cha"}
+                                label={t("father's full name")}
                                 name={"hoTenCha"}
                               />
                             </Col>
                             <Col span={4}>
                               <Field
                                 component={InputCustom}
-                                label={"Họ tên mẹ"}
+                                label={t("mother's full name")}
                                 name={"hoTenMe"}
                               />
                             </Col>
                             <Col span={4}>
                               <Field
                                 component={InputCustom}
-                                label={"Họ tên vợ chồng"}
+                                label={t("full name of husband or wife")}
                                 name={"hoTenVoChong"}
                               />
                             </Col>
                             <Col span={8}>
                               <Field
                                 component={DatePickerWithRangeCustom}
-                                label={"Ngày nhập hồ sơ"}
+                                label={t("date of entry")}
                                 fieldName1={"ngayNhapHoSoTu"}
                                 fieldName2={"ngayNhapHoSoDen"}
                               />
@@ -143,10 +148,10 @@ export default () => {
                               }}
                             >
                               <ButtonCustom htmlType="submit">
-                                Liệt kê
+                                {t("listed")}
                               </ButtonCustom>
                               <ButtonCustom htmlType="reset">
-                                Xoá điều kiện
+                                {t("Delete condition")}
                               </ButtonCustom>
                             </Space>
                           </Row>
