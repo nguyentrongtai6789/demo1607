@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Layout from "./pages/layout";
 import { RootState } from "./redux/store";
+import RoutesOfApp from "./routers/RoutesOfApp";
+import { ClimbingBoxLoader } from "react-spinners";
 
 function App() {
   const { language, loading } = useSelector((state: RootState) => state.auth);
@@ -18,7 +20,22 @@ function App() {
     changeLanguage(language);
   }, [language]);
 
-  return <Layout />;
+  const renderLoading = () => {
+    return (
+      <div className="loading-wrapper">
+        <ClimbingBoxLoader />
+      </div>
+    );
+  };
+
+  return (
+    <Suspense fallback={renderLoading()}>
+      {loading && renderLoading()}
+      <BrowserRouter>
+        <RoutesOfApp />
+      </BrowserRouter>
+    </Suspense>
+  );
 }
 
 export default App;

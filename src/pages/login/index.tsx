@@ -37,7 +37,7 @@ export const Login: React.FC = (props) => {
       if (res.status === 200) {
         NotificationCustom(t("login successfully"), "success");
         dispatch(loginSuccess(res.data));
-        navigate("/trang-chu");
+        navigate("/quan-ly-ho-so-cmnd-9-so");
       }
     } catch (error: any) {
       console.log(error);

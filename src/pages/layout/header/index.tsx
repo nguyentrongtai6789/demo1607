@@ -21,7 +21,7 @@ export default () => {
 
   const dispatch = useAppDispatch();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const menuAvatar: MenuProps["items"] = [
     {
@@ -73,7 +73,7 @@ export default () => {
         <ButtonCustom
           onClick={() => {
             dispatch(handleLogout());
-            // navigate("/login");
+            navigate("/login");
           }}
           width="100%"
         >

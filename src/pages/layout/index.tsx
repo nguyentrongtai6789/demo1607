@@ -1,7 +1,6 @@
 import { Layout } from "antd";
 import { useTranslation } from "react-i18next";
-import { BrowserRouter } from "react-router-dom";
-import Routers from "../../routers/Routers";
+import { Outlet } from "react-router-dom";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
@@ -19,14 +18,7 @@ export default () => {
           <div style={{ display: "flex", width: "100%", height: "100%" }}>
             <Sidebar />
             <Content>
-              <BrowserRouter>
-                <Routers />
-                {/* {loading && (
-                  <div className="loading-wrapper">
-                    <HashLoader size={35} color="red" />
-                  </div>
-                )} */}
-              </BrowserRouter>
+              <Outlet />
             </Content>
           </div>
         </Layout>
