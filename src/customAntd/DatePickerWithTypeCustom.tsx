@@ -1,9 +1,8 @@
 import { DatePicker, DatePickerProps, Select } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
-import { FieldProps } from "formik";
-import moment from "moment";
-import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { FieldProps } from "formik";
+import { useState } from "react";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -130,7 +129,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
             </Select>
           </div>
           <div style={{ width: "60%", marginLeft: "3px" }}>
-            <PickerWithType type={type} onChange={handleOnChange || onChange} />
+            <PickerWithType type={type} onChange={onChange || handleOnChange} />
           </div>
         </div>
       </div>

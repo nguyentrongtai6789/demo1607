@@ -74,7 +74,7 @@ export default () => {
                             <Col span={4}>
                               <Field
                                 component={InputCustom}
-                                name={"soCmnd"}
+                                name={"hoVaTen"}
                                 label={"Họ và tên"}
                               />
                             </Col>
@@ -130,6 +130,8 @@ export default () => {
                                 component={DatePickerWithRangeCustom}
                                 name={"ngayNhapHoSo"}
                                 label={"Ngày nhập hồ sơ"}
+                                fieldName1={"ngayNhapHoSoTu"}
+                                fieldName2={"ngayNhapHoSoDen"}
                               />
                             </Col>
                           </Row>
