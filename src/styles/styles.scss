@@ -4,6 +4,7 @@
   line-height: unset !important;
   padding: 10px;
   text-align: unset !important;
+  min-height: calc(100vh - 64px - 64px);
   .title-page {
     font-size: 20px;
     text-transform: uppercase;
