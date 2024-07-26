@@ -2,7 +2,7 @@ import { DatePicker, DatePickerProps, Select } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import dayjs from "dayjs";
 import { FieldProps } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -13,7 +13,7 @@ export interface DatePickerCustomProps
   size?: SizeType;
 }
 export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
-  form: { errors, touched },
+  form: { touched, errors, resetForm, values, initialValues },
   field,
   isRequired,
   label,
@@ -82,16 +82,25 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
     return <></>;
   };
 
+  useEffect(() => {
+    if (values === initialValues) {
+      setType("date");
+    }
+  }, [values]);
+
   const handleOnChange = (value: any) => {
-    const formatValue = value.format(
-      type === "date"
-        ? "DD/MM/YYYY"
-        : type === "month"
-        ? "MM/YYYY"
-        : type === "year"
-        ? "YYYY"
-        : ""
-    );
+    const formatValue =
+      (value &&
+        value.format(
+          type === "date"
+            ? "DD/MM/YYYY"
+            : type === "month"
+            ? "MM/YYYY"
+            : type === "year"
+            ? "YYYY"
+            : ""
+        )) ||
+      null;
     const changeEvent = {
       target: {
         name: field.name,

@@ -40,19 +40,18 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
   };
 
   const handleOnChange = (value: any) => {
-    const formatValue1 = value[0].format("DD/MM/YYYY");
-    const formatValue2 = value[1].format("DD/MM/YYYY");
-
+    const formatValue1 = (value && value[0].format("DD/MM/YYYY")) || null;
+    const formatValue2 = (value && value[1].format("DD/MM/YYYY")) || null;
     const changeEvent1 = {
       target: {
         name: fieldName1,
-        value: formatValue1 || "",
+        value: formatValue1,
       },
     };
     const changeEvent2 = {
       target: {
         name: fieldName2,
-        value: formatValue2 || "",
+        value: formatValue2,
       },
     };
     field.onChange(changeEvent1);

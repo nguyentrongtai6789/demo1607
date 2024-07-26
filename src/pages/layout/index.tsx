@@ -128,7 +128,6 @@ export default () => {
                             <Col span={8}>
                               <Field
                                 component={DatePickerWithRangeCustom}
-                                name={"ngayNhapHoSo"}
                                 label={"Ngày nhập hồ sơ"}
                                 fieldName1={"ngayNhapHoSoTu"}
                                 fieldName2={"ngayNhapHoSoDen"}
