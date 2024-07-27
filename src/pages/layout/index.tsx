@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import { useEffect } from "react";
 
 export default () => {
   const { Content } = Layout;
@@ -18,14 +19,8 @@ export default () => {
           <div style={{ display: "flex" }}>
             <Sidebar />
             <Content>
-              <div
-                style={{
-                  padding: "10px",
-                  minHeight: "calc(100vh - 64px)",
-                }}
-              >
-                <Outlet />
-              </div>
+              <Outlet />
+              <Outlet />
               <Footer />
             </Content>
           </div>

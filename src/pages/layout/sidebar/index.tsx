@@ -167,7 +167,7 @@ export default () => {
 
   return (
     <>
-      <div className="sider-bar-custom">
+      <div className="side-bar-custom">
         <Menu
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
@@ -175,6 +175,7 @@ export default () => {
           theme="light"
           inlineCollapsed={collapsed}
           items={items}
+          triggerSubMenuAction={"click"}
         />
       </div>
     </>

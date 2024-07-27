@@ -1,9 +1,12 @@
 .ant-layout-content {
+  overflow-y: auto;
+  position: relative;
+  top: 64px;
   background-color: unset !important;
   color: black !important;
   line-height: unset !important;
   text-align: unset !important;
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
   .title-page {
     font-size: 20px;
     text-transform: uppercase;
@@ -35,3 +38,22 @@
 .ant-picker-range-arrow {
   padding-inline: unset !important;
 }
+/* Đối tượng thanh cuộn */
+::-webkit-scrollbar {
+  width: 8px; /* Độ rộng của thanh cuộn */
+}
+
+/* Nền của thanh cuộn */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Màu nền */
+}
+
+/* Màu của thanh cuộn khi không được hover */
+::-webkit-scrollbar-thumb {
+  background: #aeacac; /* Màu thanh cuộn */
+}
+
+/* Màu của thanh cuộn khi hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #555; /* Màu thanh cuộn khi hover */
+// }

@@ -1,8 +1,16 @@
+.side-bar-custom {
+  position: relative;
+  top: 64px;
+  // height: calc(100vh - 64px);
+  // border: 1px solid black;
+  background: #e7dfab;
+}
 .ant-menu {
-  height: 100%;
+  overflow-y: auto;
   background: #e7dfab;
   text-transform: uppercase;
   max-width: 300px;
+  max-height: calc(100vh - 64px);
   font-weight: 600;
   .ant-menu-title-content {
     color: black;
@@ -25,4 +33,13 @@
 }
 .ant-menu-item-selected {
   background-color: rgb(251, 251, 134) !important;
+}
+
+.ant-menu-submenu-placement-rightTop {
+  // border: 1px solid black;
+  // position: fixed !important;
+  // top: 100px !important;
+  // max-height: calc(100vh - 300px);
+  // overflow-y: auto;
+  display: none;
 }
