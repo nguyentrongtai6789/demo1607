@@ -1,7 +1,9 @@
-.ant-btn {
+.MuiButtonBase-root {
+  padding: unset !important;
+  text-transform: lowercase !important;
   &:hover {
-    background-color: yellow !important;
-    color: red !important;
-    border: 1px solid red !important;
+    background-color: rgb(251, 251, 134) !important;
+    // color: red !important;
+    // border: 1px solid red !important;
   }
 }

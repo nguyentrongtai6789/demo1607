@@ -1,7 +1,7 @@
-import { Button } from "antd";
 import { ButtonHTMLType } from "antd/es/button";
-import { SizeType } from "antd/es/config-provider/SizeContext";
 import React from "react";
+import Button, { ButtonPropsSizeOverrides } from "@mui/material/Button";
+
 interface Props {
   border?: string;
   color?: string;
@@ -11,7 +11,7 @@ interface Props {
   radius?: string;
   width?: string;
   htmlType?: ButtonHTMLType;
-  size?: SizeType;
+  // size?: string;
 }
 
 const ButtonCustom: React.FC<Props> = ({
@@ -23,22 +23,23 @@ const ButtonCustom: React.FC<Props> = ({
   radius,
   width,
   htmlType,
-  size,
+  // size,
   ...rest
 }) => {
   return (
     <Button
-      size={size ? size : "small"}
       onClick={onClick}
+      variant="contained"
       style={{
         backgroundColor: color ? color : "#e7dfab ",
-        border: border ? border : "1px solid grey",
+        color: "black",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",
         width: width ? width : "120px",
-        fontWeight: "600",
+        fontWeight: "550",
       }}
-      htmlType={htmlType}
+      type={htmlType}
+      // size={size ? size : "small"}
       {...rest}
     >
       {children}

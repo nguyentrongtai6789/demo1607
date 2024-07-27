@@ -2,10 +2,10 @@ import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
 import "./App.css";
 import { RootState } from "./redux/store";
 import RoutesOfApp from "./routers/RoutesOfApp";
-import { ClimbingBoxLoader } from "react-spinners";
 
 function App() {
   const { language, loading } = useSelector((state: RootState) => state.auth);
@@ -23,7 +23,7 @@ function App() {
   const renderLoading = () => {
     return (
       <div className="loading-wrapper">
-        <ClimbingBoxLoader />
+        <MoonLoader color="rgb(5 129 105)" speedMultiplier={0.5} size={50} />
       </div>
     );
   };
