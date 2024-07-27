@@ -40,7 +40,6 @@ export const Login: React.FC = (props) => {
         navigate("/trang-chu");
       }
     } catch (error: any) {
-      console.log(error);
       if (error?.response?.status === 401) {
         NotificationCustom(t("wrong password or username"), "error");
       }

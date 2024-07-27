@@ -6,7 +6,8 @@
     "select languague": "Select languague",
     "network error": "Network error",
     "login successfully": "Login successfully",
-    "wrong password or username": "Wrong password or username"
+    "wrong password or username": "Wrong password or username",
+    "You are not logged in": "You are not logged in"
   },
   "vi": {
     "username": "Tên đăng nhập",
@@ -15,6 +16,7 @@
     "select languague": "Chọn ngôn ngữ",
     "network error": "Lỗi kết nối mạng",
     "login successfully": "Đăng nhập thành công",
-    "wrong password or username": "Tài khoản hoặc mật khẩu không đúng"
+    "wrong password or username": "Sai tài khoản hoặc mật khẩu",
+    "You are not logged in": "Bạn chưa đăng nhập"
   }
 }

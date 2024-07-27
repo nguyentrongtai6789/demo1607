@@ -1,31 +1,41 @@
 import { Layout } from "antd";
-import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
+import { RootState } from "../../redux/store";
 import Footer from "./footer";
 import Header from "./header";
 import Sidebar from "./sidebar";
-import { useEffect } from "react";
 
 export default () => {
   const { Content } = Layout;
 
-  const { t } = useTranslation(["dictionnary"]);
+  const { userToken } = useSelector((state: RootState) => state.auth);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userToken) {
+      navigate("/login");
+    }
+  }, [userToken]);
 
   return (
     <div>
-      <Layout>
-        <Header />
+      {userToken && (
         <Layout>
-          <div style={{ display: "flex" }}>
-            <Sidebar />
-            <Content>
-              <Outlet />
-              <Outlet />
-              <Footer />
-            </Content>
-          </div>
+          <Header />
+          <Layout>
+            <div style={{ display: "flex" }}>
+              <Sidebar />
+              <Content>
+                <Outlet />
+                <Footer />
+              </Content>
+            </div>
+          </Layout>
         </Layout>
-      </Layout>
+      )}
     </div>
   );
 };

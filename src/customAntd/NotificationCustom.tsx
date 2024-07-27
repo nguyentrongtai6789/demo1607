@@ -6,11 +6,9 @@ import {
 } from "@ant-design/icons";
 import { notification } from "antd";
 import { IconType } from "antd/es/notification/interface";
-import { useTranslation } from "react-i18next";
-import LOGIN from "../pages/login/index.json";
 
 const NotificationCustom = (
-  description: keyof typeof LOGIN.en,
+  description: string,
   type?: IconType,
   duration?: number
 ) => {
@@ -19,7 +17,7 @@ const NotificationCustom = (
     description: description,
     type: type,
     closeIcon: false,
-    duration: duration ? duration : 1,
+    duration: duration ? duration : 3,
     icon:
       type === "error" ? (
         <ExclamationCircleOutlined />
