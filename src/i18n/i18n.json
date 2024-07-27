@@ -12,7 +12,8 @@
     "date of entry": "Date of entry",
     "SEARCH CONDITIONS": "SEARCH CONDITIONS",
     "listed": "Listed",
-    "Delete condition": "Delete condition"
+    "Delete condition": "Delete condition",
+    "Not Found": "Not Found"
   },
   "vi": {
     "unit": "Đơn vị",
@@ -27,6 +28,7 @@
     "date of entry": "Ngày nhập hồ sơ",
     "SEARCH CONDITIONS": "ĐIỀU KIỆN TÌM KIẾM",
     "listed": "Liệt kê",
-    "Delete condition": "Xoá điều kiện"
+    "Delete condition": "Xoá điều kiện",
+    "Not Found": "Không tìm thấy trang này"
   }
 }
