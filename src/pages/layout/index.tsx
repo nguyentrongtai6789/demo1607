@@ -29,7 +29,12 @@ export default () => {
             <Sidebar />
             <div style={{ width: "100%" }}>
               <Content>
-                <div style={{ minHeight: "calc(100vh - 64px - 64px)" }}>
+                <div
+                  style={{
+                    minHeight: "calc(100vh - 64px - 64px)",
+                    padding: "0px  5px",
+                  }}
+                >
                   <Outlet />
                 </div>
                 <Footer />
