@@ -5,12 +5,10 @@ import {
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { Menu, MenuProps, Tooltip } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
-import httpMethod from "../../../config/httpMethod";
-import { getMenu } from "./api";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];

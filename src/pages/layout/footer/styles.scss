@@ -1,7 +1,9 @@
-.ant-layout-footer {
-  width: 100%;
-  padding: 10px 10px !important;
-  height: 64px;
+.footer-custom {
+  height: 64px !important;
   display: flex;
-  border-top: 1px solid grey;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #c3b6b6;
+  margin-top: -5px !important;
+  background-color: #c3b6b6;
 }

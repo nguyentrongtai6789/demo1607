@@ -23,18 +23,18 @@ export default () => {
   return (
     <div>
       {userToken && (
-        <Layout>
+        <>
           <Header />
-          <Layout>
-            <div style={{ display: "flex" }}>
-              <Sidebar />
+          <div style={{ display: "flex" }}>
+            <Sidebar />
+            <div style={{ width: "100%" }}>
               <Content>
                 <Outlet />
                 <Footer />
               </Content>
             </div>
-          </Layout>
-        </Layout>
+          </div>
+        </>
       )}
     </div>
   );

@@ -1,10 +1,11 @@
 export default () => {
   return (
-    <div>
-      <img
-        src="http://172.20.20.73:9200/assets/images/bando.png"
-        style={{ width: "100%", height: "calc(100vh - 64px - 64px)" }}
-      />
-    </div>
+    <img
+      src="http://172.20.20.73:9200/assets/images/bando.png"
+      style={{
+        width: "100%",
+        height: "calc(100vh - 64px - 64px)",
+      }}
+    />
   );
 };

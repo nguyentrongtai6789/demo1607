@@ -1,7 +1,10 @@
+.layout-custom {
+  display: flex !important;
+}
 .ant-layout-content {
   overflow-y: auto;
   position: relative;
-  top: 64px;
+  top: 64px !important;
   background-color: unset !important;
   color: black !important;
   line-height: unset !important;
