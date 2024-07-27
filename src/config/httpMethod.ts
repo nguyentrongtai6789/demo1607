@@ -7,6 +7,8 @@ import axios, {
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
+export const URL_AUTH = process.env.REACT_APP_API_AUTH;
+
 class Services {
   axios: AxiosInstance;
 

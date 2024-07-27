@@ -5,10 +5,12 @@ import {
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { Menu, MenuProps, Tooltip } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
+import httpMethod from "../../../config/httpMethod";
+import { getMenu } from "./api";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
@@ -19,7 +21,7 @@ export default () => {
     setCollapsed(!collapsed);
   };
 
-  const { t, i18n } = useTranslation("sidebarMenu");
+  const { t } = useTranslation("sidebarMenu");
 
   const items: MenuItem[] = [
     {
@@ -162,6 +164,7 @@ export default () => {
       ],
     },
   ];
+
   return (
     <>
       <div className="sider-bar-custom">

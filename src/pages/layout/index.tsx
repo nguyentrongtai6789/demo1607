@@ -15,14 +15,21 @@ export default () => {
       <Layout>
         <Header />
         <Layout>
-          <div style={{ display: "flex", width: "100%", height: "100%" }}>
+          <div style={{ display: "flex" }}>
             <Sidebar />
             <Content>
-              <Outlet />
+              <div
+                style={{
+                  padding: "10px",
+                  minHeight: "calc(100vh - 64px)",
+                }}
+              >
+                <Outlet />
+              </div>
+              <Footer />
             </Content>
           </div>
         </Layout>
-        <Footer />
       </Layout>
     </div>
   );
