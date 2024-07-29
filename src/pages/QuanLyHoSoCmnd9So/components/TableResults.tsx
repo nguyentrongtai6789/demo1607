@@ -10,8 +10,11 @@ import {
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { FunctionComponent, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const TableResults: FunctionComponent = (props) => {
+  const { t } = useTranslation(["dictionnary"]);
+
   interface DataType {
     key: string;
     name: string;
@@ -176,7 +179,12 @@ export const TableResults: FunctionComponent = (props) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <div className="table-results">
+      <div className="table-results-title">{t("Search Results")}</div>
+      <Table columns={columns} dataSource={data} />
+    </div>
+  );
 };
 
 export default TableResults;

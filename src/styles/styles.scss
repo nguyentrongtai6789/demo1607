@@ -69,6 +69,13 @@
   background: #aeacac; /* Màu thanh cuộn */
 }
 
+.button-bottom-wrapper {
+  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+}
+
 /* Màu của thanh cuộn khi hover */
 // ::-webkit-scrollbar-thumb:hover {
 //   background: #555; /* Màu thanh cuộn khi hover */

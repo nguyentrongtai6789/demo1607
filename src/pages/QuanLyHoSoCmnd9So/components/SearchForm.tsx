@@ -108,6 +108,7 @@ export const SearchForm: React.FC = () => {
                     api={"danh-muc-pham-vi-tim-kiem"}
                     label={t("search range")}
                     name={"phamViTimKiem"}
+                    valueNeedOfOption={"giaTri"}
                     isRequired
                   />
                 </Col>
