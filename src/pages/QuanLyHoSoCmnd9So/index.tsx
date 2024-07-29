@@ -7,9 +7,45 @@ import { DatePickerWithTypeCustom } from "../../customAntd/DatePickerWithTypeCus
 import { SelectCustom } from "../../customAntd/SelectCustom";
 import { DatePickerWithRangeCustom } from "../../customAntd/DatePickerWithRangeCustom";
 import ButtonCustom from "../../customAntd/ButtonCustom";
+import { ISearchValues } from "./interface";
+import httpMethod from "../../config/httpMethod";
+import { timKiem } from "./api";
+import { useAppDispatch } from "../../redux/store";
+import { handleLoading, loadingCancel } from "../../redux/authSlice";
+import TableResults from "./components/TableResults";
 
 export default () => {
+  const initialValues: ISearchValues = {
+    donViId: 11728,
+    gioiTinhId: null,
+    hoVaTen: "",
+    hoVaTenCha: "",
+    hoVaTenMe: "",
+    ngayNhapTu: null,
+    ngayNhapDen: null,
+    phamViTimKiem: "DV",
+    soCmnd: "",
+    ngaySinh: "",
+    hoTenVoChong: "",
+  };
   const { t } = useTranslation(["dictionnary"]);
+
+  const dispatch = useAppDispatch();
+
+  const handleSearch = async (values: ISearchValues) => {
+    dispatch(handleLoading());
+    await httpMethod
+      .post(timKiem, values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(loadingCancel());
+      });
+  };
 
   return (
     <div>
@@ -17,9 +53,9 @@ export default () => {
       <div className="search-form">
         <div className="search-from-title">{t("SEARCH CONDITIONS")}</div>
         <Formik
-          initialValues={{ gioiTinh: "" }}
-          onSubmit={(values: any) => {
-            console.log(values);
+          initialValues={initialValues}
+          onSubmit={(values: ISearchValues) => {
+            handleSearch(values);
           }}
         >
           {(propsFormik: FormikProps<any>) => {
@@ -62,7 +98,7 @@ export default () => {
                       component={SelectCustom}
                       api={"danh-muc-gioi-tinh"}
                       label={t("gender")}
-                      name={"gioiTinh"}
+                      name={"gioiTinhId"}
                     />
                   </Col>
                 </Row>
@@ -101,8 +137,8 @@ export default () => {
                     <Field
                       component={DatePickerWithRangeCustom}
                       label={t("date of entry")}
-                      fieldName1={"ngayNhapHoSoTu"}
-                      fieldName2={"ngayNhapHoSoDen"}
+                      fieldName1={"ngayNhapTu"}
+                      fieldName2={"ngayNhapDen"}
                     />
                   </Col>
                 </Row>
@@ -124,6 +160,10 @@ export default () => {
             );
           }}
         </Formik>
+      </div>
+      <div className="table-results">
+        <div className="table-results-title">{t("Search Results")}</div>
+        <TableResults />
       </div>
     </div>
   );

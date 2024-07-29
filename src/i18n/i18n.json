@@ -13,7 +13,8 @@
     "SEARCH CONDITIONS": "SEARCH CONDITIONS",
     "listed": "Listed",
     "Delete condition": "Delete condition",
-    "Not Found": "Not Found"
+    "Not Found": "Not Found",
+    "Search Results": "Search Results"
   },
   "vi": {
     "unit": "Đơn vị",
@@ -29,6 +30,7 @@
     "SEARCH CONDITIONS": "ĐIỀU KIỆN TÌM KIẾM",
     "listed": "Liệt kê",
     "Delete condition": "Xoá điều kiện",
-    "Not Found": "Không tìm thấy trang này"
+    "Not Found": "Không tìm thấy trang này",
+    "Search Results": "Kết quả tìm kiếm"
   }
 }

@@ -16,10 +16,12 @@
     font-weight: 600;
     text-align: center;
   }
+  //search-form
   .search-form {
     padding: 10px;
     border-radius: 3px;
-    box-shadow: 2px 2px 6px -1px #ccc;
+    box-shadow: 2px 2px 6px -1px #7f7b7b;
+    margin-bottom: 10px;
     .search-from-title {
       text-transform: uppercase;
       font-weight: 600;
@@ -35,6 +37,17 @@
     .ant-picker {
       height: 25px;
       width: 100%;
+    }
+  }
+  //table-results
+  .table-results {
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 6px -1px #7f7b7b;
+    .table-results-title {
+      text-transform: uppercase;
+      font-weight: 600;
+      border-bottom: 1px solid black;
     }
   }
 }
