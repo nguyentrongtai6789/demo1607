@@ -13,6 +13,7 @@ export interface SelectCustomProps
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
   api: string;
+  valueNeedOfOption?: "giaTri" | "id" | "ma";
 }
 
 export const SelectCustom: React.FC<SelectCustomProps> = ({
@@ -27,6 +28,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
   onChange,
   size,
   api,
+  valueNeedOfOption,
   ...rest
 }) => {
   const [options, setOptions] = useState<SelectProps["options"]>([]);
@@ -39,7 +41,12 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
       .then((res: AxiosResponse) => {
         setOptions(
           res.data.data.map((item: any) => ({
-            value: item.id || item.ma || item.giaTri,
+            value:
+              valueNeedOfOption === "id"
+                ? item.id
+                : valueNeedOfOption === "giaTri"
+                ? item.giaTri
+                : item.ma,
             label: item.ten,
           }))
         );
@@ -48,7 +55,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
       .finally(() => {
         setLoading(false);
       });
-  }, [api]);
+  }, []);
 
   const handleOnChange = (value: any) => {
     const changeEvent = {

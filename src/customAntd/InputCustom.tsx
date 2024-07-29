@@ -34,6 +34,8 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           allowClear={allowClear}
           disabled={disabled}
           size={size ? size : "small"}
+          autoComplete="off"
+          style={{}}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
