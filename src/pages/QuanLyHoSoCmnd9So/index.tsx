@@ -13,17 +13,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
 export default () => {
   const { t } = useTranslation(["dictionnary"]);
-
-  const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement<any, any>;
-    },
-    ref: React.Ref<unknown>
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
 
   const [open, setOpen] = React.useState(false);
 
@@ -46,10 +46,10 @@ export default () => {
         </Button>
         <Dialog
           open={open}
-          TransitionComponent={Transition}
           keepMounted
           onClose={handleClose}
           aria-describedby="alert-dialog-slide-description"
+          TransitionComponent={Transition}
         >
           <DialogTitle>{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
