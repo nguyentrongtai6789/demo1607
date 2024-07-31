@@ -8,6 +8,7 @@ import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import "../src/styles/loading.scss";
 import "../src/styles/button.scss";
+import "../src/styles/datepicker.scss";
 import "../src/styles/styles.scss";
 
 const root = ReactDOM.createRoot(

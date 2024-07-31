@@ -21,25 +21,25 @@ export default () => {
   }, [userToken]);
 
   return (
-    <div>
+    <div className="wrapper-all">
       {userToken && (
         <>
           <Header />
           <div style={{ display: "flex" }}>
             <Sidebar />
-            <div style={{ width: "100%" }}>
-              <Content>
-                <div
+            {/* <div style={{ width: "100%" }}> */}
+            <Content>
+              {/* <div
                   style={{
                     minHeight: "calc(100vh - 64px - 64px)",
                     padding: "0px  5px",
                   }}
-                >
-                  <Outlet />
-                </div>
-                <Footer />
-              </Content>
-            </div>
+                > */}
+              <Outlet />
+              {/* </div> */}
+              {/* <Footer /> */}
+            </Content>
+            {/* </div> */}
           </div>
         </>
       )}

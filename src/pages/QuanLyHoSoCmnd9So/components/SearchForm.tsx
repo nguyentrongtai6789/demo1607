@@ -1,19 +1,33 @@
 import { Col, Row, Space } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
-import { ISearchValues } from "../interface";
-import { useAppDispatch } from "../../../redux/store";
+import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { handleLoading, loadingCancel } from "../../../redux/authSlice";
-import httpMethod from "../../../config/httpMethod";
-import { timKiem } from "../api";
-import { SelectDonViCustom } from "../../../customAntd/SelectDonViCustom";
-import { InputCustom } from "../../../customAntd/InputCustom";
-import { DatePickerWithTypeCustom } from "../../../customAntd/DatePickerWithTypeCustom";
-import { SelectCustom } from "../../../customAntd/SelectCustom";
-import { DatePickerWithRangeCustom } from "../../../customAntd/DatePickerWithRangeCustom";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
+import { DatePickerWithRangeCustom } from "../../../customAntd/DatePickerWithRangeCustom";
+import { DatePickerWithTypeCustom } from "../../../customAntd/DatePickerWithTypeCustom";
+import { InputCustom } from "../../../customAntd/InputCustom";
+import { SelectCustom } from "../../../customAntd/SelectCustom";
+import { SelectDonViCustom } from "../../../customAntd/SelectDonViCustom";
 
-export const SearchForm: React.FC = () => {
+export interface ISearchValues {
+  donViId: number | null;
+  gioiTinhId: number | null;
+  hoVaTen: string | null;
+  hoVaTenCha: string | null;
+  hoVaTenMe: string | null;
+  ngayNhapTu: string | null;
+  ngayNhapDen: string | null;
+  phamViTimKiem: string | null;
+  soCmnd: string | null;
+  ngaySinh: string | null;
+  hoTenVoChong: string | null;
+}
+
+export interface ISearchForm {
+  setSearchValues: Dispatch<SetStateAction<ISearchValues | null>>;
+}
+
+export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
   const initialValues: ISearchValues = {
     donViId: 11728,
     gioiTinhId: null,
@@ -28,24 +42,7 @@ export const SearchForm: React.FC = () => {
     hoTenVoChong: "",
   };
 
-  const dispatch = useAppDispatch();
-
   const { t } = useTranslation(["dictionnary"]);
-
-  const handleSearch = async (values: ISearchValues) => {
-    dispatch(handleLoading());
-    await httpMethod
-      .post(timKiem, values)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        dispatch(loadingCancel());
-      });
-  };
 
   return (
     <div className="search-form">
@@ -53,7 +50,7 @@ export const SearchForm: React.FC = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values: ISearchValues) => {
-          handleSearch(values);
+          setSearchValues({ ...values });
         }}
       >
         {(propsFormik: FormikProps<any>) => {

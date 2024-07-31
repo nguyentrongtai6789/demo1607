@@ -12,7 +12,11 @@ import { FilterDropdownProps } from "antd/es/table/interface";
 import { FunctionComponent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export const TableResults: FunctionComponent = (props) => {
+export interface IProps {
+  data: any;
+}
+
+export const TableResults: FunctionComponent<IProps> = ({ data }) => {
   const { t } = useTranslation(["dictionnary"]);
 
   interface DataType {
@@ -24,32 +28,32 @@ export const TableResults: FunctionComponent = (props) => {
 
   type DataIndex = keyof DataType;
 
-  const data: DataType[] = [
-    {
-      key: "1",
-      name: "a",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-    },
-    {
-      key: "2",
-      name: "abc",
-      age: 42,
-      address: "London No. 1 Lake Park",
-    },
-    {
-      key: "3",
-      name: "sda",
-      age: 32,
-      address: "Sydney No. 1 Lake Park",
-    },
-    {
-      key: "4",
-      name: "Sgd",
-      age: 32,
-      address: "London No. 2 Lake Park",
-    },
-  ];
+  // const data: DataType[] = [
+  //   {
+  //     key: "1",
+  //     name: "a",
+  //     age: 32,
+  //     address: "New York No. 1 Lake Park",
+  //   },
+  //   {
+  //     key: "2",
+  //     name: "abc",
+  //     age: 42,
+  //     address: "London No. 1 Lake Park",
+  //   },
+  //   {
+  //     key: "3",
+  //     name: "sda",
+  //     age: 32,
+  //     address: "Sydney No. 1 Lake Park",
+  //   },
+  //   {
+  //     key: "4",
+  //     name: "Sgd",
+  //     age: 32,
+  //     address: "London No. 2 Lake Park",
+  //   },
+  // ];
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -182,7 +186,7 @@ export const TableResults: FunctionComponent = (props) => {
   return (
     <div className="table-results">
       <div className="table-results-title">{t("Search Results")}</div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data} pagination={false} />
     </div>
   );
 };

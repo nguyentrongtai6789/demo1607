@@ -1,6 +1,3 @@
-.layout-custom {
-  display: flex !important;
-}
 .ant-layout-content {
   overflow-y: auto;
   position: relative;
@@ -51,9 +48,7 @@
     }
   }
 }
-.ant-picker-range-arrow {
-  padding-inline: unset !important;
-}
+
 /* Đối tượng thanh cuộn */
 ::-webkit-scrollbar {
   width: 8px; /* Độ rộng của thanh cuộn */
@@ -67,15 +62,6 @@
 /* Màu của thanh cuộn khi không được hover */
 ::-webkit-scrollbar-thumb {
   background: #aeacac; /* Màu thanh cuộn */
-}
-
-.button-bottom-wrapper {
-  margin-top: 20px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  display: flex;
-  justify-content: center;
 }
 
 /* Màu của thanh cuộn khi hover */
