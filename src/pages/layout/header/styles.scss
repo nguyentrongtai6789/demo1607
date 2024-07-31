@@ -1,12 +1,12 @@
-.ant-layout-header {
-  position: fixed;
+.wrapper-header {
+  position: absolute;
   top: 0;
   width: 100%;
   color: "#fff";
   height: 64px;
   padding-inline: 48;
   line-height: unset;
-  background: #b21909;
+  background: #b21909 !important;
   .avatar-dropdown {
     cursor: pointer;
     position: fixed;

@@ -61,7 +61,9 @@ export default () => {
         console.log(error);
       })
       .finally(() => {
-        dispatch(loadingCancel());
+        setTimeout(() => {
+          dispatch(loadingCancel());
+        }, 10000);
       });
   };
 
@@ -73,41 +75,42 @@ export default () => {
   return (
     <Fragment>
       <div className="div-wrap-content">
-        <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
-        <SearchForm setSearchValues={setSearchValues} />
-        <TableResults data={data} />
-        <React.Fragment>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Slide in alert dialog
-          </Button>
-          <Dialog
-            open={open}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            TransitionComponent={Transition}
-          >
-            <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                Let Google help apps determine location. This means sending
-                anonymous location data to Google, even when no apps are
-                running.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Disagree</Button>
-              <Button onClick={handleClose}>Agree</Button>
-            </DialogActions>
-          </Dialog>
-        </React.Fragment>
-        <Row></Row>
-        <div className="button-bottom-wrapper">
-          <Space size={10}>
-            <ButtonCustom>Thêm mới</ButtonCustom>
-            <ButtonCustom>Cập nhật</ButtonCustom>
-            <ButtonCustom>Xoá</ButtonCustom>
-          </Space>
+        <div className="wrap-content-child">
+          <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
+          <SearchForm setSearchValues={setSearchValues} />
+          <TableResults data={data} />
+          {/* <React.Fragment>
+            <Button variant="outlined" onClick={handleClickOpen}>
+              Slide in alert dialog
+            </Button>
+            <Dialog
+              open={open}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
+              TransitionComponent={Transition}
+            >
+              <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                  Let Google help apps determine location. This means sending
+                  anonymous location data to Google, even when no apps are
+                  running.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Disagree</Button>
+                <Button onClick={handleClose}>Agree</Button>
+              </DialogActions>
+            </Dialog>
+          </React.Fragment> */}
+          <div className="button-bottom-wrapper">
+            <Space size={10} className="space-button">
+              <ButtonCustom>Thêm mới</ButtonCustom>
+              <ButtonCustom>Cập nhật</ButtonCustom>
+              <ButtonCustom>Xoá</ButtonCustom>
+            </Space>
+          </div>
         </div>
       </div>
     </Fragment>

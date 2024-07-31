@@ -1,10 +1,10 @@
 .side-bar-custom {
-  position: relative;
-  top: 64px;
   background: #e7dfab;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  min-width: 80px;
 }
 .ant-menu {
-  overflow-y: auto;
   background: #e7dfab;
   text-transform: uppercase;
   max-width: 300px;

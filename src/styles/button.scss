@@ -8,10 +8,19 @@
   }
 }
 .button-bottom-wrapper {
-  margin-top: 20px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  height: 40px;
+  .space-button {
+    background-color: rgb(138, 144, 130) !important;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Hiển thị shadow dưới cùng */
+    background-color: white; /* Để button không bị ẩn bởi nền */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid grey;
+  }
 }

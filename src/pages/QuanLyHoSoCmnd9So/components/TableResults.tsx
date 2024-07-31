@@ -11,6 +11,9 @@ import {
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { FunctionComponent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { LoadingCustom } from "../../../customAntd/LoadingCustom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 export interface IProps {
   data: any;
@@ -18,6 +21,7 @@ export interface IProps {
 
 export const TableResults: FunctionComponent<IProps> = ({ data }) => {
   const { t } = useTranslation(["dictionnary"]);
+  const { language, loading } = useSelector((state: RootState) => state.auth);
 
   interface DataType {
     key: string;
@@ -184,9 +188,11 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
   ];
 
   return (
-    <div className="table-results">
-      <div className="table-results-title">{t("Search Results")}</div>
-      <Table columns={columns} dataSource={data} pagination={false} />
+    <div className="table-results-wrapper">
+      <div className="table-results">
+        <div className="table-results-title">{t("Search Results")}</div>
+        <Table columns={columns} dataSource={data} pagination={false} />
+      </div>
     </div>
   );
 };

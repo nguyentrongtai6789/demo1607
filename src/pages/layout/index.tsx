@@ -25,21 +25,11 @@ export default () => {
       {userToken && (
         <>
           <Header />
-          <div style={{ display: "flex" }}>
+          <div className="wrapper-content-sidebar">
             <Sidebar />
-            {/* <div style={{ width: "100%" }}> */}
             <Content>
-              {/* <div
-                  style={{
-                    minHeight: "calc(100vh - 64px - 64px)",
-                    padding: "0px  5px",
-                  }}
-                > */}
               <Outlet />
-              {/* </div> */}
-              {/* <Footer /> */}
             </Content>
-            {/* </div> */}
           </div>
         </>
       )}

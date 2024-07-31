@@ -159,6 +159,150 @@ export default () => {
             </Tooltip>
           ),
         },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
+        {
+          key: "3",
+          label: (
+            <Tooltip
+              placement="topLeft"
+              overlayStyle={{ textTransform: "uppercase" }}
+              title={t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            >
+              {t(
+                "SENDING 9-NUMBER ID CARD PROFILE AFTER APPROVAL OF CONSOLIDATION TO DATA MINING SOFTWARE"
+              )}
+            </Tooltip>
+          ),
+        },
       ],
     },
   ];

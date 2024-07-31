@@ -1,51 +1,78 @@
-.ant-layout-content {
-  overflow-y: auto;
+.wrapper-all {
   position: relative;
-  top: 64px !important;
+  height: 100vh;
+  width: 100vw;
+}
+
+.wrapper-content-sidebar {
+  display: flex;
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+
+.div-wrap-content {
+  position: relative;
+  width: 100%;
   background-color: unset !important;
   color: black !important;
   line-height: unset !important;
   text-align: unset !important;
-  height: calc(100vh - 64px);
-  .title-page {
-    font-size: 20px;
+}
+
+.wrap-content-child {
+  height: calc(100vh - 64px) !important;
+  overflow-y: auto !important;
+}
+
+.title-page {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+}
+//search-form
+.search-form-wrapper {
+  padding: 5px;
+  position: relative;
+}
+
+.search-form {
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 6px -1px #7f7b7b;
+  margin-bottom: 10px;
+  .search-from-title {
     text-transform: uppercase;
     font-weight: 600;
-    text-align: center;
+    border-bottom: 1px solid black;
   }
-  //search-form
-  .search-form {
-    padding: 10px;
-    border-radius: 3px;
-    box-shadow: 2px 2px 6px -1px #7f7b7b;
-    margin-bottom: 10px;
-    .search-from-title {
-      text-transform: uppercase;
-      font-weight: 600;
-      border-bottom: 1px solid black;
-    }
-    .ant-col {
-      padding: 0px 5px;
-      //   border: 1px solid black;
-    }
-    .ant-select {
-      width: 100%;
-    }
-    .ant-picker {
-      height: 25px;
-      width: 100%;
-    }
+  .ant-col {
+    padding: 0px 5px;
+    //   border: 1px solid black;
   }
-  //table-results
-  .table-results {
-    padding: 10px;
-    border-radius: 3px;
-    box-shadow: 2px 2px 6px -1px #7f7b7b;
-    .table-results-title {
-      text-transform: uppercase;
-      font-weight: 600;
-      border-bottom: 1px solid black;
-    }
+  .ant-select {
+    width: 100%;
+  }
+  .ant-picker {
+    height: 25px;
+    width: 100%;
+  }
+}
+//table-results
+.table-results-wrapper {
+  padding: 5px;
+  position: relative;
+  padding-bottom: 50px;
+}
+.table-results {
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 6px -1px #7f7b7b;
+  .table-results-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: 1px solid black;
   }
 }
 
