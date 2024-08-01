@@ -63,7 +63,7 @@ export default () => {
       .finally(() => {
         setTimeout(() => {
           dispatch(loadingCancel());
-        }, 10000);
+        }, 2000);
       });
   };
 

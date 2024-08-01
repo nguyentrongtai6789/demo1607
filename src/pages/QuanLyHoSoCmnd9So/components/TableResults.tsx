@@ -11,26 +11,37 @@ import {
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { FunctionComponent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LoadingCustom } from "../../../customAntd/LoadingCustom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 
 export interface IProps {
-  data: any;
+  data: IRecordTable[];
+}
+
+export interface IRecordTable {
+  id: number;
+  soCmnd: string;
+  soDinhDanh: string;
+  hoVaTen: string;
+  ngaySinh: string;
+  gioiTinh: string;
+  noiSinh: string;
+  thuongTru: string;
+  hoVaTenCha: string;
+  hoVaTenMe: string;
+  hoVaTenVoChong: string;
+  ngayNhap: string;
+  donVi: string;
+  congViec: string;
+  ketQuaCongViec: string;
+  congViecTiepTheo: string;
 }
 
 export const TableResults: FunctionComponent<IProps> = ({ data }) => {
   const { t } = useTranslation(["dictionnary"]);
   const { language, loading } = useSelector((state: RootState) => state.auth);
 
-  interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-  }
-
-  type DataIndex = keyof DataType;
+  type DataIndex = keyof IRecordTable;
 
   // const data: DataType[] = [
   //   {
@@ -79,7 +90,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
 
   const getColumnSearchProps = (
     dataIndex: DataIndex
-  ): TableColumnType<DataType> => ({
+  ): TableColumnType<IRecordTable> => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
@@ -158,31 +169,119 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
     render: (text) => (searchedColumn === dataIndex ? text : text),
   });
 
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<IRecordTable> = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      ...getColumnSearchProps("name"),
+      title: "Số CMND",
+      dataIndex: "soCmnd",
+      key: "soCmnd",
+      // width: "30%",
+      // ...getColumnSearchProps("name"),
       sortDirections: ["descend", "ascend"],
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      // sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-      width: "20%",
-      ...getColumnSearchProps("age"),
+      title: "Họ và tên",
+      dataIndex: "hoVaTen",
+      key: "hoVaTen",
+      // width: "20%",
+      // ...getColumnSearchProps("age"),
       sortDirections: ["descend", "ascend"],
-      sorter: (a, b) => a.age - b.age,
+      // sorter: (a, b) => a.age - b.age,
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
+      title: "Ngày sinh",
+      dataIndex: "ngaySinh",
+      key: "ngaySinh",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Giới tính",
+      dataIndex: "gioiTinh",
+      key: "gioiTinh",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Nơi sinh",
+      dataIndex: "noiSinh",
+      key: "noiSinh",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Thường trú",
+      dataIndex: "thuongTru",
+      key: "thuongTru",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Họ và tên cha",
+      dataIndex: "hoVaTenCha",
+      key: "hoVaTenCha",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Họ và tên mẹ",
+      dataIndex: "hoVaTenMe",
+      key: "hoVaTenMe",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Họ và tên vợ chồng",
+      dataIndex: "hoVaTenVoChong",
+      key: "hoVaTenVoChong",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Ngày nhập",
+      dataIndex: "ngayNhap",
+      key: "ngayNhap",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Đơn vị",
+      dataIndex: "donVi",
+      key: "donVi",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Công việc đã thực hiện",
+      dataIndex: "congViec",
+      key: "congViec",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Kết quả",
+      dataIndex: "ketQuaCongViec",
+      key: "ketQuaCongViec",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Công việc thực hiện tiếp theo",
+      dataIndex: "congViecTiepTheo",
+      key: "congViecTiepTheo",
+      // ...getColumnSearchProps("address"),
+      // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
     },
   ];
