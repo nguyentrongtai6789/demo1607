@@ -85,24 +85,22 @@ export default () => {
   ];
 
   return (
-    <div className="wrapper-header">
-      <Header>
-        <Space size={50}>
-          <img
-            src="http://172.20.20.73:9100/assets/images/logo.svg"
-            alt=""
-            style={{ height: "64px" }}
-          />
-        </Space>
-        <Dropdown
-          menu={{ items: menuAvatar }}
-          trigger={["click"]}
-          arrow={true}
-          className="avatar-dropdown"
-        >
-          <Avatar size="large" icon={<UserOutlined />} />
-        </Dropdown>
-      </Header>
-    </div>
+    <Header>
+      <Space size={50}>
+        <img
+          src="http://172.20.20.73:9100/assets/images/logo.svg"
+          alt=""
+          style={{ height: "64px" }}
+        />
+      </Space>
+      <Dropdown
+        menu={{ items: menuAvatar }}
+        trigger={["click"]}
+        arrow={true}
+        className="avatar-dropdown"
+      >
+        <Avatar size="large" icon={<UserOutlined />} />
+      </Dropdown>
+    </Header>
   );
 };

@@ -287,12 +287,21 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
   ];
 
   return (
-    <div className="table-results-wrapper">
-      <div className="table-results">
-        <div className="table-results-title">{t("Search Results")}</div>
-        <Table columns={columns} dataSource={data} pagination={false} />
+    <>
+      <div style={{ padding: "5px 5px 50px 5px" }}>
+        <div className="table-results">
+          <div className="table-results-title">{t("Search Results")}</div>
+          <div className="table-results-content">
+            <Table
+              columns={columns}
+              dataSource={data}
+              scroll={{ x: 2000, y: 500 }}
+              pagination={false}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

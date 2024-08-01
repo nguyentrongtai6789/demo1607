@@ -8,7 +8,7 @@ import { Menu, MenuProps, Tooltip } from "antd";
 import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import "./styles.scss";
+// import "./styles.scss";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
