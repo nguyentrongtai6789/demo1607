@@ -1,3 +1,11 @@
 .ant-layout-header {
   background: #b21909;
+  display: flex;
+  position: relative;
+  .avatar-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+  }
 }
