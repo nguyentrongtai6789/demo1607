@@ -1,14 +1,9 @@
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
 import { Menu, MenuProps, Tooltip } from "antd";
 import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
-// import "./styles.scss";
+import "./styles.scss";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
@@ -22,19 +17,6 @@ export default () => {
   const { t } = useTranslation("sidebarMenu");
 
   const items: MenuItem[] = [
-    {
-      key: "0",
-      icon: collapsed ? (
-        <MenuUnfoldOutlined onClick={toggleCollapsed} />
-      ) : (
-        <MenuFoldOutlined onClick={toggleCollapsed} />
-      ),
-      label: (
-        <div onClick={toggleCollapsed}>
-          {collapsed ? t("expand menu") : t("collapse menu")}
-        </div>
-      ),
-    },
     {
       key: "1",
       label: (

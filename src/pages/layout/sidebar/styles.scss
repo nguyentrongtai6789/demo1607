@@ -1,43 +1,7 @@
-// .side-bar-custom {
-//   background: #e7dfab;
-//   height: calc(100vh - 64px);
-//   overflow-y: auto;
-//   min-width: 80px;
-//   max-width: 300px;
-// }
-// .ant-menu {
-//   background: #e7dfab;
-//   text-transform: uppercase;
-//   max-height: calc(100vh - 64px);
-//   font-weight: 600;
-//   .ant-menu-title-content {
-//     color: black;
-//   }
-//   .ant-menu-item-icon {
-//     color: black !important;
-//   }
-//   .ant-menu-inline {
-//     background: #e7dfab !important;
-//   }
-// }
-// .collaps-menu-button {
-//   background: #e7dfab;
-//   height: 40px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-//   width: 100%;
-// }
-// .ant-menu-item-selected {
-//   background-color: rgb(251, 251, 134) !important;
-// }
-
-// .ant-menu-submenu-placement-rightTop {
-//   // border: 1px solid black;
-//   // position: fixed !important;
-//   // top: 100px !important;
-//   // max-height: calc(100vh - 300px);
-//   // overflow-y: auto;
-//   display: none;
-// }
+.ant-layout-sider {
+  background: rgb(231, 223, 171) !important;
+  box-shadow: 2px 2px 6px -1px #7f7b7b;
+}
+.ant-menu {
+  background: rgb(231, 223, 171);
+}
