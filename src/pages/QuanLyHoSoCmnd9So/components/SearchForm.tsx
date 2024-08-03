@@ -48,7 +48,6 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     <div className="search-form-wrapper">
       <div className="search-form">
         <div className="search-from-title">{t("SEARCH CONDITIONS")}</div>
-
         <Formik
           initialValues={initialValues}
           onSubmit={(values: ISearchValues) => {

@@ -1,76 +1,32 @@
+import { Space } from "antd";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ISearchValues, SearchForm } from "./components/SearchForm";
 import ButtonCustom from "../../customAntd/ButtonCustom";
-import { Row, Space } from "antd";
-import React, { Fragment, useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-import { useAppDispatch } from "../../redux/store";
-import { handleLoading, loadingCancel } from "../../redux/authSlice";
-import httpMethod from "../../config/httpMethod";
-import { timKiem } from "./api";
+import { ISearchValues, SearchForm } from "./components/SearchForm";
 import TableResults from "./components/TableResults";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
 
 export default () => {
   const { t } = useTranslation(["dictionnary"]);
-  const dispatch = useAppDispatch();
-
-  //demoModal
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  //tìm kiếm
-  //giá trị tìm kiếm
   const [searchValues, setSearchValues] = useState<ISearchValues | null>(null);
-  //dữ liệu trả về
-  const [data, setData] = useState<any[]>([]);
-  //handle
-  const handleSearch = async (values: ISearchValues) => {
-    dispatch(handleLoading());
-    await httpMethod
-      .post(timKiem, values)
-      .then((res: any) => {
-        if (res?.data?.code === 200) {
-          setData(res?.data?.data);
-          console.log("asd");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          dispatch(loadingCancel());
-        }, 2000);
-      });
-  };
-
-  useEffect(() => {
-    if (!searchValues) return;
-    handleSearch(searchValues);
-  }, [searchValues]);
+  // const handleSearch = async (values: ISearchValues) => {
+  //   dispatch(handleLoading());
+  //   await httpMethod
+  //     .post(timKiem, values)
+  //     .then((res: any) => {
+  //       if (res?.data?.code === 200) {
+  //         setData(res?.data?.data);
+  //         console.log("asd");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .finally(() => {
+  //       setTimeout(() => {
+  //         dispatch(loadingCancel());
+  //       }, 2000);
+  //     });
+  // };
 
   return (
     <Fragment>
@@ -78,7 +34,7 @@ export default () => {
         <div className="wrap-content-child">
           <div className="title-page">quản lý hồ sơ cmnd 9 số</div>
           <SearchForm setSearchValues={setSearchValues} />
-          <TableResults data={data} />
+          <TableResults searchValues={searchValues} />
           {/* <React.Fragment>
             <Button variant="outlined" onClick={handleClickOpen}>
               Slide in alert dialog

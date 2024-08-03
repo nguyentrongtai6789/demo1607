@@ -1,10 +1,10 @@
 .ant-table-wrapper {
   margin-top: 5px;
-  background: #d8d7d7;
+  // background: #d8d7d7;
 }
 
 .table-results {
-  padding: 10px;
+  padding: 10px 5px;
   border-radius: 3px;
   box-shadow: 2px 2px 6px -1px #c2c2c2;
   .table-results-title {
@@ -19,6 +19,8 @@
 }
 
 .ant-table-cell {
-  text-align: center !important;
   padding: 5px 10px !important;
+  text-align: center !important;
+  // min-width: 150px;
+  // white-space: nowrap;
 }

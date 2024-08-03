@@ -1,21 +1,18 @@
-import { SearchOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Input,
-  InputRef,
-  Space,
-  Table,
-  TableColumnsType,
-  TableColumnType,
-} from "antd";
-import { FilterDropdownProps } from "antd/es/table/interface";
-import { FunctionComponent, useRef, useState } from "react";
+import { GetProp, Table, TableColumnsType, TableProps } from "antd";
+import { SorterResult } from "antd/es/table/interface";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import httpMethod from "../../../config/httpMethod";
+import { RootState, useAppDispatch } from "../../../redux/store";
+import { timKiem } from "../api";
+import { ISearchValues } from "./SearchForm";
+import { current } from "@reduxjs/toolkit";
+import { LoadingCustom } from "../../../customAntd/LoadingCustom";
+import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 
 export interface IProps {
-  data: IRecordTable[];
+  searchValues: ISearchValues | null;
 }
 
 export interface IRecordTable {
@@ -37,264 +34,229 @@ export interface IRecordTable {
   congViecTiepTheo: string;
 }
 
-export const TableResults: FunctionComponent<IProps> = ({ data }) => {
+interface TableParams {
+  pagination?: TablePaginationConfig;
+  sortField?: SorterResult<any>["field"];
+  sortOrder?: "asc" | "desc";
+  filters?: Parameters<GetProp<TableProps, "onChange">>[1];
+}
+
+type TablePaginationConfig = Exclude<
+  GetProp<TableProps, "pagination">,
+  boolean
+>;
+
+export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
   const { t } = useTranslation(["dictionnary"]);
-  const { language, loading } = useSelector((state: RootState) => state.auth);
+  const { language } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
 
-  type DataIndex = keyof IRecordTable;
+  const [data, setData] = useState<IRecordTable[]>();
 
-  // const data: DataType[] = [
-  //   {
-  //     key: "1",
-  //     name: "a",
-  //     age: 32,
-  //     address: "New York No. 1 Lake Park",
-  //   },
-  //   {
-  //     key: "2",
-  //     name: "abc",
-  //     age: 42,
-  //     address: "London No. 1 Lake Park",
-  //   },
-  //   {
-  //     key: "3",
-  //     name: "sda",
-  //     age: 32,
-  //     address: "Sydney No. 1 Lake Park",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Sgd",
-  //     age: 32,
-  //     address: "London No. 2 Lake Park",
-  //   },
-  // ];
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef<InputRef>(null);
-
-  const handleSearch = (
-    selectedKeys: string[],
-    confirm: FilterDropdownProps["confirm"],
-    dataIndex: DataIndex
-  ) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters: () => void) => {
-    clearFilters();
-    setSearchText("");
-  };
-
-  const getColumnSearchProps = (
-    dataIndex: DataIndex
-  ): TableColumnType<IRecordTable> => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-      close,
-    }) => (
-      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
-        <Input
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            handleSearch(selectedKeys as string[], confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() =>
-              handleSearch(selectedKeys as string[], confirm, dataIndex)
-            }
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => clearFilters && handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              setSearchText((selectedKeys as string[])[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              close();
-            }}
-          >
-            close
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered: boolean) => (
-      <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes((value as string).toLowerCase()),
-    onFilterDropdownOpenChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.current?.select(), 100);
-      }
+  const [tableParams, setTableParams] = useState<TableParams>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
     },
-    render: (text) => (searchedColumn === dataIndex ? text : text),
+    sortField: "soCmnd",
+    sortOrder: "asc",
   });
 
+  const fecthData = async () => {
+    dispatch(handleLoading());
+    await httpMethod
+      .post(
+        `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}`,
+        {
+          ...searchValues,
+          sortDirection: tableParams.sortOrder,
+          sortField: tableParams.sortField,
+        }
+      )
+      .then((res: any) => {
+        if (res?.data?.code === 200) {
+          setData(res?.data?.data);
+          setTableParams({
+            ...tableParams,
+            pagination: {
+              ...tableParams.pagination,
+              total: 200,
+              // 200 is mock data, you should read it from server
+              // total: data.totalCount,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          dispatch(loadingCancel());
+        }, 500);
+      });
+  };
+
+  const handleTableChange: TableProps["onChange"] = (
+    pagination,
+    filters,
+    sorter
+  ) => {
+    console.log(sorter);
+    setTableParams({
+      pagination,
+      filters,
+      sortOrder: Array.isArray(sorter)
+        ? undefined
+        : sorter.order === "ascend"
+        ? "asc"
+        : "desc",
+      sortField: Array.isArray(sorter) ? undefined : sorter.field,
+    });
+    // `dataSource` is useless since `pageSize` changed
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setData([]);
+    }
+  };
+
+  useEffect(() => {
+    fecthData();
+  }, [
+    tableParams.pagination?.current,
+    tableParams.pagination?.pageSize,
+    tableParams?.sortOrder,
+    tableParams?.sortField,
+    searchValues,
+  ]);
+
   const columns: TableColumnsType<IRecordTable> = [
+    {
+      title: "STT",
+      width: 50,
+      render: (value: any, record: IRecordTable, index: number) => {
+        return <span>{index + 1}</span>;
+      },
+    },
     {
       title: "Số CMND",
       dataIndex: "soCmnd",
       key: "soCmnd",
-      width: "fit-content",
-      // ...getColumnSearchProps("name"),
-      sortDirections: ["descend", "ascend"],
-      // sorter: (a, b) => a.name.localeCompare(b.name),
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
+      sortDirections: ["ascend", "descend"],
     },
     {
       title: "Họ và tên",
       dataIndex: "hoVaTen",
       key: "hoVaTen",
-      width: "fit-content",
-      // ...getColumnSearchProps("age"),
-      sortDirections: ["descend", "ascend"],
-      // sorter: (a, b) => a.age - b.age,
+      width: 200,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Ngày sinh",
       dataIndex: "ngaySinh",
       key: "ngaySinh",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Giới tính",
       dataIndex: "gioiTinh",
       key: "gioiTinh",
-      width: "100px",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Nơi sinh",
       dataIndex: "noiSinh",
       key: "noiSinh",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Thường trú",
       dataIndex: "thuongTru",
       key: "thuongTru",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 300,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Họ và tên cha",
       dataIndex: "hoVaTenCha",
       key: "hoVaTenCha",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Họ và tên mẹ",
       dataIndex: "hoVaTenMe",
       key: "hoVaTenMe",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Họ và tên vợ chồng",
       dataIndex: "hoVaTenVoChong",
       key: "hoVaTenVoChong",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 200,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Ngày nhập",
       dataIndex: "ngayNhap",
       key: "ngayNhap",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Đơn vị",
       dataIndex: "donVi",
       key: "donVi",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 300,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Công việc đã thực hiện",
       dataIndex: "congViec",
       key: "congViec",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 300,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Kết quả",
       dataIndex: "ketQuaCongViec",
       key: "ketQuaCongViec",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
     },
     {
       title: "Công việc thực hiện tiếp theo",
       dataIndex: "congViecTiepTheo",
       key: "congViecTiepTheo",
-      width: "fit-content",
-      // ...getColumnSearchProps("address"),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 300,
+      sorter: true,
+      showSorterTooltip: false,
+    },
+    {
+      title: "Công việc thực hiện tiếp theo",
+      dataIndex: "congViecTiepTheo",
+      key: "congViecTiepTheo",
+      width: 300,
+      sorter: true,
+      showSorterTooltip: false,
     },
   ];
 
@@ -306,11 +268,21 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
           <Table
             columns={columns}
             dataSource={data}
-            scroll={{ x: "max-content", y: 500 }}
-            pagination={false}
+            scroll={{ x: "2500px", y: "auto" }}
             bordered
-            // rowSelection={}
             rowHoverable
+            pagination={{
+              current: tableParams.pagination?.current,
+              pageSize: tableParams.pagination?.pageSize,
+              total: data?.length || 0,
+              showTotal: (total, range) => (
+                <>
+                  Từ {range[0]} đến {range[1]} trên tổng số {total} bản ghi
+                </>
+              ),
+              showSizeChanger: true,
+            }}
+            onChange={handleTableChange}
           />
         </div>
       </div>
