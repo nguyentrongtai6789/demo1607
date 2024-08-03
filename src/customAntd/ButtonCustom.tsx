@@ -1,6 +1,6 @@
+import Button from "@mui/material/Button";
 import { ButtonHTMLType } from "antd/es/button";
 import React from "react";
-import Button, { ButtonPropsSizeOverrides } from "@mui/material/Button";
 
 interface Props {
   border?: string;
@@ -31,7 +31,7 @@ const ButtonCustom: React.FC<Props> = ({
       onClick={onClick}
       variant="contained"
       style={{
-        backgroundColor: color ? color : "#e7dfab ",
+        backgroundColor: color ? color : "rgb(239, 248, 172)",
         color: "black",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",

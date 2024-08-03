@@ -10,6 +10,8 @@ import "../src/styles/loading.scss";
 import "../src/styles/button.scss";
 import "../src/styles/datepicker.scss";
 import "../src/styles/styles.scss";
+import "../src/styles/table.scss";
+import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,7 +20,24 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConfigProvider
+        theme={{
+          token: {
+            // Seed Token
+            // colorPrimary: "#00b96b",
+            borderRadius: 2,
+
+            // Alias Token
+          },
+          components: {
+            Table: {
+              rowHoverBg: "#cdcdcd",
+            },
+          },
+        }}
+      >
+        <App />
+      </ConfigProvider>
     </Provider>
   </React.StrictMode>
 );
