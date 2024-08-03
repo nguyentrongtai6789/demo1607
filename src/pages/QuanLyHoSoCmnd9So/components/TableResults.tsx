@@ -4,12 +4,10 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import httpMethod from "../../../config/httpMethod";
+import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import { timKiem } from "../api";
 import { ISearchValues } from "./SearchForm";
-import { current } from "@reduxjs/toolkit";
-import { LoadingCustom } from "../../../customAntd/LoadingCustom";
-import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 
 export interface IProps {
   searchValues: ISearchValues | null;
