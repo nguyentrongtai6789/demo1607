@@ -23,15 +23,13 @@ root.render(
       <ConfigProvider
         theme={{
           token: {
-            // Seed Token
-            // colorPrimary: "#00b96b",
             borderRadius: 2,
-
-            // Alias Token
           },
           components: {
             Table: {
-              rowHoverBg: "#cdcdcd",
+              rowHoverBg: "#d8d7d7",
+              headerBg: "#d8d7d7",
+              // borderColor: "black",
             },
           },
         }}

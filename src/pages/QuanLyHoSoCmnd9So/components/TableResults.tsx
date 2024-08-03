@@ -174,7 +174,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Số CMND",
       dataIndex: "soCmnd",
       key: "soCmnd",
-      // width: "30%",
+      width: "fit-content",
       // ...getColumnSearchProps("name"),
       sortDirections: ["descend", "ascend"],
       // sorter: (a, b) => a.name.localeCompare(b.name),
@@ -183,7 +183,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Họ và tên",
       dataIndex: "hoVaTen",
       key: "hoVaTen",
-      // width: "20%",
+      width: "fit-content",
       // ...getColumnSearchProps("age"),
       sortDirections: ["descend", "ascend"],
       // sorter: (a, b) => a.age - b.age,
@@ -192,6 +192,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Ngày sinh",
       dataIndex: "ngaySinh",
       key: "ngaySinh",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -200,6 +201,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Giới tính",
       dataIndex: "gioiTinh",
       key: "gioiTinh",
+      width: "100px",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -208,6 +210,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Nơi sinh",
       dataIndex: "noiSinh",
       key: "noiSinh",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -216,6 +219,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Thường trú",
       dataIndex: "thuongTru",
       key: "thuongTru",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -224,6 +228,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Họ và tên cha",
       dataIndex: "hoVaTenCha",
       key: "hoVaTenCha",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -232,6 +237,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Họ và tên mẹ",
       dataIndex: "hoVaTenMe",
       key: "hoVaTenMe",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -240,6 +246,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Họ và tên vợ chồng",
       dataIndex: "hoVaTenVoChong",
       key: "hoVaTenVoChong",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -248,6 +255,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Ngày nhập",
       dataIndex: "ngayNhap",
       key: "ngayNhap",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -256,6 +264,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Đơn vị",
       dataIndex: "donVi",
       key: "donVi",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -264,6 +273,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Công việc đã thực hiện",
       dataIndex: "congViec",
       key: "congViec",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -272,6 +282,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Kết quả",
       dataIndex: "ketQuaCongViec",
       key: "ketQuaCongViec",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -280,6 +291,7 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
       title: "Công việc thực hiện tiếp theo",
       dataIndex: "congViecTiepTheo",
       key: "congViecTiepTheo",
+      width: "fit-content",
       // ...getColumnSearchProps("address"),
       // sorter: (a, b) => a.address.length - b.address.length,
       sortDirections: ["descend", "ascend"],
@@ -294,11 +306,11 @@ export const TableResults: FunctionComponent<IProps> = ({ data }) => {
           <Table
             columns={columns}
             dataSource={data}
-            scroll={{ x: 3000, y: 500 }}
+            scroll={{ x: "max-content", y: 500 }}
             pagination={false}
             bordered
             // rowSelection={}
-            // rowHoverable
+            rowHoverable
           />
         </div>
       </div>
