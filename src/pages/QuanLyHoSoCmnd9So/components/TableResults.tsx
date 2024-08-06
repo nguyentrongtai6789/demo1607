@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import httpMethod from "../../../config/httpMethod";
 import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
-import { timKiem } from "../api";
+import { timKiem } from "./api";
 import { Handle } from "./Handle";
 import { ISearchValues } from "./SearchForm";
 

@@ -7,6 +7,7 @@ import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
+import { SelectCustom } from "../../customAntd/SelectCustom";
 import { LanguageOptions, languages } from "../../i18n/i18n";
 import {
   handleChangeLanguage,
@@ -15,8 +16,14 @@ import {
   loginSuccess,
 } from "../../redux/authSlice";
 import { useAppDispatch } from "../../redux/store";
-import { ILoginValues } from "./interface";
+import { phanHeHeThong } from "./api";
 import "./styles.scss";
+
+interface ILoginValues {
+  username: string;
+  password: string;
+  loginOption: string;
+}
 
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
@@ -58,6 +65,7 @@ export const Login: React.FC = (props) => {
           initialValues={{
             username: "",
             password: "",
+            loginOption: "KHAITHAC_SOHOA",
           }}
           onSubmit={(values: ILoginValues) => {
             handleLogin(values);
@@ -82,6 +90,15 @@ export const Login: React.FC = (props) => {
                     setFieldValue("password", event.target.value);
                   }}
                   style={{ marginBottom: "5px" }}
+                />
+                <Field
+                  component={SelectCustom}
+                  name={"loginOption"}
+                  placeholder={t("select subsystem")}
+                  size="middle"
+                  api={phanHeHeThong}
+                  valueNeedOfOption={"giaTri"}
+                  style={{ width: "100%" }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
                   {t("log in")}

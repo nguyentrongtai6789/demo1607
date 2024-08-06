@@ -4,6 +4,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { ErrorMessage, FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import httpMethod, { URL } from "../config/httpMethod";
+import { useTranslation } from "react-i18next";
 
 export interface SelectCustomProps
   extends FieldProps,
@@ -14,6 +15,7 @@ export interface SelectCustomProps
   size?: SizeType;
   api: string;
   valueNeedOfOption?: "giaTri" | "id" | "ma";
+  style?: React.CSSProperties;
 }
 
 export const SelectCustom: React.FC<SelectCustomProps> = ({
@@ -29,6 +31,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
   size,
   api,
   valueNeedOfOption,
+  style,
   ...rest
 }) => {
   const [options, setOptions] = useState<SelectProps["options"]>([]);
@@ -47,7 +50,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
                 : valueNeedOfOption === "giaTri"
                 ? item.giaTri
                 : item.ma,
-            label: item.ten,
+            label: item.ten || item.moTa,
           }))
         );
       })
@@ -83,6 +86,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
           loading={loading}
           onChange={handleOnChange || onChange}
           value={field.value}
+          style={style}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
