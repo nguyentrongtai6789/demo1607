@@ -11,17 +11,14 @@ const QuanLyHoSoCmnd9So = lazy(
 const RoutesOfAllPage: RouteObject[] = [
   {
     path: "*",
-    index: true,
     element: <Page404 />,
   },
   {
     path: "quan-ly-ho-so-cmnd-9-so",
-    index: true,
     element: <QuanLyHoSoCmnd9So />,
   },
   {
-    path: "trang-chu",
-    index: true,
+    path: "",
     element: <TrangChu />,
   },
 ];

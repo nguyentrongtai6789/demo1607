@@ -1,20 +1,26 @@
-import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 import { lazy } from "react";
-import RoutesOfAllPage from "./RoutesOfAllPage";
+import { RouteObject, useRoutes } from "react-router-dom";
 import Layout from "../pages/layout";
+import RoutesOfAllPage from "./RoutesOfAllPage";
 
 const Login = lazy(() => import("../pages/login/index"));
 
+const Page404 = lazy(() => import("../pages/page404"));
+
 const routes: RouteObject[] = [
   {
-    path: "login",
     index: true,
+    path: `${process.env.PUBLIC_URL}/login`,
     element: <Login />,
   },
   {
-    path: "/",
+    path: `${process.env.PUBLIC_URL}`,
     element: <Layout />,
     children: RoutesOfAllPage,
+  },
+  {
+    path: "*",
+    element: <Page404 />,
   },
 ];
 
