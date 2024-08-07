@@ -14,7 +14,6 @@ import httpMethod from "../../../config/httpMethod";
 import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import { timKiem } from "./api";
-import { Handle } from "./Handle";
 import { ISearchValues } from "./SearchForm";
 import {
   DeleteOutlined,
@@ -23,6 +22,7 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
+import { Action } from "./Action";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -276,19 +276,9 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       key: "operation",
       fixed: "right",
       width: 120,
-      render: () => renderAction(),
+      render: (record: IRecordTable) => <Action record={record} />,
     },
   ];
-
-  const renderAction = () => {
-    return (
-      <Space size={20} className="space-button-table-action">
-        <EyeOutlined />
-        <EditOutlined />
-        <DeleteOutlined />
-      </Space>
-    );
-  };
 
   return (
     <>
