@@ -287,7 +287,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
 
   return (
     <>
-      <div style={{ padding: "5px 5px 5px 5px" }}>
+      <div style={{ padding: "15px" }}>
         <div className="table-results">
           <div className="table-results-title">{t("Search Results")}</div>
           <Table

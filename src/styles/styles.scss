@@ -34,7 +34,7 @@
 }
 //search-form
 .search-form-wrapper {
-  padding: 5px;
+  padding: 0px 15px;
   position: relative;
 }
 
@@ -65,7 +65,7 @@
 
 /* Đối tượng thanh cuộn */
 ::-webkit-scrollbar {
-  width: 8px; /* Độ rộng của thanh cuộn */
+  width: 12px; /* Độ rộng của thanh cuộn */
 }
 
 /* Nền của thanh cuộn */
@@ -75,7 +75,7 @@
 
 /* Màu của thanh cuộn khi không được hover */
 ::-webkit-scrollbar-thumb {
-  background: #aeacac; /* Màu thanh cuộn */
+  background: #8e8d8d; /* Màu thanh cuộn */
 }
 
 /* Màu của thanh cuộn khi hover */
