@@ -33,3 +33,18 @@
     border: 1px solid grey;
   }
 }
+
+.space-button-table-action {
+  .anticon-eye {
+    cursor: pointer;
+    color: rgb(11, 7, 132);
+  }
+  .anticon-edit {
+    cursor: pointer;
+    color: green;
+  }
+  .anticon-delete {
+    cursor: pointer;
+    color: rgb(202, 33, 33);
+  }
+}
