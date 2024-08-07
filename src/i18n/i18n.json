@@ -12,7 +12,7 @@
     "date of entry": "Date of entry",
     "SEARCH CONDITIONS": "SEARCH CONDITIONS",
     "listed": "Listed",
-    "Delete condition": "Delete condition",
+    "Delete condition": "Reset",
     "Not Found": "Not Found",
     "Search Results": "Search Results"
   },
@@ -29,7 +29,7 @@
     "date of entry": "Ngày nhập hồ sơ",
     "SEARCH CONDITIONS": "ĐIỀU KIỆN TÌM KIẾM",
     "listed": "Liệt kê",
-    "Delete condition": "Xoá điều kiện",
+    "Delete condition": "Đặt lại",
     "Not Found": "Không tìm thấy trang này",
     "Search Results": "Kết quả tìm kiếm"
   }

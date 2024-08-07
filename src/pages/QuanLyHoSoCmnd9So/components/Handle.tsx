@@ -12,6 +12,11 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { Alert } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 
 interface IProps {}
 
@@ -34,11 +39,18 @@ export const Handle: React.FC<IProps> = ({}) => {
             onClick={() => {
               setOpenModalThemMoi(true);
             }}
+            startIcon={<PlusCircleOutlined />}
           >
             Thêm mới
           </ButtonCustom>
-          <ButtonCustom>Cập nhật</ButtonCustom>
-          <ButtonCustom>Xoá</ButtonCustom>
+          <ButtonCustom startIcon={<EditOutlined />}>Cập nhật</ButtonCustom>
+          <ButtonCustom
+            startIcon={<DeleteOutlined />}
+            className="delete-button"
+            color="rgb(248, 51, 51)"
+          >
+            Xoá
+          </ButtonCustom>
         </Space>
       </div>
       {false && (

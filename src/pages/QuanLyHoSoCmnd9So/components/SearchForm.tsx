@@ -8,6 +8,11 @@ import { DatePickerWithTypeCustom } from "../../../customAntd/DatePickerWithType
 import { InputCustom } from "../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../customAntd/SelectDonViCustom";
+import {
+  DeleteOutlined,
+  RetweetOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -148,8 +153,18 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       justifyContent: "center",
                     }}
                   >
-                    <ButtonCustom htmlType="submit">{t("listed")}</ButtonCustom>
-                    <ButtonCustom htmlType="reset">
+                    <ButtonCustom
+                      htmlType="submit"
+                      startIcon={<SearchOutlined />}
+                    >
+                      {t("listed")}
+                    </ButtonCustom>
+                    <ButtonCustom
+                      htmlType="reset"
+                      color="rgb(248, 51, 51)"
+                      startIcon={<RetweetOutlined />}
+                      className="delete-button"
+                    >
                       {t("Delete condition")}
                     </ButtonCustom>
                   </Space>
