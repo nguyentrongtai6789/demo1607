@@ -13,11 +13,13 @@ const NotificationCustom = (
   duration?: number
 ) => {
   notification.open({
-    message: false,
-    description: description,
+    message: description,
+    description: false,
     type: type,
     closeIcon: false,
     duration: duration ? duration : 3,
+    showProgress: true,
+    pauseOnHover: true,
     icon:
       type === "error" ? (
         <ExclamationCircleOutlined />
