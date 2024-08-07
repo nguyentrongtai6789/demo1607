@@ -31,8 +31,8 @@ const ButtonCustom: React.FC<Props> = ({
       onClick={onClick}
       variant="contained"
       style={{
-        backgroundColor: color ? color : "rgb(239, 248, 172)",
-        color: "black",
+        backgroundColor: color ? color : "rgb(39, 34, 190)",
+        color: "white",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",
         width: width ? width : "120px",
