@@ -8,6 +8,7 @@ export interface InputCustomProps extends FieldProps, Omit<InputProps, "form"> {
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
   type?: string;
+  styleInput?: React.CSSProperties;
 }
 
 export const InputCustom: React.FC<InputCustomProps> = ({
@@ -21,6 +22,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
   allowClear,
   size,
   type,
+  styleInput,
   ...rest
 }) => {
   if (type === "password") {
@@ -38,7 +40,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
             allowClear={allowClear}
             disabled={disabled}
             size={size ? size : "small"}
-            style={{}}
+            style={styleInput}
           />
           <div>
             {errors[field.name] && touched[field.name] && (
@@ -66,7 +68,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           allowClear={allowClear}
           disabled={disabled}
           size={size ? size : "small"}
-          style={{}}
+          style={styleInput}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
