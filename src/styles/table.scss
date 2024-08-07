@@ -24,3 +24,13 @@
   // min-width: 150px;
   // white-space: nowrap;
 }
+
+.ant-table-title {
+  padding: 5px 0px 10px 0px !important;
+  border: unset !important;
+  display: flex;
+  justify-content: end;
+  button {
+    right: 0px;
+  }
+}
