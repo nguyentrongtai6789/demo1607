@@ -15,7 +15,7 @@ export default () => {
 
   //thông tin user:
 
-  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { username } = useSelector((state: RootState) => state.auth);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
@@ -27,7 +27,7 @@ export default () => {
     {
       label: (
         <span>
-          {t("username")}: {userInfo.username}
+          {t("username")}: {username}
         </span>
       ),
       key: "0",

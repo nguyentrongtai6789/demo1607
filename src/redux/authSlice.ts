@@ -5,7 +5,7 @@ import httpMethod from "../config/httpMethod";
 
 interface IAuthState {
   loading: boolean;
-  userInfo: any;
+  username: string;
   userToken: string | null;
   language: keyof typeof languages;
   countLoading: number;
@@ -13,7 +13,7 @@ interface IAuthState {
 
 export const initialState: IAuthState = {
   loading: false,
-  userInfo: {}, // for user object
+  username: "", // for user object
   userToken: localStorage.getItem("userToken") || null,
   language: (localStorage.getItem("language") ||
     "en") as keyof typeof languages,
@@ -39,7 +39,7 @@ const authSlice = createSlice({
     handleLogout: (state: IAuthState, action) => {
       localStorage.clear();
       state.loading = false;
-      state.userInfo = {};
+      state.username = "";
       state.userToken = null;
     },
     handleChangeLanguage: (state: IAuthState, action) => {
@@ -58,9 +58,9 @@ const authSlice = createSlice({
     },
     loginSuccess: (state: IAuthState, action) => {
       localStorage.setItem("userToken", action.payload.token);
-      state.userInfo = action.payload;
-      state.userToken = action.payload.token;
-      httpMethod.attachTokenToHeader(action.payload.token);
+      state.username = action.payload.name;
+      state.userToken = action.payload.id_token;
+      httpMethod.attachTokenToHeader(action.payload.id_token);
     },
   },
   extraReducers: (builder) => {

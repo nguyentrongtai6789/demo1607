@@ -1,4 +1,5 @@
-import { Input, Select } from "antd";
+import { Select } from "antd";
+import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +15,9 @@ import {
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import { AxiosError, AxiosResponse } from "axios";
-import { error } from "console";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 interface ILoginValues {
   username: string;
@@ -36,8 +33,6 @@ export const Login: React.FC = (props) => {
   const navigate = useNavigate();
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
-
-  const { loading } = useSelector((state: RootState) => state.auth);
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -59,26 +54,6 @@ export const Login: React.FC = (props) => {
       });
   };
 
-  const [language, setLanguage] = useState<any>();
-
-  useEffect(() => {
-    dispatch(handleLoading());
-
-    const fetchData = async () => {
-      try {
-        const res = await httpMethod.get(
-          "http://localhost:8080/api/demo-translation"
-        );
-        console.log(res.data.translations);
-        setLanguage(res.data.translations);
-      } catch {
-      } finally {
-      }
-      dispatch(loadingCancel());
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className="login-page" style={{ textAlign: "center" }}>
       <div className="login-form">
@@ -95,7 +70,12 @@ export const Login: React.FC = (props) => {
           {(propsFormik: FormikProps<ILoginValues>) => {
             const { values, setValues, setFieldValue } = propsFormik;
             return (
-              <Form>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                  propsFormik.handleSubmit(); // Gọi hàm handleSubmit của Formik để xử lý submit
+                }}
+              >
                 <Field
                   component={InputCustom}
                   name={"username"}
@@ -103,13 +83,12 @@ export const Login: React.FC = (props) => {
                   size="middle"
                 />
                 <Field
-                  component={Input.Password}
+                  component={InputCustom}
                   disabled={false}
                   placeholder={t("password")}
+                  type="password"
                   size="middle"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setFieldValue("password", event.target.value);
-                  }}
+                  name="password"
                   style={{ marginBottom: "5px" }}
                 />
                 <Field

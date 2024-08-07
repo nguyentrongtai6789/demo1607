@@ -18,7 +18,7 @@ const RoutesOfAllPage: RouteObject[] = [
     element: <QuanLyHoSoCmnd9So />,
   },
   {
-    path: "",
+    path: "trang-chu",
     element: <TrangChu />,
   },
 ];

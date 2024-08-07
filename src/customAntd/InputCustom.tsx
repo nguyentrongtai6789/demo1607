@@ -7,6 +7,7 @@ export interface InputCustomProps extends FieldProps, Omit<InputProps, "form"> {
   label?: string;
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
+  type?: string;
 }
 
 export const InputCustom: React.FC<InputCustomProps> = ({
@@ -19,8 +20,39 @@ export const InputCustom: React.FC<InputCustomProps> = ({
   disabled,
   allowClear,
   size,
+  type,
   ...rest
 }) => {
+  if (type === "password") {
+    return (
+      <>
+        <div style={styleWrapper || { marginBottom: "5px" }}>
+          <span>
+            {label || ""}{" "}
+            {isRequired && <span style={{ color: "red" }}>*</span>}
+          </span>
+          <Input.Password
+            {...field}
+            {...rest}
+            placeholder={placeholder}
+            allowClear={allowClear}
+            disabled={disabled}
+            size={size ? size : "small"}
+            style={{}}
+          />
+          <div>
+            {errors[field.name] && touched[field.name] && (
+              <span
+                style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
+              >
+                <ErrorMessage name={field.name || ""} />
+              </span>
+            )}
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
@@ -34,7 +66,6 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           allowClear={allowClear}
           disabled={disabled}
           size={size ? size : "small"}
-          autoComplete="off"
           style={{}}
         />
         <div>
