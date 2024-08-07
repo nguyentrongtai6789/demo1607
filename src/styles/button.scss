@@ -24,20 +24,20 @@
   justify-content: center;
   height: 40px;
   .space-button {
-    background-color: rgba(94, 91, 139, 0.401) !important;
+    // background-color: rgba(94, 91, 139, 0.401) !important;
     padding: 10px 10px 10px 10px;
-    box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Hiển thị shadow dưới cùng */
-    background-color: white; /* Để button không bị ẩn bởi nền */
+    // box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Hiển thị shadow dưới cùng */
+    // background-color: white; /* Để button không bị ẩn bởi nền */
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    border: 1px solid grey;
+    // border: 1px solid grey;
   }
 }
 
 .space-button-table-action {
   .anticon-eye {
     cursor: pointer;
-    color: rgb(11, 7, 132);
+    color: rgb(30, 82, 203);
   }
   .anticon-edit {
     cursor: pointer;
