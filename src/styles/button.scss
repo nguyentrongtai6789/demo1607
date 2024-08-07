@@ -1,11 +1,21 @@
 .MuiButtonBase-root {
-  padding: unset !important;
-  text-transform: lowercase !important;
+  padding: 2px !important;
+  text-transform: unset !important;
   border-radius: 2px !important;
+  color: rgb(30, 82, 203);
   &:hover {
-    background-color: rgb(28, 24, 138) !important;
+    background: rgb(11, 7, 132) !important;
+    box-shadow: 3px 3px 6px -1px #7f7b7b !important;
   }
 }
+
+.delete-button {
+  &:hover {
+    background: rgb(202, 33, 33) !important;
+    box-shadow: 3px 3px 6px -1px #7f7b7b !important;
+  }
+}
+
 .button-bottom-wrapper {
   position: absolute;
   bottom: 0px;

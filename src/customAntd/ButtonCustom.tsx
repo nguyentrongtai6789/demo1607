@@ -11,7 +11,8 @@ interface Props {
   radius?: string;
   width?: string;
   htmlType?: ButtonHTMLType;
-  // size?: string;
+  startIcon?: React.ReactNode;
+  className?: string;
 }
 
 const ButtonCustom: React.FC<Props> = ({
@@ -23,7 +24,8 @@ const ButtonCustom: React.FC<Props> = ({
   radius,
   width,
   htmlType,
-  // size,
+  startIcon,
+  className,
   ...rest
 }) => {
   return (
@@ -31,16 +33,17 @@ const ButtonCustom: React.FC<Props> = ({
       onClick={onClick}
       variant="contained"
       style={{
-        backgroundColor: color ? color : "rgb(39, 34, 190)",
+        backgroundColor: color ? color : "rgb(30, 82, 203)",
         color: "white",
         borderRadius: radius ? radius : "none",
         height: height ? height : "25px",
         width: width ? width : "120px",
-        fontWeight: "550",
+        fontSize: "14px",
       }}
+      startIcon={startIcon}
       type={htmlType}
-      // size={size ? size : "small"}
       {...rest}
+      className={className}
     >
       {children}
     </Button>
