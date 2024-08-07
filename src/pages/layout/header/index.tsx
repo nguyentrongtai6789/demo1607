@@ -73,7 +73,7 @@ export default () => {
         <ButtonCustom
           onClick={() => {
             dispatch(handleLogout());
-            navigate("/login");
+            navigate(`${process.env.PUBLIC_URL}/login`);
           }}
           width="100%"
         >

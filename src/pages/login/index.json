@@ -8,7 +8,9 @@
     "login successfully": "Login successfully",
     "wrong password or username": "Wrong password or username",
     "You are not logged in": "You are not logged in",
-    "select subsystem": "Select subsystem"
+    "select subsystem": "Select subsystem",
+    "Hệ thống khai thác hồ sơ CMND 9 số số hóa": "Digital 9-digit ID card file mining system",
+    "Hệ thống quản lý hồ sơ CMND 9 số số hóa": "Digital 9-digit ID card file management system"
   },
   "vi": {
     "username": "Tên đăng nhập",
@@ -19,6 +21,8 @@
     "login successfully": "Đăng nhập thành công",
     "wrong password or username": "Sai tài khoản hoặc mật khẩu",
     "You are not logged in": "Bạn chưa đăng nhập",
-    "select subsystem": "Chọn phân hệ"
+    "select subsystem": "Chọn phân hệ",
+    "Hệ thống khai thác hồ sơ CMND 9 số số hóa": "Hệ thống khai thác hồ sơ CMND 9 số số hóa",
+    "Hệ thống quản lý hồ sơ CMND 9 số số hóa": "Hệ thống quản lý hồ sơ CMND 9 số số hóa"
   }
 }

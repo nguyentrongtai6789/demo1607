@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LOGIN from "../pages/login/index.json";
 import HEADER from "../pages/layout/header/index.json";
 import SIDEBAR_MENU from "../pages/layout/sidebar/index.json";
+import LOGIN from "../pages/login/index.json";
 import DICTIONARY from "./i18n.json";
 
 export enum ELanguages {

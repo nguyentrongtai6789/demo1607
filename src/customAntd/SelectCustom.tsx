@@ -5,6 +5,7 @@ import { ErrorMessage, FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import httpMethod, { URL } from "../config/httpMethod";
 import { useTranslation } from "react-i18next";
+import { languages, resources } from "../i18n/i18n";
 
 export interface SelectCustomProps
   extends FieldProps,
@@ -36,6 +37,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
 }) => {
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -50,7 +52,8 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
                 : valueNeedOfOption === "giaTri"
                 ? item.giaTri
                 : item.ma,
-            label: item.ten || item.moTa,
+            // label: item.ten || item.moTa,
+            label: t(`${item.ten}` as keyof typeof resources.en.login),
           }))
         );
       })
@@ -58,7 +61,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [i18n.language]);
 
   const handleOnChange = (value: any) => {
     const changeEvent = {

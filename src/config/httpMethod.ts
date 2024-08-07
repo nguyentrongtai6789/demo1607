@@ -29,7 +29,7 @@ class Services {
           // );
         }
         if (error?.code === AxiosError.ERR_NETWORK) {
-          // NotificationCustom("Lỗi kết nối mạng", "error");
+          // NotificationCustom("network error", "error");
         }
         return Promise.reject(error);
       }
@@ -69,7 +69,7 @@ class Services {
     return new Promise((resolve, reject) => {
       this.axios
         .post<D, AxiosResponse<R>>(url, data, config)
-        .then((response) => resolve(response))
+        .then((response: AxiosResponse) => resolve(response))
         .catch((error: AxiosError) => reject(error));
     });
   }

@@ -12,7 +12,7 @@ const NotificationCustom = (
   type?: IconType,
   duration?: number
 ) => {
-  return notification.open({
+  notification.open({
     message: false,
     description: description,
     type: type,

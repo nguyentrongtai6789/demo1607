@@ -17,11 +17,11 @@ export default () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!userToken) {
-  //     navigate("/login");
-  //   }
-  // }, [userToken]);
+  useEffect(() => {
+    if (!userToken) {
+      navigate(`${process.env.PUBLIC_URL}/login`);
+    }
+  }, [userToken]);
 
   const [collapsed, setCollapsed] = useState<boolean>(false);
 

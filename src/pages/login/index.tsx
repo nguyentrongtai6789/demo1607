@@ -1,5 +1,4 @@
 import { Input, Select } from "antd";
-import { AxiosError } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +14,13 @@ import {
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { useAppDispatch } from "../../redux/store";
-import { phanHeHeThong } from "./api";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
+import { AxiosError, AxiosResponse } from "axios";
+import { error } from "console";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 interface ILoginValues {
   username: string;
@@ -34,29 +37,47 @@ export const Login: React.FC = (props) => {
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
+  const { loading } = useSelector((state: RootState) => state.auth);
+
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
-    try {
-      const res = await httpMethod.post(
-        "http://localhost:8080/api/login",
-        values
-      );
-      if (res.status === 200) {
-        NotificationCustom(t("login successfully"), "success");
-        dispatch(loginSuccess(res.data));
-        navigate("/trang-chu");
-      }
-    } catch (error: any) {
-      if (error?.response?.status === 401) {
-        NotificationCustom(t("wrong password or username"), "error");
-      }
-      if (error?.code === AxiosError.ERR_NETWORK) {
-        NotificationCustom(t("network error"), "error");
-      }
-    } finally {
-      dispatch(loadingCancel());
-    }
+    httpMethod
+      .post(`${authenticate}`, values)
+      .then((res: AxiosResponse) => {
+        if (res.headers.authorization) {
+          NotificationCustom(t("login successfully"), "success");
+          dispatch(loginSuccess(res.data));
+          navigate(`${process.env.PUBLIC_URL}/trang-chu`);
+        }
+        if (res.data.error === "201") {
+          return NotificationCustom(t("wrong password or username"), "error");
+        }
+      })
+      .catch((error: AxiosError) => {})
+      .finally(() => {
+        dispatch(loadingCancel());
+      });
   };
+
+  const [language, setLanguage] = useState<any>();
+
+  useEffect(() => {
+    dispatch(handleLoading());
+
+    const fetchData = async () => {
+      try {
+        const res = await httpMethod.get(
+          "http://localhost:8080/api/demo-translation"
+        );
+        console.log(res.data.translations);
+        setLanguage(res.data.translations);
+      } catch {
+      } finally {
+      }
+      dispatch(loadingCancel());
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="login-page" style={{ textAlign: "center" }}>
@@ -110,10 +131,6 @@ export const Login: React.FC = (props) => {
                     style={{
                       width: 150,
                       marginTop: "5px",
-                      // height: "25px",
-                      // position: "fixed",
-                      // top: 10,
-                      // right: 10,
                     }}
                     size="small"
                     // dropdownStyle={{ height: "25px" }}
