@@ -23,6 +23,7 @@ import {
 } from "@ant-design/icons";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
 import { Action } from "./Action";
+import { ModalCustom } from "./ModalCustom";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -280,6 +281,8 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     },
   ];
 
+  const [openModalThemMoi, setOpenModalThemMoi] = useState<boolean>(false);
+
   return (
     <>
       <div style={{ padding: "15px" }}>
@@ -288,7 +291,11 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           <Table
             title={() => (
               <>
-                <ButtonCustom startIcon={<PlusCircleOutlined />} width="145px">
+                <ButtonCustom
+                  startIcon={<PlusCircleOutlined />}
+                  width="145px"
+                  onClick={() => setOpenModalThemMoi(true)}
+                >
                   Thêm mới
                 </ButtonCustom>
               </>
@@ -312,6 +319,23 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           />
         </div>
       </div>
+      <ModalCustom open={openModalThemMoi} title="CẬP NHẬT HỒ SƠ CMND 9 SỐ">
+        <div>ABC</div>
+        <div>ABC</div>
+        <div>ABC</div>
+        <div>ABC</div>
+        <div>ABC</div>
+        <div>ABC</div>
+        <div>ABC</div>
+        <div className="button-bottom-wrapper">
+          <Space className="space-button">
+            <ButtonCustom onClick={() => setOpenModalThemMoi(false)}>
+              Đóng
+            </ButtonCustom>
+            <ButtonCustom width="200px">Xem thông tin tại HT CCCD</ButtonCustom>
+          </Space>
+        </div>
+      </ModalCustom>
     </>
   );
 };
