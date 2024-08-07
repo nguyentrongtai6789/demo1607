@@ -18,6 +18,7 @@ import {
 import { useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 interface ILoginValues {
   username: string;
@@ -81,6 +82,8 @@ export const Login: React.FC = (props) => {
                   name={"username"}
                   placeholder={t("username")}
                   size="middle"
+                  prefix={<UserOutlined />}
+                  styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
                 />
                 <Field
                   component={InputCustom}
@@ -90,6 +93,8 @@ export const Login: React.FC = (props) => {
                   size="middle"
                   name="password"
                   style={{ marginBottom: "5px" }}
+                  prefix={<LockOutlined />}
+                  styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
                 />
                 <Field
                   component={SelectCustom}
@@ -98,7 +103,9 @@ export const Login: React.FC = (props) => {
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
-                  style={{ width: "100%" }}
+                  style={{
+                    width: "100%",
+                  }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
                   {t("log in")}
