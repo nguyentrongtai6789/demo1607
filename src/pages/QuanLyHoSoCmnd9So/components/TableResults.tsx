@@ -1,4 +1,11 @@
-import { GetProp, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  GetProp,
+  Space,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import { SorterResult } from "antd/es/table/interface";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,6 +16,8 @@ import { RootState, useAppDispatch } from "../../../redux/store";
 import { timKiem } from "./api";
 import { Handle } from "./Handle";
 import { ISearchValues } from "./SearchForm";
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import ButtonCustom from "../../../customAntd/ButtonCustom";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -257,11 +266,28 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       sorter: true,
       showSorterTooltip: false,
     },
+    {
+      title: "Thao tác",
+      key: "operation",
+      fixed: "right",
+      width: 120,
+      render: () => renderAction(),
+    },
   ];
+
+  const renderAction = () => {
+    return (
+      <Space size={20} className="space-button-table-action">
+        <EyeOutlined />
+        <EditOutlined />
+        <DeleteOutlined />
+      </Space>
+    );
+  };
 
   return (
     <>
-      <div style={{ padding: "5px 5px 50px 5px" }}>
+      <div style={{ padding: "5px 5px 5px 5px" }}>
         <div className="table-results">
           <div className="table-results-title">{t("Search Results")}</div>
           <Table
@@ -269,7 +295,6 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             dataSource={data}
             scroll={{ x: "2500px", y: "auto" }}
             bordered
-            rowHoverable
             pagination={{
               current: tableParams.pagination?.current,
               pageSize: tableParams.pagination?.pageSize,
@@ -285,7 +310,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           />
         </div>
       </div>
-      <Handle />
+      {/* <Handle /> */}
     </>
   );
 };
