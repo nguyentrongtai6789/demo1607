@@ -312,7 +312,6 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           />
         </div>
       </div>
-      {/* <Handle /> */}
     </>
   );
 };

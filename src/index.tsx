@@ -12,7 +12,7 @@ import "../src/styles/datepicker.scss";
 import "../src/styles/styles.scss";
 import "../src/styles/table.scss";
 import "../src/styles/notification.scss";
-
+import "../src/styles/modalConfirm.scss";
 import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(
