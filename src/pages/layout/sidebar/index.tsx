@@ -1,6 +1,5 @@
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
 import { Menu, MenuProps, Tooltip } from "antd";
-import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
@@ -8,13 +7,22 @@ import "./styles.scss";
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
 
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
   const { t } = useTranslation("sidebarMenu");
+
+  const danhSachChucNang = JSON.parse(
+    localStorage.getItem("danhSachChucNang") || "[]"
+  );
+
+  console.log(danhSachChucNang);
+
+  const itemsDemo: MenuItem[] = danhSachChucNang.map((item: any) => ({
+    key: item.key,
+    label: item.title,
+    children: item.children.map((item: any) => ({
+      key: item.key,
+      label: <a href={"quan-ly-ho-so-cmnd-9-so"}>{item.title}</a>,
+    })),
+  }));
 
   const items: MenuItem[] = [
     {
@@ -297,8 +305,7 @@ export default () => {
           defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="light"
-          inlineCollapsed={collapsed}
-          items={items}
+          items={itemsDemo}
           triggerSubMenuAction={"click"}
         />
       </div>

@@ -60,6 +60,12 @@ const authSlice = createSlice({
       localStorage.setItem("userToken", action.payload.token);
       state.username = action.payload.name;
       state.userToken = action.payload.id_token;
+      console.log(action.payload);
+
+      localStorage.setItem(
+        "danhSachChucNang",
+        JSON.stringify(action.payload.danhSachChucNang)
+      );
       httpMethod.attachTokenToHeader(action.payload.id_token);
     },
   },
