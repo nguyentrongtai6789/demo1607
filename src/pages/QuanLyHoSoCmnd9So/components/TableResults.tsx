@@ -16,7 +16,12 @@ import { RootState, useAppDispatch } from "../../../redux/store";
 import { timKiem } from "./api";
 import { Handle } from "./Handle";
 import { ISearchValues } from "./SearchForm";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
 
 export interface IProps {
@@ -291,9 +296,16 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
         <div className="table-results">
           <div className="table-results-title">{t("Search Results")}</div>
           <Table
+            title={() => (
+              <>
+                <ButtonCustom startIcon={<PlusCircleOutlined />} width="145px">
+                  Thêm mới
+                </ButtonCustom>
+              </>
+            )}
             columns={columns}
             dataSource={data}
-            scroll={{ x: "2500px", y: "auto" }}
+            scroll={{ x: "2500px", y: "500px" }}
             bordered
             pagination={{
               current: tableParams.pagination?.current,
