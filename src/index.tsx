@@ -24,6 +24,7 @@ root.render(
         theme={{
           token: {
             borderRadius: 2,
+            colorText: "#001529",
           },
           components: {
             Table: {

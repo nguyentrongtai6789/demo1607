@@ -22,6 +22,8 @@
 .wrap-content-child {
   height: calc(100vh - 64px) !important;
   overflow-y: auto !important;
+  // color: rgb(3, 2, 97);
+  color: #001529;
 }
 
 .title-page {
@@ -41,10 +43,12 @@
   border-radius: 3px;
   box-shadow: 2px 2px 6px -1px #7f7b7b;
   margin-bottom: 10px;
+  background: white;
+  // color: rgb(3, 2, 97);
   .search-from-title {
     text-transform: uppercase;
     font-weight: 600;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(3, 2, 97);
   }
   .ant-col {
     padding: 0px 5px;
