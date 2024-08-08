@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
-import { LanguageOptions, languages } from "../../../i18n/i18n";
+import { LanguageOptions, languages } from "../../../i18n/i18nFrontEnd";
 import { handleChangeLanguage, handleLogout } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import "./styles.scss";

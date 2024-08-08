@@ -5,7 +5,7 @@ import { ErrorMessage, FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import httpMethod, { URL } from "../config/httpMethod";
 import { useTranslation } from "react-i18next";
-import { languages, resources } from "../i18n/i18n";
+import { languages, resources } from "../i18n/i18nFrontEnd";
 
 export interface SelectCustomProps
   extends FieldProps,
@@ -52,8 +52,8 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
                 : valueNeedOfOption === "giaTri"
                 ? item.giaTri
                 : item.ma,
-            // label: item.ten || item.moTa,
-            label: t(`${item.ten}` as keyof typeof resources.en.login),
+            label: item.ten || item.moTa,
+            // label: t(`${item.ten}` as keyof typeof resources.en.login),
           }))
         );
       })
