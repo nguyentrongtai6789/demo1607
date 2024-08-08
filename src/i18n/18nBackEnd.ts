@@ -36,11 +36,12 @@ const backendOptions = {
 };
 
 i18n
-  // .use(initReactI18next)
+  .use(initReactI18next)
   .use(LanguageDetector)
   .use(backend)
   .init({
     backend: backendOptions,
+    // ns: ["translations"],
     fallbackLng: "en",
     debug: false,
     load: "languageOnly",
