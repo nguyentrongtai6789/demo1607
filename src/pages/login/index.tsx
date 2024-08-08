@@ -1,24 +1,25 @@
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Select } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
 import { SelectCustom } from "../../customAntd/SelectCustom";
-import { LanguageOptions, languages } from "../../i18n/i18n";
 import {
   handleChangeLanguage,
   handleLoading,
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { useAppDispatch } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LanguageOptions, languages } from "../../i18n/i18nFrontEnd";
 
 interface ILoginValues {
   username: string;
@@ -29,11 +30,15 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { t, i18n } = useTranslation("login");
+  const { i18n } = useTranslation();
 
   const navigate = useNavigate();
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
+
+  const { jsonFile } = useSelector((state: RootState) => state.auth);
+
+  const loginLanguage = jsonFile.login;
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -41,12 +46,12 @@ export const Login: React.FC = (props) => {
       .post(`${authenticate}`, values)
       .then((res: AxiosResponse) => {
         if (res.headers.authorization) {
-          NotificationCustom(t("login successfully"), "success");
+          NotificationCustom(loginLanguage.loginSuccess, "success");
           dispatch(loginSuccess(res.data));
           navigate(`${process.env.PUBLIC_URL}/trang-chu`);
         }
         if (res.data.error === "201") {
-          return NotificationCustom(t("wrong password or username"), "error");
+          return NotificationCustom(loginLanguage.wrongPassOrUser, "error");
         }
       })
       .catch((error: AxiosError) => {})
@@ -71,16 +76,12 @@ export const Login: React.FC = (props) => {
           {(propsFormik: FormikProps<ILoginValues>) => {
             const { values, setValues, setFieldValue } = propsFormik;
             return (
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault(); // Ngăn chặn hành vi mặc định của form
-                  propsFormik.handleSubmit(); // Gọi hàm handleSubmit của Formik để xử lý submit
-                }}
-              >
+              <Form>
                 <Field
                   component={InputCustom}
                   name={"username"}
-                  placeholder={t("username")}
+                  // placeholder={t("username")}
+                  placeholder={loginLanguage.placeholder1}
                   size="middle"
                   prefix={<UserOutlined />}
                   styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
@@ -88,7 +89,8 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={InputCustom}
                   disabled={false}
-                  placeholder={t("password")}
+                  // placeholder={t("password")}
+                  placeholder={loginLanguage.placeholder2}
                   type="password"
                   size="middle"
                   name="password"
@@ -99,7 +101,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={SelectCustom}
                   name={"loginOption"}
-                  placeholder={t("select subsystem")}
+                  placeholder={loginLanguage.selectSubsystem}
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
@@ -108,7 +110,8 @@ export const Login: React.FC = (props) => {
                   }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
-                  {t("log in")}
+                  {/* {t("log in")} */}
+                  {jsonFile.login.buttonLogin}
                 </ButtonCustom>
                 <div>
                   <Select

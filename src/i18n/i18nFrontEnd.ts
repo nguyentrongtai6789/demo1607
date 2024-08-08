@@ -2,7 +2,6 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import HEADER from "../pages/layout/header/index.json";
 import SIDEBAR_MENU from "../pages/layout/sidebar/index.json";
-import LOGIN from "../pages/login/index.json";
 import DICTIONARY from "./i18n.json";
 
 export enum ELanguages {
@@ -33,13 +32,11 @@ export const LanguageOptions: ILanguageOptions[] = [
 
 export const resources = {
   en: {
-    login: LOGIN.en,
     header: HEADER.en,
     sidebarMenu: SIDEBAR_MENU.en,
     dictionnary: DICTIONARY.en,
   },
   vi: {
-    login: LOGIN.vi,
     header: HEADER.vi,
     sidebarMenu: SIDEBAR_MENU.vi,
     dictionnary: DICTIONARY.vi,
@@ -55,7 +52,7 @@ i18n
     // (tip move them in a JSON file and import them,
     // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     resources,
-    ns: ["login", "header", "sidebarMenu", "dictionnary"],
+    ns: ["header", "sidebarMenu", "dictionnary"],
     defaultNS: defaultNS,
     lng: "en", // if you're using a language detector, do not define the lng option
     fallbackLng: "en",
