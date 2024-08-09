@@ -19,7 +19,7 @@ import {
 import { RootState, useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import { LanguageOptions, languages } from "../../i18n/i18nFrontEnd";
+import { LanguageOptions, languages } from "../../i18n/i18n";
 
 interface ILoginValues {
   username: string;

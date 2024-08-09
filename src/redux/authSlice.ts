@@ -1,7 +1,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { languages } from "../i18n/i18nFrontEnd";
 import { handleLogin } from "./authActions";
 import httpMethod from "../config/httpMethod";
+import { languages } from "../i18n/i18n";
 
 interface IAuthState {
   loading: boolean;

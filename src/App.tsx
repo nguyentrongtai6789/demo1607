@@ -11,7 +11,7 @@ import { handleSetJsonFile, loginSuccess } from "./redux/authSlice";
 function App() {
   const { language, loading } = useSelector((state: RootState) => state.auth);
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const dispatch = useAppDispatch();
 

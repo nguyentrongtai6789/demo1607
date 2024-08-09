@@ -5,7 +5,6 @@ import { ErrorMessage, FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import httpMethod, { URL } from "../config/httpMethod";
 import { useTranslation } from "react-i18next";
-import { languages, resources } from "../i18n/i18nFrontEnd";
 
 export interface SelectCustomProps
   extends FieldProps,
@@ -37,31 +36,30 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
 }) => {
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    setLoading(true);
-    httpMethod
-      .get(`${URL}/${api}`)
-      .then((res: AxiosResponse) => {
-        setOptions(
-          res.data.data.map((item: any) => ({
-            value:
-              valueNeedOfOption === "id"
-                ? item.id
-                : valueNeedOfOption === "giaTri"
-                ? item.giaTri
-                : item.ma,
-            label: item.ten || item.moTa,
-            // label: t(`${item.ten}` as keyof typeof resources.en.login),
-          }))
-        );
-      })
-      .catch((error: AxiosError) => {})
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   httpMethod
+  //     .get(`${URL}/${api}`)
+  //     .then((res: AxiosResponse) => {
+  //       setOptions(
+  //         res.data.data.map((item: any) => ({
+  //           value:
+  //             valueNeedOfOption === "id"
+  //               ? item.id
+  //               : valueNeedOfOption === "giaTri"
+  //               ? item.giaTri
+  //               : item.ma,
+  //           label: item.ten || item.moTa,
+  //           // label: t(`${item.ten}` as keyof typeof resources.en.login),
+  //         }))
+  //       );
+  //     })
+  //     .catch((error: AxiosError) => {})
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, [i18n.language]);
 
   const handleOnChange = (value: any) => {
     const changeEvent = {
