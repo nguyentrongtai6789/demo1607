@@ -41,8 +41,8 @@ export const Login: React.FC = (props) => {
       .post(`${authenticate}`, values)
       .then((res: AxiosResponse) => {
         if (res.headers.authorization) {
-          NotificationCustom(t("loginSuccess"), "success");
           dispatch(loginSuccess(res.data));
+          NotificationCustom(t("loginSuccess"), "success");
           navigate(`${process.env.PUBLIC_URL}/trang-chu`);
         }
         if (res.data.error === "201") {

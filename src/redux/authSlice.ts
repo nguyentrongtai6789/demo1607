@@ -9,15 +9,17 @@ interface IAuthState {
   userToken: string | null;
   language: keyof typeof languages;
   countLoading: number;
+  userInfo: any;
 }
 
 export const initialState: IAuthState = {
   loading: false,
-  username: "", // for user object
+  username: localStorage.getItem("username") || "",
   userToken: localStorage.getItem("userToken") || null,
   language: (localStorage.getItem("language") ||
     "en") as keyof typeof languages,
   countLoading: 0,
+  userInfo: localStorage.getItem("userInfo") || {},
 };
 
 export const handleLogout = createAction("auth/handleLogout");
@@ -57,11 +59,11 @@ const authSlice = createSlice({
       }
     },
     loginSuccess: (state: IAuthState, action) => {
-      localStorage.setItem("userToken", action.payload.token);
+      localStorage.setItem("userToken", action.payload.id_token);
+      state.userToken = action.payload.id_token; // ko set 2 thằng củ lìn này thì bên kia nó sẽ bị null
       state.username = action.payload.name;
-      state.userToken = action.payload.id_token;
-      console.log(action.payload);
-
+      localStorage.setItem("username", action.payload.name);
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
       localStorage.setItem(
         "danhSachChucNang",
         JSON.stringify(action.payload.danhSachChucNang)
