@@ -34,13 +34,12 @@ i18n
   .init({
     fallbackLng: "en",
     debug: true,
-    ns: ["translations"],
-    defaultNS: "translations",
     interpolation: {
       escapeValue: false,
     },
+    defaultNS: "translation",
     backend: {
-      loadPath: "http://localhost:8080/api/demo-translation/{{lng}}",
+      loadPath: "http://localhost:8080/api/demo-translation/{{lng}}/{{ns}}",
     },
   });
 

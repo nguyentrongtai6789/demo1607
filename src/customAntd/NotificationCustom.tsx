@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { notification } from "antd";
 import { IconType } from "antd/es/notification/interface";
+import { useTranslation } from "react-i18next";
 
 const NotificationCustom = (
   description: string,

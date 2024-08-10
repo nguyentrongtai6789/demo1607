@@ -4,6 +4,7 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+import NotificationCustom from "../customAntd/NotificationCustom";
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
@@ -22,14 +23,41 @@ class Services {
         return Promise.resolve(response);
       },
       function (error: AxiosError) {
+        const language = localStorage.getItem("language");
+        //các lỗi chung sẽ bắt ở đây
+        //token hết hạn
         if (error?.response?.status === 401) {
-          // NotificationCustom(
-          //   "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
-          //   "error"
-          // );
+          if (language === "vi") {
+            NotificationCustom(
+              "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
+              "error"
+            );
+          } else {
+            NotificationCustom(
+              "Login information expired, please login again",
+              "error"
+            );
+            return;
+          }
+        }
+        //notfound
+        if (error?.response?.status === 404) {
+          if (language === "vi") {
+            NotificationCustom("Không tìm thấy địa chỉ api", "error");
+            return;
+          } else {
+            NotificationCustom("Not found api", "error");
+            return;
+          }
         }
         if (error?.code === AxiosError.ERR_NETWORK) {
-          // NotificationCustom("network error", "error");
+          if (language === "vi") {
+            NotificationCustom("Không có kết nối mạng", "error");
+            return;
+          } else {
+            NotificationCustom("Network error", "error");
+            return;
+          }
         }
         return Promise.reject(error);
       }

@@ -9,7 +9,6 @@ interface IAuthState {
   userToken: string | null;
   language: keyof typeof languages;
   countLoading: number;
-  jsonFile: any;
 }
 
 export const initialState: IAuthState = {
@@ -19,7 +18,6 @@ export const initialState: IAuthState = {
   language: (localStorage.getItem("language") ||
     "en") as keyof typeof languages,
   countLoading: 0,
-  jsonFile: {},
 };
 
 export const handleLogout = createAction("auth/handleLogout");
@@ -34,8 +32,6 @@ export const loadingCancel = createAction("auth/loadingCancel");
 
 export const loginSuccess = createAction<any>("auth/loginSuccess");
 
-export const handleSetJsonFile = createAction<any>("auth/handleSetJsonFile");
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -45,9 +41,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.username = "";
       state.userToken = null;
-    },
-    handleSetJsonFile: (state: IAuthState, action) => {
-      state.jsonFile = action.payload;
     },
     handleChangeLanguage: (state: IAuthState, action) => {
       localStorage.setItem("language", action.payload);
