@@ -24,8 +24,16 @@ const RoutesApp: RouteObject[] = [
   },
 ];
 
+const RoutesOutlet: RouteObject[] = [
+  {
+    path: ``,
+    element: <Outlet />,
+    children: RoutesApp,
+  },
+];
+
 const RoutesOfApp = () => {
-  const element = useRoutes(RoutesApp);
+  const element = useRoutes(RoutesOutlet);
   return element;
 };
 

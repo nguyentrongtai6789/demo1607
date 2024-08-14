@@ -52,17 +52,6 @@ export default () => {
           </Content>
         </Layout>
       </Layout>
-      {/* {userToken && (
-        <>
-          <Header />
-          <div className="wrapper-content-sidebar">
-            <Sidebar />
-            <Content>
-              <Outlet />
-            </Content>
-          </div>
-        </>
-      )} */}
     </div>
   );
 };
