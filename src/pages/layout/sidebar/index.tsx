@@ -2,6 +2,7 @@ import { Menu, MenuProps } from "antd";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
@@ -12,27 +13,55 @@ export default () => {
     localStorage.getItem("danhSachChucNang") || "[]"
   );
 
+  const [openKey, setOpenKey] = useState<string>("");
+
+  const [selectedKey, setSelectedKey] = useState<string>("");
+
   const itemsDemo: MenuItem[] = danhSachChucNang.map((item: any) => ({
     key: item.key,
     label: item.title,
-    children: item.children.map((item: any) => ({
-      key: item.key,
+    children: item.children.map((item2: any) => ({
+      key: item2.key,
       label: (
-        <Link to={`${process.env.PUBLIC_URL}${item.url}`}>{item.title}</Link>
+        <Link to={`${process.env.PUBLIC_URL}${item2.url}`}>{item2.title}</Link>
       ),
     })),
   }));
+
+  const baseUrl = window.location.pathname;
+
+  const checkOpenKey = () => {
+    for (let i = 0; i <= danhSachChucNang.length - 1; i++) {
+      for (let j = 0; j <= danhSachChucNang[i].children.length - 1; j++) {
+        if (baseUrl.includes(danhSachChucNang[i].children[j].url)) {
+          setOpenKey(danhSachChucNang[i].key);
+          setSelectedKey(danhSachChucNang[i].children[j].key);
+          return;
+        }
+      }
+    }
+  };
+
+  const onClick: MenuProps["onClick"] = (e) => {
+    setOpenKey(e.keyPath[1]);
+    setSelectedKey(e.keyPath[0]);
+  };
+
+  useEffect(() => {
+    checkOpenKey();
+  }, []);
 
   return (
     <>
       <div className="side-bar-custom">
         <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          selectedKeys={[selectedKey]}
+          defaultOpenKeys={[openKey]}
           mode="inline"
           theme="light"
           items={itemsDemo}
           triggerSubMenuAction={"click"}
+          onClick={onClick}
         />
       </div>
     </>
