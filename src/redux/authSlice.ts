@@ -2,6 +2,7 @@ import { createAction, createSlice } from "@reduxjs/toolkit";
 import { handleLogin } from "./authActions";
 import httpMethod from "../config/httpMethod";
 import { languages } from "../i18n/i18n";
+import Cookies from "js-cookie";
 
 interface IAuthState {
   loading: boolean;
@@ -43,6 +44,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.username = "";
       state.userToken = null;
+      Cookies.remove("userToken");
     },
     handleChangeLanguage: (state: IAuthState, action) => {
       localStorage.setItem("language", action.payload);
@@ -68,7 +70,7 @@ const authSlice = createSlice({
         "danhSachChucNang",
         JSON.stringify(action.payload.danhSachChucNang)
       );
-      httpMethod.attachTokenToHeader(action.payload.id_token);
+      Cookies.set("userToken", action.payload.id_token);
     },
   },
   extraReducers: (builder) => {

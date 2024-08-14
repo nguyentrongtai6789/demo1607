@@ -5,6 +5,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 import NotificationCustom from "../customAntd/NotificationCustom";
+import Cookies from "js-cookie";
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
@@ -63,14 +64,22 @@ class Services {
         return Promise.reject(error);
       }
     );
+    this.attachTokenToHeader();
   }
 
   //gắn token vào header request:
-  attachTokenToHeader(token: string) {
-    this.axios.interceptors.request.use(function (config: any) {
-      config.headers.Authorization = `Bearer ${token}`;
-      return config;
-    });
+  attachTokenToHeader() {
+    const token = Cookies.get("userToken");
+    this.axios.interceptors.request.use(
+      function (config: any) {
+        // Do something before request is sent
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      },
+      function (error: any) {
+        return Promise.reject(error);
+      }
+    );
   }
 
   public get<T = any, R = T, D = any>(
