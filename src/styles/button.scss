@@ -1,4 +1,4 @@
-.MuiButtonBase-root {
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
   padding: 2px !important;
   text-transform: unset !important;
   border-radius: 2px !important;
@@ -14,6 +14,10 @@
     background: rgb(202, 33, 33) !important;
     box-shadow: 3px 3px 6px -1px #7f7b7b !important;
   }
+}
+
+.button-collapse {
+  border-radius: 0px !important;
 }
 
 .button-bottom-wrapper {

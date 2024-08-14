@@ -14,7 +14,7 @@ const RoutesOfAllPage: RouteObject[] = [
     element: <Page404 />,
   },
   {
-    path: "quan-ly-ho-so-cmnd-9-so",
+    path: "quan-ly/hs-cmnd-9-so",
     element: <QuanLyHoSoCmnd9So />,
   },
   {

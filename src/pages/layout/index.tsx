@@ -38,7 +38,12 @@ export default () => {
           onCollapse={(value) => setCollapsed(value)}
           trigger={
             <Tooltip title={collapsed ? t("expand menu") : t("collapse menu")}>
-              <ButtonCustom width="100%" height="100%" radius="unset">
+              <ButtonCustom
+                width="100%"
+                height="100%"
+                radius="unset"
+                className="button-collapse"
+              >
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               </ButtonCustom>
             </Tooltip>
