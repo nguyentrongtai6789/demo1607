@@ -10,11 +10,11 @@ const Page404 = lazy(() => import("../pages/page404"));
 const RoutesApp: RouteObject[] = [
   {
     index: true,
-    path: `${process.env.PUBLIC_URL}/login`,
+    path: `login`,
     element: <Login />,
   },
   {
-    path: `${process.env.PUBLIC_URL}`,
+    path: ``,
     element: <Layout />,
     children: RoutesOfAllPage,
   },
@@ -26,7 +26,7 @@ const RoutesApp: RouteObject[] = [
 
 const RoutesOutlet: RouteObject[] = [
   {
-    path: ``,
+    path: `${process.env.PUBLIC_URL}`,
     element: <Outlet />,
     children: RoutesApp,
   },

@@ -23,7 +23,7 @@ export default () => {
     }
   }, [userToken]);
 
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
 
   const { t } = useTranslation("sidebarMenu");
 
@@ -36,6 +36,7 @@ export default () => {
           className="sider-menu"
           theme="light"
           onCollapse={(value) => setCollapsed(value)}
+          collapsed={collapsed}
           trigger={
             <Tooltip title={collapsed ? t("expandMenu") : t("collapseMenu")}>
               <ButtonCustom

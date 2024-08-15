@@ -1,3 +1,4 @@
+import { RetweetOutlined, SearchOutlined } from "@ant-design/icons";
 import { Col, Row, Space } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Dispatch, SetStateAction } from "react";
@@ -8,11 +9,6 @@ import { DatePickerWithTypeCustom } from "../../../customAntd/DatePickerWithType
 import { InputCustom } from "../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../customAntd/SelectDonViCustom";
-import {
-  DeleteOutlined,
-  RetweetOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -47,12 +43,12 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     hoTenVoChong: "",
   };
 
-  const { t } = useTranslation(["dictionnary"]);
+  const { t } = useTranslation(["quanLyHoSoCmnd9So", "sidebarMenu"]);
 
   return (
     <div className="search-form-wrapper">
       <div className="search-form">
-        <div className="search-from-title">{t("SEARCH CONDITIONS")}</div>
+        <div className="search-from-title">{t("searchCondition")}</div>
         <Formik
           initialValues={initialValues}
           onSubmit={(values: ISearchValues) => {
@@ -77,21 +73,21 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={InputCustom}
                       name={"soCmnd"}
-                      label={t("identity card number")}
+                      label={t("identityCardNumber")}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={InputCustom}
                       name={"hoVaTen"}
-                      label={t("dictionnary:fullname")}
+                      label={t("fullName")} // chú ý thằng củ lìn này
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={DatePickerWithTypeCustom}
                       name={"ngaySinh"}
-                      label={t("date of birth")}
+                      label={t("dateOfBirth")}
                     />
                   </Col>
                   <Col span={4}>
@@ -109,7 +105,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={SelectCustom}
                       api={"danh-muc-pham-vi-tim-kiem"}
-                      label={t("search range")}
+                      label={t("searchRange")}
                       name={"phamViTimKiem"}
                       valueNeedOfOption={"giaTri"}
                       isRequired
@@ -118,28 +114,28 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("father's full name")}
+                      label={t("fatherName")}
                       name={"hoTenCha"}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("mother's full name")}
+                      label={t("motherName")}
                       name={"hoTenMe"}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("full name of husband or wife")}
+                      label={t("husbandWifeName")}
                       name={"hoTenVoChong"}
                     />
                   </Col>
                   <Col span={8}>
                     <Field
                       component={DatePickerWithRangeCustom}
-                      label={t("date of entry")}
+                      label={t("dateInput")}
                       fieldName1={"ngayNhapTu"}
                       fieldName2={"ngayNhapDen"}
                     />
@@ -165,7 +161,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       startIcon={<RetweetOutlined />}
                       className="delete-button"
                     >
-                      {t("Delete condition")}
+                      {t("reset")}
                     </ButtonCustom>
                   </Space>
                 </Row>

@@ -13,8 +13,6 @@ export default () => {
     localStorage.getItem("danhSachChucNang") || "[]"
   );
 
-  const [openKey, setOpenKey] = useState<string>("");
-
   const [selectedKey, setSelectedKey] = useState<string>("");
 
   const itemsDemo: MenuItem[] = danhSachChucNang.map((item: any) => ({
@@ -34,7 +32,6 @@ export default () => {
     for (let i = 0; i <= danhSachChucNang.length - 1; i++) {
       for (let j = 0; j <= danhSachChucNang[i].children.length - 1; j++) {
         if (baseUrl.includes(danhSachChucNang[i].children[j].url)) {
-          setOpenKey(danhSachChucNang[i].key);
           setSelectedKey(danhSachChucNang[i].children[j].key);
           return;
         }
@@ -43,7 +40,6 @@ export default () => {
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setOpenKey(e.keyPath[1]);
     setSelectedKey(e.keyPath[0]);
   };
 
@@ -56,11 +52,10 @@ export default () => {
       <div className="side-bar-custom">
         <Menu
           selectedKeys={[selectedKey]}
-          defaultOpenKeys={[openKey]}
           mode="inline"
           theme="light"
           items={itemsDemo}
-          triggerSubMenuAction={"click"}
+          triggerSubMenuAction={"hover"}
           onClick={onClick}
         />
       </div>

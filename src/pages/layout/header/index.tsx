@@ -39,7 +39,11 @@ export default () => {
       type: "group",
     },
     {
-      label: <span>{t("language")}</span>,
+      label: (
+        <span>
+          {t("language")}: {currentLanguage}
+        </span>
+      ),
       key: "2",
       children: [
         {
