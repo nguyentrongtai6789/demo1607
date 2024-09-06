@@ -91,9 +91,9 @@ export default () => {
   return (
     <Header>
       <img
-        src="http://172.20.20.73:9100/assets/images/logo.svg"
+        src="assets/images/logoHeader.png"
         alt=""
-        style={{ height: "64px" }}
+        style={{ height: "64px", width: 550 }}
       />
       <div>
         <Dropdown
