@@ -4,6 +4,8 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+import NotificationCustom from "../customAntd/NotificationCustom";
+import Cookies from "js-cookie";
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
@@ -22,29 +24,62 @@ class Services {
         return Promise.resolve(response);
       },
       function (error: AxiosError) {
+        const language = localStorage.getItem("language");
+        //các lỗi chung sẽ bắt ở đây
+        //token hết hạn
         if (error?.response?.status === 401) {
-          // NotificationCustom(
-          //   "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
-          //   "error"
-          // );
+          if (language === "vi") {
+            NotificationCustom(
+              "Thông tin đăng nhập hết hạn, vui lòng đăng nhập lại",
+              "error"
+            );
+          } else {
+            NotificationCustom(
+              "Login information expired, please login again",
+              "error"
+            );
+            return;
+          }
         }
+        //notfound
+        if (error?.response?.status === 404) {
+          if (language === "vi") {
+            NotificationCustom("Không tìm thấy địa chỉ api", "error");
+            return;
+          } else {
+            NotificationCustom("Not found api", "error");
+            return;
+          }
+        }
+        //network error
         if (error?.code === AxiosError.ERR_NETWORK) {
-          // NotificationCustom("network error", "error");
+          if (language === "vi") {
+            NotificationCustom("Không có kết nối mạng", "error");
+            return;
+          } else {
+            NotificationCustom("Network error", "error");
+            return;
+          }
         }
         return Promise.reject(error);
       }
     );
-    this.attachTokenToHeader("");
+    this.attachTokenToHeader();
   }
 
   //gắn token vào header request:
-  attachTokenToHeader(token: string) {
-    const tokenTest =
-      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMzMxODYwMDY2NjYiLCJkb252aSI6eyJpZCI6MywibG9naW4iOiIwMzMxODYwMDY2NjYiLCJmaXJzdE5hbWUiOm51bGwsImxhc3ROYW1lIjpudWxsLCJlbWFpbCI6bnVsbCwiYWN0aXZhdGVkIjp0cnVlLCJsYW5nS2V5IjpudWxsLCJpbWFnZVVybCI6bnVsbCwiZGlhQ2hpbmhJZCI6MSwibG9haVRrIjpudWxsLCJkb25WaUlkIjoxMTcyOCwiY2FuQm9JZCI6MywicGhvbmdCYW5JZCI6bnVsbCwiY2FwWHVMeSI6IlciLCJ0ZW5Eb25WaSI6IkPhu6VjIEPhuqNuaCBzw6F0IFFMSEMgduG7gSBUVFhIIFThuqFpIFRXIEjDoCBO4buZaSIsInRlbkNhbkJvIjoiQ8OhbiBi4buZIEEiLCJxdWFuTHkiOiJOIiwidHJ1eUNhcElkIjoxMjQ1NiwibWVzc2FnZSI6bnVsbCwiYWxsb3dEbFRvS2hhaSI6dHJ1ZSwiYWxsb3dEbENkQ2NjZCI6dHJ1ZSwiYWxsb3dEbER0Q2NjZCI6dHJ1ZSwiYWxsb3dEbENkRGFuQ3UiOnRydWUsImFsbG93RGxEdERhbkN1Ijp0cnVlLCJjaHVjVnUiOiJjw6FuIGLhu5kgIiwiYWRtaW4iOnRydWV9LCJleHAiOjIwMzY3NDEzMjB9.QO69BBgdMIlMP2RTV1UsBWpIOoZncEj5OLyj0V2eAzML7hpF_MB2KlvbnGkOtYn5tzuJSUSgO9FjmJFYllE0Cw";
-    this.axios.interceptors.request.use(function (config: any) {
-      config.headers.Authorization = `Bearer ${tokenTest}`;
-      return config;
-    });
+  attachTokenToHeader() {
+    const token = Cookies.get("userToken");
+    this.axios.interceptors.request.use(
+      function (config: any) {
+        // Do something before request is sent
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      },
+      function (error: any) {
+        return Promise.reject(error);
+      }
+    );
   }
 
   public get<T = any, R = T, D = any>(

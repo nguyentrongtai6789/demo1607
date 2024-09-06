@@ -1,14 +1,14 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
-import { LanguageOptions, languages } from "../../../i18n/i18nFrontEnd";
 import { handleChangeLanguage, handleLogout } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import "./styles.scss";
+import { LanguageOptions, languages } from "../../../i18n/i18n";
+import { useTranslation } from "react-i18next";
 
 export default () => {
   const { t, i18n } = useTranslation("header");
@@ -34,12 +34,16 @@ export default () => {
       type: "group",
     },
     {
-      label: `${t("author")}:`,
+      label: <span>{t("unit")}</span>,
       key: "1",
       type: "group",
     },
     {
-      label: `${t("language")}: ${currentLanguage}`,
+      label: (
+        <span>
+          {t("language")}: {currentLanguage}
+        </span>
+      ),
       key: "2",
       children: [
         {
@@ -77,7 +81,7 @@ export default () => {
           }}
           width="100%"
         >
-          {t("log out")}
+          {t("logOut")}
         </ButtonCustom>
       ),
       key: "3",

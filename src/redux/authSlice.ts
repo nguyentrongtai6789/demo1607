@@ -1,7 +1,8 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { languages } from "../i18n/i18nFrontEnd";
 import { handleLogin } from "./authActions";
 import httpMethod from "../config/httpMethod";
+import { languages } from "../i18n/i18n";
+import Cookies from "js-cookie";
 
 interface IAuthState {
   loading: boolean;
@@ -9,17 +10,17 @@ interface IAuthState {
   userToken: string | null;
   language: keyof typeof languages;
   countLoading: number;
-  jsonFile: any;
+  userInfo: any;
 }
 
 export const initialState: IAuthState = {
   loading: false,
-  username: "", // for user object
+  username: localStorage.getItem("username") || "",
   userToken: localStorage.getItem("userToken") || null,
   language: (localStorage.getItem("language") ||
     "en") as keyof typeof languages,
   countLoading: 0,
-  jsonFile: {},
+  userInfo: localStorage.getItem("userInfo") || {},
 };
 
 export const handleLogout = createAction("auth/handleLogout");
@@ -34,8 +35,6 @@ export const loadingCancel = createAction("auth/loadingCancel");
 
 export const loginSuccess = createAction<any>("auth/loginSuccess");
 
-export const handleSetJsonFile = createAction<any>("auth/handleSetJsonFile");
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -45,9 +44,8 @@ const authSlice = createSlice({
       state.loading = false;
       state.username = "";
       state.userToken = null;
-    },
-    handleSetJsonFile: (state: IAuthState, action) => {
-      state.jsonFile = action.payload;
+      Cookies.remove("userToken");
+      httpMethod.attachTokenToHeader();
     },
     handleChangeLanguage: (state: IAuthState, action) => {
       localStorage.setItem("language", action.payload);
@@ -64,16 +62,17 @@ const authSlice = createSlice({
       }
     },
     loginSuccess: (state: IAuthState, action) => {
-      localStorage.setItem("userToken", action.payload.token);
+      localStorage.setItem("userToken", action.payload.id_token);
+      state.userToken = action.payload.id_token; // ko set 2 thằng củ lìn này thì bên kia nó sẽ bị null
       state.username = action.payload.name;
-      state.userToken = action.payload.id_token;
-      console.log(action.payload);
-
+      localStorage.setItem("username", action.payload.name);
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
       localStorage.setItem(
         "danhSachChucNang",
         JSON.stringify(action.payload.danhSachChucNang)
       );
-      httpMethod.attachTokenToHeader(action.payload.id_token);
+      Cookies.set("userToken", action.payload.id_token);
+      httpMethod.attachTokenToHeader();
     },
   },
   extraReducers: (builder) => {

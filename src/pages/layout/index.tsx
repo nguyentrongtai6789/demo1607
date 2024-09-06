@@ -23,7 +23,7 @@ export default () => {
     }
   }, [userToken]);
 
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
 
   const { t } = useTranslation("sidebarMenu");
 
@@ -36,9 +36,15 @@ export default () => {
           className="sider-menu"
           theme="light"
           onCollapse={(value) => setCollapsed(value)}
+          collapsed={collapsed}
           trigger={
-            <Tooltip title={collapsed ? t("expand menu") : t("collapse menu")}>
-              <ButtonCustom width="100%" height="100%" radius="unset">
+            <Tooltip title={collapsed ? t("expandMenu") : t("collapseMenu")}>
+              <ButtonCustom
+                width="100%"
+                height="100%"
+                radius="unset"
+                className="button-collapse"
+              >
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               </ButtonCustom>
             </Tooltip>
@@ -52,17 +58,6 @@ export default () => {
           </Content>
         </Layout>
       </Layout>
-      {/* {userToken && (
-        <>
-          <Header />
-          <div className="wrapper-content-sidebar">
-            <Sidebar />
-            <Content>
-              <Outlet />
-            </Content>
-          </div>
-        </>
-      )} */}
     </div>
   );
 };
