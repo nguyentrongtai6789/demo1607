@@ -62,16 +62,15 @@ const authSlice = createSlice({
       }
     },
     loginSuccess: (state: IAuthState, action) => {
-      localStorage.setItem("userToken", action.payload.id_token);
       state.userToken = action.payload.id_token; // ko set 2 thằng củ lìn này thì bên kia nó sẽ bị null
       state.username = action.payload.name;
+      localStorage.setItem("userToken", action.payload.id_token);
       localStorage.setItem("username", action.payload.name);
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
       localStorage.setItem(
         "danhSachChucNang",
         JSON.stringify(action.payload.danhSachChucNang)
       );
-      Cookies.set("userToken", action.payload.id_token);
       httpMethod.attachTokenToHeader();
     },
   },

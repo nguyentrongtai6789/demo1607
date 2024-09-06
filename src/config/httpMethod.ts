@@ -69,7 +69,7 @@ class Services {
 
   //gắn token vào header request:
   attachTokenToHeader() {
-    const token = Cookies.get("userToken");
+    const token = localStorage.getItem("userToken");
     this.axios.interceptors.request.use(
       function (config: any) {
         // Do something before request is sent
