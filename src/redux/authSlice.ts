@@ -45,6 +45,7 @@ const authSlice = createSlice({
       state.username = "";
       state.userToken = null;
       Cookies.remove("userToken");
+      httpMethod.attachTokenToHeader();
     },
     handleChangeLanguage: (state: IAuthState, action) => {
       localStorage.setItem("language", action.payload);
@@ -71,6 +72,7 @@ const authSlice = createSlice({
         JSON.stringify(action.payload.danhSachChucNang)
       );
       Cookies.set("userToken", action.payload.id_token);
+      httpMethod.attachTokenToHeader();
     },
   },
   extraReducers: (builder) => {

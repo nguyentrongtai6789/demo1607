@@ -3,6 +3,7 @@ import { SizeType } from "antd/es/config-provider/SizeContext";
 import dayjs from "dayjs";
 import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -27,6 +28,8 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
   const { Option } = Select;
 
   const [type, setType] = useState<PickerType>("date");
+
+  const { t } = useTranslation();
 
   const PickerWithType = ({
     type,
@@ -54,6 +57,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           format={"DD/MM/YYYY"}
           value={formattedValue}
           {...rest}
+          placeholder={t("selectDate")}
         />
       );
     }
@@ -63,9 +67,9 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           onChange={onChange}
           format={"MM/YYYY"}
           value={formattedValue}
-          placeholder="Select month"
           picker={type}
           {...rest}
+          placeholder={t("selectMonth")}
         />
       );
     }
@@ -75,6 +79,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           picker={type}
           value={formattedValue}
           onChange={onChange}
+          placeholder={t("selectYear")}
           {...rest}
         />
       );
@@ -132,9 +137,9 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
               }}
               size={size || "small"}
             >
-              <Option value="date">Date</Option>
-              <Option value="month">Month</Option>
-              <Option value="year">Year</Option>
+              <Option value="date">{t("date")}</Option>
+              <Option value="month">{t("month")}</Option>
+              <Option value="year">{t("year")}</Option>
             </Select>
           </div>
           <div style={{ width: "60%", marginLeft: "3px" }}>

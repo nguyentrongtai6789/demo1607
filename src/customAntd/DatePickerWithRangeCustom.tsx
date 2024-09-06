@@ -4,6 +4,7 @@ import { RangePickerProps } from "antd/es/date-picker";
 import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 export interface RangePickerCustomProps
   extends FieldProps,
@@ -60,6 +61,8 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
 
   const [value, setValue] = useState<(dayjs.Dayjs | null)[]>([null, null]);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const value1 = getFieldMeta(fieldName1).value;
     const value2 = getFieldMeta(fieldName2).value;
@@ -84,6 +87,7 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
             disabledDate={disabled7DaysDate}
             value={[value[0], value[1]]}
             format={"DD/MM/YYYY"}
+            placeholder={[t("fromDate"), t("toDate")]}
             id={{
               start: "startInput",
               end: "endInput",
