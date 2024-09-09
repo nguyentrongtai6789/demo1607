@@ -28,10 +28,9 @@
   justify-content: center;
   height: 40px;
   .space-button {
-    // background-color: rgba(94, 91, 139, 0.401) !important;
+    background-color: rgba(94, 91, 139, 0.401) !important;
     padding: 10px 10px 10px 10px;
-    // box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Hiển thị shadow dưới cùng */
-    // background-color: white; /* Để button không bị ẩn bởi nền */
+    box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Hiển thị shadow dưới cùng */
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     // border: 1px solid grey;

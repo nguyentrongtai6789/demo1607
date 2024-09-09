@@ -16,10 +16,13 @@ import { RootState, useAppDispatch } from "../../../redux/store";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
 import {
+  CheckOutlined,
   DeleteOutlined,
   EditOutlined,
+  ExportOutlined,
   EyeOutlined,
   PlusCircleOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
 import { Action } from "./Action";
@@ -318,6 +321,12 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             onChange={handleTableChange}
           />
         </div>
+      </div>
+      <div className="button-bottom-wrapper">
+        <Space className="space-button">
+          <ButtonCustom startIcon={<CheckOutlined />}>Phê duyệt</ButtonCustom>
+          <ButtonCustom startIcon={<ExportOutlined />}>Xuất file</ButtonCustom>
+        </Space>
       </div>
       <ModalCustom open={openModalThemMoi} title="CẬP NHẬT HỒ SƠ CMND 9 SỐ">
         <div>ABC</div>
