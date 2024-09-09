@@ -9,6 +9,7 @@ import { RootState, useAppDispatch } from "../../../redux/store";
 import "./styles.scss";
 import { LanguageOptions, languages } from "../../../i18n/i18n";
 import { useTranslation } from "react-i18next";
+import logoHeader from "../../../assets/images/logoHeader.png";
 
 export default () => {
   const { t, i18n } = useTranslation("header");
@@ -90,11 +91,7 @@ export default () => {
 
   return (
     <Header>
-      <img
-        src="assets/images/logoHeader.png"
-        alt=""
-        style={{ height: "64px", width: 550 }}
-      />
+      <img src={logoHeader} alt="" style={{ height: "64px", width: 550 }} />
       <div>
         <Dropdown
           menu={{ items: menuAvatar }}
