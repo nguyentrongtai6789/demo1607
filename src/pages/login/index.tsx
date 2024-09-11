@@ -15,10 +15,12 @@ import {
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { useAppDispatch } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
 import NotificationCustom from "../../customAntd/NotificationCustom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 interface ILoginValues {
   username: string;
@@ -29,11 +31,17 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
+  const { language } = useSelector((state: RootState) => state.auth);
+
   const { i18n, t } = useTranslation("login");
 
   const navigate = useNavigate();
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());

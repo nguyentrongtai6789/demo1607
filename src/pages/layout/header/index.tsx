@@ -10,19 +10,24 @@ import "./styles.scss";
 import { LanguageOptions, languages } from "../../../i18n/i18n";
 import { useTranslation } from "react-i18next";
 import logoHeader from "../../../assets/images/logoHeader.png";
+import { useEffect } from "react";
 
 export default () => {
   const { t, i18n } = useTranslation("header");
 
   //thông tin user:
 
-  const { username } = useSelector((state: RootState) => state.auth);
+  const { username, language } = useSelector((state: RootState) => state.auth);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const menuAvatar: MenuProps["items"] = [
     {
