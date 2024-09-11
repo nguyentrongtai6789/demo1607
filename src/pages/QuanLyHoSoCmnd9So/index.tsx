@@ -6,6 +6,7 @@ import TableResults from "./components/TableResults";
 export default () => {
   const { t } = useTranslation(["dictionnary"]);
   const [searchValues, setSearchValues] = useState<ISearchValues | null>(null);
+
   return (
     <Fragment>
       <div className="div-wrap-content">

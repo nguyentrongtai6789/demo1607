@@ -47,11 +47,14 @@ export const Login: React.FC = (props) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
           NotificationCustom(t("loginSuccess"), "success");
-          navigate(
-            location.state
-              ? `${location.state}`
-              : `${process.env.PUBLIC_URL}/trang-chu`
-          );
+          // navigate(
+          //   location.state
+          //     ? `${location.state}`
+          //     : `${process.env.PUBLIC_URL}/trang-chu`
+          // );
+          window.location.href = location.state
+            ? `${location.state}`
+            : `${process.env.PUBLIC_URL}/trang-chu`;
         }
         if (res.data.error === "201") {
           return NotificationCustom(t("wrongPasswordOrUsername"), "error");

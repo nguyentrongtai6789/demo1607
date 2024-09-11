@@ -21,6 +21,7 @@ export default () => {
 
   useEffect(() => {
     if (!userToken) {
+      location.state = location.pathname;
       navigate(`${process.env.PUBLIC_URL}/login`, { state: location.pathname });
     }
   }, [userToken]);
