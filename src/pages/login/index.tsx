@@ -15,10 +15,12 @@ import {
   loadingCancel,
   loginSuccess,
 } from "../../redux/authSlice";
-import { useAppDispatch } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
 import NotificationCustom from "../../customAntd/NotificationCustom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 interface ILoginValues {
   username: string;
@@ -115,9 +117,10 @@ export const Login: React.FC = (props) => {
                     }}
                     size="small"
                     // dropdownStyle={{ height: "25px" }}
-                    onChange={(value: string) =>
-                      dispatch(handleChangeLanguage(value))
-                    }
+                    onChange={(value: string) => {
+                      dispatch(handleChangeLanguage(value));
+                      i18n.changeLanguage(value);
+                    }}
                   />
                 </div>
               </Form>

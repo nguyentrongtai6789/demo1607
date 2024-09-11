@@ -14,8 +14,6 @@ import logoHeader from "../../../assets/images/logoHeader.png";
 export default () => {
   const { t, i18n } = useTranslation("header");
 
-  //thông tin user:
-
   const { username } = useSelector((state: RootState) => state.auth);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
@@ -51,9 +49,10 @@ export default () => {
           key: "2-1",
           label: (
             <span
-              onClick={() =>
-                dispatch(handleChangeLanguage(LanguageOptions[0].value))
-              }
+              onClick={() => {
+                dispatch(handleChangeLanguage(LanguageOptions[0].value));
+                i18n.changeLanguage(LanguageOptions[0].value);
+              }}
             >
               {LanguageOptions[0].label}
             </span>
@@ -63,9 +62,10 @@ export default () => {
           key: "2-2",
           label: (
             <span
-              onClick={() =>
-                dispatch(handleChangeLanguage(LanguageOptions[1].value))
-              }
+              onClick={() => {
+                dispatch(handleChangeLanguage(LanguageOptions[1].value));
+                i18n.changeLanguage(LanguageOptions[1].value);
+              }}
             >
               {LanguageOptions[1].label}
             </span>

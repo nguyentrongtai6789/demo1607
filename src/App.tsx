@@ -1,5 +1,4 @@
-import { Suspense, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -8,13 +7,7 @@ import { RootState } from "./redux/store";
 import RoutesOfApp from "./routers/RoutesOfApp";
 
 function App() {
-  const { language, loading } = useSelector((state: RootState) => state.auth);
-
-  const { i18n, t } = useTranslation();
-
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language]);
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   return (
     <Suspense fallback={<LoadingCustom />}>
