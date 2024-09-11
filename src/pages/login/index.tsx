@@ -31,17 +31,11 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { language } = useSelector((state: RootState) => state.auth);
-
   const { i18n, t } = useTranslation("login");
 
   const navigate = useNavigate();
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
-
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language]);
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -123,9 +117,10 @@ export const Login: React.FC = (props) => {
                     }}
                     size="small"
                     // dropdownStyle={{ height: "25px" }}
-                    onChange={(value: string) =>
-                      dispatch(handleChangeLanguage(value))
-                    }
+                    onChange={(value: string) => {
+                      dispatch(handleChangeLanguage(value));
+                      i18n.changeLanguage(value);
+                    }}
                   />
                 </div>
               </Form>
