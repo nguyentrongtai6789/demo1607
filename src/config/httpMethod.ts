@@ -5,7 +5,6 @@ import axios, {
   AxiosResponse,
 } from "axios";
 import NotificationCustom from "../customAntd/NotificationCustom";
-import Cookies from "js-cookie";
 
 export const URL = process.env.REACT_APP_API_DEMO;
 
@@ -70,6 +69,7 @@ class Services {
   //gắn token vào header request:
   attachTokenToHeader() {
     const token = localStorage.getItem("userToken");
+    console.log(token, "attachTokenToHeader");
     this.axios.interceptors.request.use(
       function (config: any) {
         // Do something before request is sent

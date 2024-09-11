@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
@@ -37,6 +37,8 @@ export const Login: React.FC = (props) => {
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
+  const location = useLocation();
+
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
     httpMethod
@@ -45,7 +47,14 @@ export const Login: React.FC = (props) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
           NotificationCustom(t("loginSuccess"), "success");
-          navigate(`${process.env.PUBLIC_URL}/trang-chu`);
+          // navigate(
+          //   location.state
+          //     ? `${location.state}`
+          //     : `${process.env.PUBLIC_URL}/trang-chu`
+          // );
+          window.location.href = location.state
+            ? `${location.state}`
+            : `${process.env.PUBLIC_URL}/trang-chu`;
         }
         if (res.data.error === "201") {
           return NotificationCustom(t("wrongPasswordOrUsername"), "error");

@@ -2,7 +2,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { RootState } from "../../redux/store";
 import Header from "./header";
@@ -17,9 +17,12 @@ export default () => {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (!userToken) {
-      navigate(`${process.env.PUBLIC_URL}/login`);
+      location.state = location.pathname;
+      navigate(`${process.env.PUBLIC_URL}/login`, { state: location.pathname });
     }
   }, [userToken]);
 
