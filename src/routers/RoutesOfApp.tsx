@@ -10,7 +10,7 @@ const Page404 = lazy(() => import("../pages/page404"));
 const RoutesApp: RouteObject[] = [
   {
     index: true,
-    path: `login`,
+    path: `login/*`,
     element: <Login />,
   },
   {
