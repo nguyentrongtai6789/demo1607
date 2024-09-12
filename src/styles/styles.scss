@@ -75,7 +75,8 @@
 
 /* Màu của thanh cuộn khi không được hover */
 ::-webkit-scrollbar-thumb {
-  background: #8e8d8d; /* Màu thanh cuộn */
+  background: rgba(0, 0, 0, 0.5); /* Màu thanh cuộn */
+  border-radius: 99px;
 }
 
 /* Màu của thanh cuộn khi hover */
