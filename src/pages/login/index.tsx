@@ -3,7 +3,12 @@ import { Select } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  redirect,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
@@ -35,7 +40,13 @@ export const Login: React.FC = (props) => {
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
-  const location = useLocation();
+  let location = useLocation();
+
+  let params = new URLSearchParams(location.search);
+
+  const navigate = useNavigate();
+
+  let from = params.get("from") || `${process.env.PUBLIC_URL}/trang-chu`;
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -45,10 +56,12 @@ export const Login: React.FC = (props) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
           NotificationCustom(t("loginSuccess"), "success");
-          window.location.href =
-            location.state && location.state !== process.env.PUBLIC_URL
-              ? `${location.state}`
-              : `${process.env.PUBLIC_URL}/trang-chu`;
+          navigate(`${from}`);
+          // navigate(from, { replace: true });
+          // window.location.href =
+          //   location.state && location.state !== process.env.PUBLIC_URL
+          //     ? `${location.state}`
+          //     : `${process.env.PUBLIC_URL}/trang-chu`;
         }
         if (res.data.error === "201") {
           return NotificationCustom(t("wrongPasswordOrUsername"), "error");
