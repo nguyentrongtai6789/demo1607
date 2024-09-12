@@ -1,19 +1,18 @@
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { LoadingCustom } from "./customAntd/LoadingCustom";
 import { RootState } from "./redux/store";
-import RoutesOfApp from "./routers/RoutesOfApp";
+import { router } from "./routers/RoutesOfApp";
 
 function App() {
   const { loading } = useSelector((state: RootState) => state.auth);
+
   return (
     <Suspense fallback={<LoadingCustom />}>
       {loading && <LoadingCustom />}
-      <BrowserRouter>
-        <RoutesOfApp />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </Suspense>
   );
 }

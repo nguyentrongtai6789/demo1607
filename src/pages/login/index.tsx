@@ -4,9 +4,10 @@ import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import httpMethod from "../../config/httpMethod";
+// import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
+import NotificationCustom from "../../customAntd/NotificationCustom";
 import { SelectCustom } from "../../customAntd/SelectCustom";
 import { LanguageOptions, languages } from "../../i18n/i18n";
 import {
@@ -18,9 +19,9 @@ import {
 import { RootState, useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import NotificationCustom from "../../customAntd/NotificationCustom";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import httpMethod from "../../config/httpMethod";
+import { useEffect } from "react";
 
 interface ILoginValues {
   username: string;
@@ -33,11 +34,13 @@ export const Login: React.FC = (props) => {
 
   const { i18n, t } = useTranslation("login");
 
-  const navigate = useNavigate();
-
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
-  const location = useLocation();
+  let location = useLocation();
+
+  let params = new URLSearchParams(location.search);
+
+  let from = params.get("from") || `${process.env.PUBLIC_URL}/trang-chu`;
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
@@ -47,14 +50,7 @@ export const Login: React.FC = (props) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
           NotificationCustom(t("loginSuccess"), "success");
-          // navigate(
-          //   location.state
-          //     ? `${location.state}`
-          //     : `${process.env.PUBLIC_URL}/trang-chu`
-          // );
-          window.location.href = location.state
-            ? `${location.state}`
-            : `${process.env.PUBLIC_URL}/trang-chu`;
+          window.location.href = `${from}`;
         }
         if (res.data.error === "201") {
           return NotificationCustom(t("wrongPasswordOrUsername"), "error");

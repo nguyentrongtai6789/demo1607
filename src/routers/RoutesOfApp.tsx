@@ -1,5 +1,6 @@
 import { lazy } from "react";
-import { Outlet, RouteObject, useRoutes } from "react-router-dom";
+import type { LoaderFunctionArgs } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "../pages/layout";
 import RoutesOfAllPage from "./RoutesOfAllPage";
 
@@ -7,34 +8,33 @@ const Login = lazy(() => import("../pages/login/index"));
 
 const Page404 = lazy(() => import("../pages/page404"));
 
-const RoutesApp: RouteObject[] = [
+export const router = createBrowserRouter([
   {
-    index: true,
-    path: `login/*`,
-    element: <Login />,
-  },
-  {
-    path: ``,
+    path: `${process.env.PUBLIC_URL}`,
     element: <Layout />,
     children: RoutesOfAllPage,
+    loader: protectedLoader,
+  },
+  {
+    index: true,
+    path: `${process.env.PUBLIC_URL}/login/*`,
+    element: <Login />,
   },
   {
     path: "*",
     element: <Page404 />,
   },
-];
+]);
 
-const RoutesOutlet: RouteObject[] = [
-  {
-    path: `${process.env.PUBLIC_URL}`,
-    element: <Outlet />,
-    children: RoutesApp,
-  },
-];
-
-const RoutesOfApp = () => {
-  const element = useRoutes(RoutesOutlet);
-  return element;
-};
-
-export default RoutesOfApp;
+function protectedLoader({ request }: LoaderFunctionArgs) {
+  // If the user is not logged in and tries to access `/protected`, we redirect
+  // them to `/login` with a `from` parameter that allows login to redirect back
+  // to this page upon successful authentication
+  const useToken = localStorage.getItem("userToken");
+  if (!useToken) {
+    let params = new URLSearchParams();
+    params.set("from", new URL(request.url).pathname);
+    return redirect(`${process.env.PUBLIC_URL}/login?` + params.toString());
+  }
+  return null;
+}
