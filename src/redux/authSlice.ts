@@ -44,7 +44,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.username = "";
       state.userToken = null;
-      Cookies.remove("userToken");
       httpMethod.attachTokenToHeader();
     },
     handleChangeLanguage: (state: IAuthState, action) => {

@@ -33,8 +33,6 @@ export const Login: React.FC = (props) => {
 
   const { i18n, t } = useTranslation("login");
 
-  const navigate = useNavigate();
-
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
   const location = useLocation();
@@ -47,14 +45,10 @@ export const Login: React.FC = (props) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
           NotificationCustom(t("loginSuccess"), "success");
-          // navigate(
-          //   location.state
-          //     ? `${location.state}`
-          //     : `${process.env.PUBLIC_URL}/trang-chu`
-          // );
-          window.location.href = location.state
-            ? `${location.state}`
-            : `${process.env.PUBLIC_URL}/trang-chu`;
+          window.location.href =
+            location.state && location.state !== process.env.PUBLIC_URL
+              ? `${location.state}`
+              : `${process.env.PUBLIC_URL}/trang-chu`;
         }
         if (res.data.error === "201") {
           return NotificationCustom(t("wrongPasswordOrUsername"), "error");

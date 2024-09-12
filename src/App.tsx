@@ -8,6 +8,7 @@ import RoutesOfApp from "./routers/RoutesOfApp";
 
 function App() {
   const { loading } = useSelector((state: RootState) => state.auth);
+
   return (
     <Suspense fallback={<LoadingCustom />}>
       {loading && <LoadingCustom />}
