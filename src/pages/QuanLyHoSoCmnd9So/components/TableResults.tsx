@@ -303,6 +303,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
                 </ButtonCustom>
               </>
             )}
+            virtual
             columns={columns}
             dataSource={data}
             scroll={{ x: "2500px", y: "500px" }}
