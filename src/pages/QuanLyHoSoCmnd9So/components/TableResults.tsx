@@ -1,32 +1,21 @@
 import {
-  Button,
-  GetProp,
-  Space,
-  Table,
-  TableColumnsType,
-  TableProps,
-} from "antd";
+  CheckOutlined,
+  ExportOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import { GetProp, Space, Table, TableColumnsType, TableProps } from "antd";
 import { SorterResult } from "antd/es/table/interface";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import httpMethod from "../../../config/httpMethod";
+import ButtonCustom from "../../../customAntd/ButtonCustom";
 import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
-import { timKiem } from "./api";
-import { ISearchValues } from "./SearchForm";
-import {
-  CheckOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  ExportOutlined,
-  EyeOutlined,
-  PlusCircleOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
-import ButtonCustom from "../../../customAntd/ButtonCustom";
 import { Action } from "./Action";
-import { ModalCustom } from "./ModalCustom";
+import { timKiem } from "./api";
+import { ModalCustom } from "../../../customAntd/ModalCustom";
+import { ISearchValues } from "./SearchForm";
 
 export interface IProps {
   searchValues: ISearchValues | null;
