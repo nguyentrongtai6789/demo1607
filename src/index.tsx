@@ -32,7 +32,6 @@ root.render(
             Table: {
               rowHoverBg: "#d8d7d7",
               headerBg: "#d8d7d7",
-              // borderColor: "black",
             },
             Layout: {
               headerBg: "#002768",

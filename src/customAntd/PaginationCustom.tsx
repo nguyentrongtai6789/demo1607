@@ -38,10 +38,11 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
   ];
 
   return (
-    <div style={{ display: "flex", justifyContent: "end" }}>
+    <div
+      style={{ display: "flex", justifyContent: "end", fontStyle: "italic" }}
+    >
       <Pagination
         style={style || { marginTop: "5px" }}
-        align="end"
         current={current}
         pageSize={pageSize}
         total={total}
@@ -50,7 +51,7 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
             ? showTotal
             : (total, range) => (
                 <>
-                  Từ {range[0]} đến {range[1]} trên tổng số {total} bản ghi
+                  Từ {range[0]} đến {range[1]} trong tổng số {total} bản ghi
                 </>
               )
         }
@@ -62,7 +63,6 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
           alignItems: "center",
           display: "flex",
           marginTop: "5px",
-          padding: "0px 10px",
         }}
       >
         <Select
