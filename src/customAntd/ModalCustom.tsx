@@ -1,5 +1,4 @@
 import { Modal } from "antd";
-import header from "../../layout/header";
 
 interface IProps {
   open: boolean;

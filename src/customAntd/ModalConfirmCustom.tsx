@@ -25,7 +25,7 @@ export const ModalConfirmCustom: React.FC<IProps> = ({
       onCancel={onCancel}
       onOk={onOk}
     >
-      <div style={{ textAlign: "center", marginBottom: "5px" }}>{title}</div>
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>{title}</div>
       <div style={{ textAlign: "center" }}>
         <Space size={50}>
           <ButtonCustom onClick={onCancel}>Huỷ</ButtonCustom>

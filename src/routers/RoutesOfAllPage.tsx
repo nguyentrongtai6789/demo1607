@@ -13,7 +13,7 @@ const RoutesOfAllPage: RouteObject[] = [
     element: <Page404 />,
   },
   {
-    path: "trang-chu",
+    path: "",
     element: <TrangChu />,
   },
   ...RoutesQuanLy,

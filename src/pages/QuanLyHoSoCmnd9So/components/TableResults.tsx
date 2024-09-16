@@ -1,32 +1,22 @@
 import {
-  Button,
-  GetProp,
-  Space,
-  Table,
-  TableColumnsType,
-  TableProps,
-} from "antd";
+  CheckOutlined,
+  ExportOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import { GetProp, Space, Table, TableColumnsType, TableProps } from "antd";
 import { SorterResult } from "antd/es/table/interface";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import httpMethod from "../../../config/httpMethod";
+import ButtonCustom from "../../../customAntd/ButtonCustom";
+import { ModalCustom } from "../../../customAntd/ModalCustom";
+import PaginationCustom from "../../../customAntd/PaginationCustom";
 import { handleLoading, loadingCancel } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
+import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
-import {
-  CheckOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  ExportOutlined,
-  EyeOutlined,
-  PlusCircleOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
-import ButtonCustom from "../../../customAntd/ButtonCustom";
-import { Action } from "./Action";
-import { ModalCustom } from "./ModalCustom";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -51,8 +41,8 @@ export interface IRecordTable {
   congViecTiepTheo: string;
 }
 
-interface TableParams {
-  pagination?: TablePaginationConfig;
+export interface TableParams {
+  pagination: TablePaginationConfig;
   sortField?: SorterResult<any>["field"];
   sortOrder?: "asc" | "desc";
   filters?: Parameters<GetProp<TableProps, "onChange">>[1];
@@ -97,7 +87,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             ...tableParams,
             pagination: {
               ...tableParams.pagination,
-              total: 200,
+              total: res.headers["x-total-count"],
               // 200 is mock data, you should read it from server
               // total: data.totalCount,
             },
@@ -108,9 +98,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
         console.log(error);
       })
       .finally(() => {
-        setTimeout(() => {
-          dispatch(loadingCancel());
-        }, 500);
+        dispatch(loadingCancel());
       });
   };
 
@@ -120,38 +108,61 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     sorter
   ) => {
     console.log(sorter);
+    if (Array.isArray(sorter)) return;
+    if (!sorter.column) return;
     setTableParams({
-      pagination,
+      pagination: {
+        current: tableParams.pagination.current,
+        pageSize: tableParams.pagination.pageSize,
+      },
       filters,
-      sortOrder: Array.isArray(sorter)
-        ? undefined
-        : sorter.order === "ascend"
-        ? "asc"
-        : "desc",
-      sortField: Array.isArray(sorter) ? undefined : sorter.field,
+      sortOrder: sorter.order === "ascend" ? "asc" : "desc",
+      sortField: sorter.field,
     });
-    // `dataSource` is useless since `pageSize` changed
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      setData([]);
-    }
   };
 
+  //tìm kiếm khi phân trang và sort table:
   useEffect(() => {
-    fecthData();
+    if (searchValues) {
+      fecthData();
+    }
   }, [
     tableParams.pagination?.current,
     tableParams.pagination?.pageSize,
     tableParams?.sortOrder,
     tableParams?.sortField,
-    searchValues,
   ]);
+
+  //tìm kiếm khi searchValues thay đổi:
+  useEffect(() => {
+    if (searchValues) {
+      if (tableParams.pagination.current !== 1) {
+        setTableParams({
+          ...tableParams,
+          pagination: {
+            current: 1,
+            pageSize: tableParams.pagination.pageSize,
+          },
+        });
+      } else {
+        fecthData();
+      }
+    }
+  }, [searchValues]);
 
   const columns: TableColumnsType<IRecordTable> = [
     {
       title: "STT",
       width: 50,
       render: (value: any, record: IRecordTable, index: number) => {
-        return <span>{index + 1}</span>;
+        return (
+          <span>
+            {(tableParams.pagination.pageSize || 0) *
+              ((tableParams.pagination.current || 1) - 1) +
+              index +
+              1}
+          </span>
+        );
       },
     },
     {
@@ -288,7 +299,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
 
   return (
     <>
-      <div style={{ padding: "15px" }}>
+      <div style={{ padding: "15px", marginBottom: "25px" }}>
         <div className="table-results">
           <div className="table-results-title">{t("Search Results")}</div>
           <Table
@@ -303,23 +314,26 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
                 </ButtonCustom>
               </>
             )}
-            virtual
             columns={columns}
             dataSource={data}
             scroll={{ x: "2500px", y: "500px" }}
             bordered
-            pagination={{
-              current: tableParams.pagination?.current,
-              pageSize: tableParams.pagination?.pageSize,
-              total: data?.length || 0,
-              showTotal: (total, range) => (
-                <>
-                  Từ {range[0]} đến {range[1]} trên tổng số {total} bản ghi
-                </>
-              ),
-              showSizeChanger: true,
-            }}
+            pagination={false}
             onChange={handleTableChange}
+          />
+          <PaginationCustom
+            current={tableParams.pagination?.current}
+            pageSize={tableParams.pagination?.pageSize}
+            total={tableParams.pagination?.total}
+            pageSizeOptions={["5", "10", "20", "50"]}
+            showSizeChanger={false}
+            onChange={(page, pageSize) => {
+              setTableParams({
+                ...tableParams,
+                pagination: { pageSize: pageSize, current: page },
+              });
+            }}
+            setTableParams={setTableParams}
           />
         </div>
       </div>

@@ -40,7 +40,7 @@ export const Login: React.FC = (props) => {
 
   let params = new URLSearchParams(location.search);
 
-  let from = params.get("from") || `${process.env.PUBLIC_URL}/trang-chu`;
+  let from = params.get("from") || `${process.env.PUBLIC_URL}/`;
 
   const handleLogin = async (values: ILoginValues) => {
     dispatch(handleLoading());
