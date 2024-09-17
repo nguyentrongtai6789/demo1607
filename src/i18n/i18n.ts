@@ -7,6 +7,8 @@ import login from "./login.json";
 import button from "./button.json";
 import tooltip from "./tooltip.json";
 import pagination from "./pagination.json";
+import datePicker from "./datePicker.json";
+import header from "./header.json";
 
 export enum ELanguages {
   English = "English",
@@ -34,19 +36,33 @@ export const LanguageOptions: ILanguageOptions[] = [
   },
 ];
 
-const combineTranslation = (language: string, translationData: any) => {
+export const combineTranslation = (language: string, translationData: any) => {
   switch (language) {
     case "en":
       return {
         ..._.merge(
-          { ...login.en, ...button.en, ...tooltip.en, ...pagination.en },
+          {
+            ...login.en,
+            ...button.en,
+            ...tooltip.en,
+            ...pagination.en,
+            ...datePicker.en,
+            ...header.en,
+          },
           translationData
         ),
       };
     case "vi":
       return {
         ..._.merge(
-          { ...login.vi, ...button.vi, ...tooltip.vi, ...pagination.vi },
+          {
+            ...login.vi,
+            ...button.vi,
+            ...tooltip.vi,
+            ...pagination.vi,
+            ...datePicker.vi,
+            ...header.vi,
+          },
           translationData
         ),
       };
