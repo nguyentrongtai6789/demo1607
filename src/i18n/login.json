@@ -1,24 +1,8 @@
 {
   "vi": {
-    "logIn": "Đăng nhập",
-    "date": "Ngày",
-    "month": "Tháng",
-    "year": "Năm",
-    "selectDate": "Chọn ngày",
-    "selectMonth": "Chọn tháng",
-    "selectYear": "Chọn năm",
-    "fromDate": "Từ ngày",
-    "toDate": "Đến ngày"
+    "logIn": "Đăng nhập"
   },
   "en": {
-    "logIn": "Login",
-    "date": "Date",
-    "month": "Month",
-    "year": "Year",
-    "selectDate": "Select date",
-    "selectMonth": "Select month",
-    "selectYear": "Select year",
-    "fromDate": "From date",
-    "toDate": "To date"
+    "logIn": "Login"
   }
 }

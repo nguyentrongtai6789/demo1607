@@ -1,0 +1,16 @@
+{
+  "vi": {
+    "from": "Từ",
+    "to": "đến",
+    "of": "trong tổng số ",
+    "record": "bản ghi",
+    "page": "trang"
+  },
+  "en": {
+    "from": "From",
+    "to": "to",
+    "of": "of ",
+    "record": "record",
+    "page": "page"
+  }
+}
