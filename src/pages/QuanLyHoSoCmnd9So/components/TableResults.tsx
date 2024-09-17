@@ -54,7 +54,7 @@ type TablePaginationConfig = Exclude<
 >;
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
-  const { t } = useTranslation(["dictionnary"]);
+  const { t } = useTranslation(["dictionnary", "button"]);
   const { language } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -290,7 +290,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       title: "Thao tác",
       key: "operation",
       fixed: "right",
-      width: 120,
+      width: 160,
       render: (record: IRecordTable) => <Action record={record} />,
     },
   ];
@@ -310,7 +310,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
                   width="145px"
                   onClick={() => setOpenModalThemMoi(true)}
                 >
-                  Thêm mới
+                  {t("addNew")}
                 </ButtonCustom>
               </>
             )}
