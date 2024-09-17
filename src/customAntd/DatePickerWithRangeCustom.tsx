@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
-export interface RangePickerCustomProps
+interface RangePickerCustomProps
   extends FieldProps,
     Omit<RangePickerProps, "form"> {
   isRequired?: boolean;
@@ -15,6 +15,7 @@ export interface RangePickerCustomProps
   size?: SizeType;
   fieldName1: string;
   fieldName2: string;
+  rangeTime: string;
 }
 export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
   form: { errors, touched, setFieldValue, values, getFieldMeta },
@@ -26,16 +27,14 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
   onChange,
   fieldName1,
   fieldName2,
+  rangeTime,
   ...rest
 }) => {
   const { RangePicker } = DatePicker;
 
-  const disabled7DaysDate: DatePickerProps["disabledDate"] = (
-    current,
-    { from }
-  ) => {
+  const disabledDate: DatePickerProps["disabledDate"] = (current, { from }) => {
     if (from) {
-      return Math.abs(current.diff(from, "days")) >= 7;
+      return Math.abs(current.diff(from, "days")) >= Number(rangeTime);
     }
     return false;
   };
@@ -84,7 +83,7 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
             {...rest}
             picker="date"
             onChange={onChange || handleOnChange}
-            disabledDate={disabled7DaysDate}
+            disabledDate={disabledDate}
             value={[value[0], value[1]]}
             format={"DD/MM/YYYY"}
             placeholder={[t("fromDate"), t("toDate")]}
