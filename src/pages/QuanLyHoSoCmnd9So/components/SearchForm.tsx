@@ -138,7 +138,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       label={t("dateInput")}
                       fieldName1={"ngayNhapTu"}
                       fieldName2={"ngayNhapDen"}
-                      rangeTime={"90"} // khoảng thời gian được chọn
+                      rangeTime={"10"} // khoảng thời gian được phép chọn
                     />
                   </Col>
                 </Row>
