@@ -5,6 +5,7 @@ import { initReactI18next } from "react-i18next";
 import httpMethod from "../config/httpMethod";
 import login from "./login.json";
 import button from "./button.json";
+import tooltip from "./tooltip.json";
 
 export enum ELanguages {
   English = "English",
@@ -35,9 +36,19 @@ export const LanguageOptions: ILanguageOptions[] = [
 const combineTranslation = (language: string, translationData: any) => {
   switch (language) {
     case "en":
-      return { ..._.merge({ ...login.en, ...button.en }, translationData) };
+      return {
+        ..._.merge(
+          { ...login.en, ...button.en, ...tooltip.en },
+          translationData
+        ),
+      };
     case "vi":
-      return { ..._.merge({ ...login.vi, ...button.vi }, translationData) };
+      return {
+        ..._.merge(
+          { ...login.vi, ...button.vi, ...tooltip.vi },
+          translationData
+        ),
+      };
   }
 };
 

@@ -2,11 +2,15 @@
   "vi": {
     "listed": "Tìm kiếm",
     "reset": "Đặt lại",
-    "addNew": "Thêm mới"
+    "addNew": "Thêm mới",
+    "approve": "Phê duyệt",
+    "exportFile": "Xuất file"
   },
   "en": {
     "listed": "Listed",
     "reset": "Reset",
-    "addNew": "Add new"
+    "addNew": "Add new",
+    "approve": "Approve",
+    "exportFile": "Export file"
   }
 }

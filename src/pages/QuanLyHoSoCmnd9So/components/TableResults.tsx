@@ -339,8 +339,12 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       </div>
       <div className="button-bottom-wrapper">
         <Space className="space-button">
-          <ButtonCustom startIcon={<CheckOutlined />}>Phê duyệt</ButtonCustom>
-          <ButtonCustom startIcon={<ExportOutlined />}>Xuất file</ButtonCustom>
+          <ButtonCustom startIcon={<CheckOutlined />}>
+            {t("approve")}
+          </ButtonCustom>
+          <ButtonCustom startIcon={<ExportOutlined />}>
+            {t("exportFile")}
+          </ButtonCustom>
         </Space>
       </div>
       <ModalCustom open={openModalThemMoi} title="CẬP NHẬT HỒ SƠ CMND 9 SỐ">

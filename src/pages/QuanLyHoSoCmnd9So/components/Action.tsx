@@ -14,7 +14,7 @@ interface IProps {
 
 export const Action: React.FC<IProps> = ({ record }) => {
   const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
-  const { t } = useTranslation(["quanLyHoSoCmnd9So", "dictionnary"]);
+  const { t } = useTranslation(["tooltip"]);
 
   return (
     <>
