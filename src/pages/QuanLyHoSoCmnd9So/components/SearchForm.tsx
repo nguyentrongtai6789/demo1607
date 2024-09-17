@@ -80,7 +80,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={InputCustom}
                       name={"hoVaTen"}
-                      label={t("fullName")} // chú ý thằng củ lìn này
+                      label={t("fullName")}
                     />
                   </Col>
                   <Col span={4}>
@@ -138,6 +138,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       label={t("dateInput")}
                       fieldName1={"ngayNhapTu"}
                       fieldName2={"ngayNhapDen"}
+                      rangeTime={"10"} // khoảng thời gian được phép chọn
                     />
                   </Col>
                 </Row>
