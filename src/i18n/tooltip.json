@@ -1,0 +1,12 @@
+{
+  "vi": {
+    "viewDetail": "Xem chi tiết",
+    "edit": "Chỉnh sửa",
+    "delete": "Xoá"
+  },
+  "en": {
+    "viewDetail": "View detail",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
+}

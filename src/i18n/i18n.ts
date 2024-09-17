@@ -3,7 +3,9 @@ import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
 import httpMethod from "../config/httpMethod";
-import dictionary from "./dictionary.json";
+import login from "./login.json";
+import button from "./button.json";
+import tooltip from "./tooltip.json";
 
 export enum ELanguages {
   English = "English",
@@ -34,9 +36,19 @@ export const LanguageOptions: ILanguageOptions[] = [
 const combineTranslation = (language: string, translationData: any) => {
   switch (language) {
     case "en":
-      return { ..._.merge({ ...dictionary.en }, translationData) };
+      return {
+        ..._.merge(
+          { ...login.en, ...button.en, ...tooltip.en },
+          translationData
+        ),
+      };
     case "vi":
-      return { ..._.merge({ ...dictionary.vi }, translationData) };
+      return {
+        ..._.merge(
+          { ...login.vi, ...button.vi, ...tooltip.vi },
+          translationData
+        ),
+      };
   }
 };
 

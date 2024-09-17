@@ -54,7 +54,7 @@ type TablePaginationConfig = Exclude<
 >;
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
-  const { t } = useTranslation(["dictionnary"]);
+  const { t } = useTranslation(["dictionnary", "button"]);
   const { language } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -290,7 +290,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       title: "Thao tác",
       key: "operation",
       fixed: "right",
-      width: 120,
+      width: 160,
       render: (record: IRecordTable) => <Action record={record} />,
     },
   ];
@@ -310,7 +310,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
                   width="145px"
                   onClick={() => setOpenModalThemMoi(true)}
                 >
-                  Thêm mới
+                  {t("addNew")}
                 </ButtonCustom>
               </>
             )}
@@ -339,8 +339,12 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       </div>
       <div className="button-bottom-wrapper">
         <Space className="space-button">
-          <ButtonCustom startIcon={<CheckOutlined />}>Phê duyệt</ButtonCustom>
-          <ButtonCustom startIcon={<ExportOutlined />}>Xuất file</ButtonCustom>
+          <ButtonCustom startIcon={<CheckOutlined />}>
+            {t("approve")}
+          </ButtonCustom>
+          <ButtonCustom startIcon={<ExportOutlined />}>
+            {t("exportFile")}
+          </ButtonCustom>
         </Space>
       </div>
       <ModalCustom open={openModalThemMoi} title="CẬP NHẬT HỒ SƠ CMND 9 SỐ">

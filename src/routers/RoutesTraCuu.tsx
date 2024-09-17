@@ -10,7 +10,7 @@ export const RoutesTraCuu: RouteObject[] = [
     path: "tra-cuu",
     children: [
       {
-        path: "hs-hop-nhat-voi-tt-dt",
+        path: "hs-cmnd-9-so",
         element: <QuanLyHoSoCmnd9So />,
       },
     ],
