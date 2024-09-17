@@ -4,13 +4,17 @@
     "reset": "Đặt lại",
     "addNew": "Thêm mới",
     "approve": "Phê duyệt",
-    "exportFile": "Xuất file"
+    "exportFile": "Xuất file",
+    "expandMenu": "Mở rộng Menu",
+    "collapseMenu": "Thu gọn Menu"
   },
   "en": {
     "listed": "Listed",
     "reset": "Reset",
     "addNew": "Add new",
     "approve": "Approve",
-    "exportFile": "Export file"
+    "exportFile": "Export file",
+    "expandMenu": "Expand Menu",
+    "collapseMenu": "Collapse Menu"
   }
 }

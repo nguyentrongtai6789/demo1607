@@ -6,6 +6,7 @@ import httpMethod from "../config/httpMethod";
 import login from "./login.json";
 import button from "./button.json";
 import tooltip from "./tooltip.json";
+import pagination from "./pagination.json";
 
 export enum ELanguages {
   English = "English",
@@ -38,14 +39,14 @@ const combineTranslation = (language: string, translationData: any) => {
     case "en":
       return {
         ..._.merge(
-          { ...login.en, ...button.en, ...tooltip.en },
+          { ...login.en, ...button.en, ...tooltip.en, ...pagination.en },
           translationData
         ),
       };
     case "vi":
       return {
         ..._.merge(
-          { ...login.vi, ...button.vi, ...tooltip.vi },
+          { ...login.vi, ...button.vi, ...tooltip.vi, ...pagination.vi },
           translationData
         ),
       };

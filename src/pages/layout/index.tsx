@@ -13,7 +13,7 @@ export default () => {
 
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
-  const { t } = useTranslation("sidebarMenu");
+  const { t } = useTranslation("button");
 
   return (
     <div className="wrapper-all">
