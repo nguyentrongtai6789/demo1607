@@ -1,12 +1,11 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import React, { useState } from "react";
-import { ModalConfirmCustom } from "../../../customAntd/ModalConfirmCustom";
-import NotificationCustom from "../../../customAntd/NotificationCustom";
 import { IRecordTable } from "./TableResults";
-import ButtonCustom from "../../../customAntd/ButtonCustom";
-import IConCustom from "../../../customAntd/IConCustom";
 import { useTranslation } from "react-i18next";
+import IConCustom from "../../../../../customAntd/IConCustom";
+import { ModalConfirmCustom } from "../../../../../customAntd/ModalConfirmCustom";
+import NotificationCustom from "../../../../../customAntd/NotificationCustom";
 
 interface IProps {
   record: IRecordTable;

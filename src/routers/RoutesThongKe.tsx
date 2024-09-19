@@ -2,15 +2,15 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 const QuanLyHoSoCmnd9So = lazy(
-  () => import("../pages/laoEid/quanLy/QuanLyHoSoCmnd9So")
+  () => import("../pages/laoEid/thongKe/HsCmnd9SoTheoDonVi")
 );
 
-export const RoutesQuanLy: RouteObject[] = [
+export const RoutesThongKe: RouteObject[] = [
   {
-    path: "quan-ly",
+    path: "thong-ke",
     children: [
       {
-        path: "hs-cmnd-9-so",
+        path: "hs-cmnd-9-so-hop-nhat-theo-don-vi",
         element: <QuanLyHoSoCmnd9So />,
       },
     ],

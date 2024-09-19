@@ -8,12 +8,14 @@ import { SorterResult } from "antd/es/table/interface";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import httpMethod from "../../../config/httpMethod";
-import ButtonCustom from "../../../customAntd/ButtonCustom";
-import { ModalCustom } from "../../../customAntd/ModalCustom";
-import PaginationCustom from "../../../customAntd/PaginationCustom";
-import { handleLoading, loadingCancel } from "../../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../../redux/store";
+import httpMethod from "../../../../../config/httpMethod";
+import ButtonCustom from "../../../../../customAntd/ButtonCustom";
+import { ModalCustom } from "../../../../../customAntd/ModalCustom";
+import PaginationCustom, {
+  TableParams,
+} from "../../../../../customAntd/PaginationCustom";
+import { handleLoading, loadingCancel } from "../../../../../redux/authSlice";
+import { RootState, useAppDispatch } from "../../../../../redux/store";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
@@ -40,18 +42,6 @@ export interface IRecordTable {
   ketQuaCongViec: string;
   congViecTiepTheo: string;
 }
-
-export interface TableParams {
-  pagination: TablePaginationConfig;
-  sortField?: SorterResult<any>["field"];
-  sortOrder?: "asc" | "desc";
-  filters?: Parameters<GetProp<TableProps, "onChange">>[1];
-}
-
-type TablePaginationConfig = Exclude<
-  GetProp<TableProps, "pagination">,
-  boolean
->;
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
   const { t } = useTranslation(["dictionnary", "button"]);
