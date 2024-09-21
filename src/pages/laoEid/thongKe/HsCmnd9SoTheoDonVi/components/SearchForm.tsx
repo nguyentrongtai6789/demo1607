@@ -1,4 +1,9 @@
-import { RetweetOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  ExportOutlined,
+  PrinterOutlined,
+  RetweetOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import { Col, Row, Space } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Dispatch, SetStateAction } from "react";
@@ -9,6 +14,7 @@ import { DatePickerWithTypeCustom } from "../../../../../customAntd/DatePickerWi
 import { InputCustom } from "../../../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
+import { SelectDanhMucByMa } from "../../../../../customAntd/SelectDanhMucByMa";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -29,7 +35,7 @@ export interface ISearchForm {
 }
 
 export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
-  const initialValues: ISearchValues = {
+  const initialValues: any = {
     donViId: 11728,
     gioiTinhId: null,
     hoVaTen: "",
@@ -41,9 +47,10 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     soCmnd: "",
     ngaySinh: "",
     hoTenVoChong: "",
+    loaiBaoCao: "",
   };
 
-  const { t } = useTranslation(["quanLyHoSoCmnd9So", "sidebarMenu"]);
+  const { t } = useTranslation();
 
   return (
     <div className="search-form-wrapper">
@@ -51,8 +58,10 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
         <div className="search-from-title">{t("searchCondition")}</div>
         <Formik
           initialValues={initialValues}
-          onSubmit={(values: ISearchValues) => {
-            setSearchValues({ ...values });
+          onSubmit={(values: any) => {
+            console.log(values);
+
+            // setSearchValues({ ...values });
           }}
         >
           {(propsFormik: FormikProps<any>) => {
@@ -60,91 +69,79 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
             return (
               <Form>
                 <Row>
-                  <Col span={8}>
+                  <Col span={4}>
                     <Field
-                      component={SelectDonViCustom}
-                      api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
-                      label={t("unit")}
-                      name={"donViId"}
+                      component={SelectDanhMucByMa}
+                      label={t("loaiBaoCao")}
+                      name={"loaiBaoCao"}
+                      maDanhMuc={"LOAI-BAO-CAO"}
                       isRequired
                     />
                   </Col>
-                  <Col span={4}>
+                  <Col span={10}>
                     <Field
-                      component={InputCustom}
-                      name={"soCmnd"}
-                      label={t("identityCardNumber")}
+                      component={SelectDonViCustom}
+                      api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
+                      name={"donViId"}
+                      label={t("donVi")}
+                      isRequired
                     />
                   </Col>
-                  <Col span={4}>
+                  <Col span={10}>
                     <Field
-                      component={InputCustom}
-                      name={"hoVaTen"}
-                      label={t("fullName")}
-                    />
-                  </Col>
-                  <Col span={4}>
-                    <Field
-                      component={DatePickerWithTypeCustom}
-                      name={"ngaySinh"}
-                      label={t("dateOfBirth")}
-                    />
-                  </Col>
-                  <Col span={4}>
-                    <Field
-                      component={SelectCustom}
-                      api={"danh-muc-gioi-tinh"}
-                      label={t("gender")}
-                      name={"gioiTinhId"}
-                      valueNeedOfOption={"id"}
+                      isRequired
+                      component={DatePickerWithRangeCustom}
+                      label={t("ngayPheDuyetCd")}
+                      fieldName1={"ngayDuyetCdTu"}
+                      fieldName2={"ngayDuyetCdDen"}
+                      rangeTime={"10"} // khoảng thời gian được phép chọn
                     />
                   </Col>
                 </Row>
                 <Row>
                   <Col span={4}>
+                    {values.loaiBaoCao === "2" && (
+                      <Field
+                        component={SelectDanhMucByMa}
+                        label={t("loaiHopNhat")}
+                        name={"loaiHopNhat"}
+                        maDanhMuc={"LOAI-HOP-NHAT"}
+                        isRequired
+                      />
+                    )}
+                  </Col>
+                  <Col span={5}>
                     <Field
                       component={SelectCustom}
                       api={"danh-muc-pham-vi-tim-kiem"}
-                      label={t("searchRange")}
+                      label={t("phamViTimKiem")}
                       name={"phamViTimKiem"}
                       valueNeedOfOption={"giaTri"}
                       isRequired
                     />
                   </Col>
-                  <Col span={4}>
+                  <Col span={5}>
                     <Field
-                      component={InputCustom}
-                      label={t("fatherName")}
-                      name={"hoTenCha"}
+                      component={SelectDanhMucByMa}
+                      label={t("loaiXuatFile")}
+                      name={"loaiXuatFile"}
+                      maDanhMuc={"LOAI-XUAT-FILE"}
                     />
                   </Col>
-                  <Col span={4}>
+                  <Col span={10}>
                     <Field
-                      component={InputCustom}
-                      label={t("motherName")}
-                      name={"hoTenMe"}
-                    />
-                  </Col>
-                  <Col span={4}>
-                    <Field
-                      component={InputCustom}
-                      label={t("husbandWifeName")}
-                      name={"hoTenVoChong"}
-                    />
-                  </Col>
-                  <Col span={8}>
-                    <Field
+                      isRequired
                       component={DatePickerWithRangeCustom}
-                      label={t("dateInput")}
-                      fieldName1={"ngayNhapTu"}
-                      fieldName2={"ngayNhapDen"}
+                      label={t("ngayPheDuyetDt")}
+                      fieldName1={"ngayDuyetDtTu"}
+                      fieldName2={"ngayDuyetDtDen"}
                       rangeTime={"10"} // khoảng thời gian được phép chọn
                     />
                   </Col>
                 </Row>
                 <Row>
                   <Space
-                    size={100}
+                    size={10}
                     style={{
                       width: "100%",
                       justifyContent: "center",
@@ -163,6 +160,18 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       className="delete-button"
                     >
                       {t("reset")}
+                    </ButtonCustom>
+                    <ButtonCustom
+                      htmlType="button"
+                      startIcon={<PrinterOutlined />}
+                    >
+                      {t("inBaoCao")}
+                    </ButtonCustom>
+                    <ButtonCustom
+                      htmlType="button"
+                      startIcon={<ExportOutlined />}
+                    >
+                      {t("xuatFile")}
                     </ButtonCustom>
                   </Space>
                 </Row>

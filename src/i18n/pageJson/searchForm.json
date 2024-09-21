@@ -1,0 +1,20 @@
+{
+  "vi": {
+    "loaiBaoCao": "Loại báo cáo",
+    "donVi": "Đơn vị",
+    "ngayPheDuyetCd": "Ngày phê duyệt công dân",
+    "phamViTimKiem": "Phạm vi tìm kiếm",
+    "loaiXuatFile": "Loại xuất file",
+    "ngayPheDuyetDt": "Ngày phê duyệt đối tượng",
+    "loaiHopNhat": "Loại hợp nhất"
+  },
+  "en": {
+    "loaiBaoCao": "Report type",
+    "donVi": "Unit",
+    "ngayPheDuyetCd": "Citizen approval date from",
+    "phamViTimKiem": "Search range",
+    "loaiXuatFile": "File output type",
+    "ngayPheDuyetDt": "Object approval date",
+    "loaiHopNhat": "Merge type"
+  }
+}

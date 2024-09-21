@@ -3,12 +3,13 @@ import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
 import httpMethod from "../config/httpMethod";
-import login from "./login.json";
-import button from "./button.json";
-import tooltip from "./tooltip.json";
-import pagination from "./pagination.json";
-import datePicker from "./datePicker.json";
-import header from "./header.json";
+import login from "./commonJson/login.json";
+import button from "./commonJson/button.json";
+import tooltip from "./commonJson/tooltip.json";
+import pagination from "./commonJson/pagination.json";
+import datePicker from "./commonJson/datePicker.json";
+import header from "./commonJson/header.json";
+import searchForm from "./pageJson/searchForm.json";
 
 export enum ELanguages {
   English = "English",
@@ -48,6 +49,7 @@ export const combineTranslation = (language: string, translationData: any) => {
             ...pagination.en,
             ...datePicker.en,
             ...header.en,
+            ...searchForm.en,
           },
           translationData
         ),
@@ -62,6 +64,7 @@ export const combineTranslation = (language: string, translationData: any) => {
             ...pagination.vi,
             ...datePicker.vi,
             ...header.vi,
+            ...searchForm.vi,
           },
           translationData
         ),
@@ -104,7 +107,7 @@ i18n
   .use(HttpApi)
   .use(initReactI18next)
   .init({
-    fallbackLng: "en",
+    fallbackLng: localStorage.getItem("language") || "en",
     debug: true,
     interpolation: {
       escapeValue: false,
