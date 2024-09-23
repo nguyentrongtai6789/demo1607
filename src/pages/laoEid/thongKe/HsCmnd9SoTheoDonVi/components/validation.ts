@@ -1,59 +1,33 @@
-import moment from "moment";
 import * as Yup from "yup";
+import { isArrayAllUndefined } from "../../../../../customhHelperFunction";
 
 export const validateSearchForm = Yup.object().shape({
   donViId: Yup.string().required("Bắt buộc nhập").nullable(),
   phamViTimKiem: Yup.string().required("Bắt buộc nhập").nullable(),
   loaiBaoCao: Yup.string().required("Bắt buộc nhập").nullable(),
-  ngayDuyetCongDan: Yup.array()
+  ngayDuyetDoiTuong: Yup.array()
     .nullable()
-    .test("ngayDuyetCongDan", "xxx", function (value) {
-      if (!value || !value.length) {
+    .test("ngayDuyetDoiTuong", "xxx", function (value) {
+      const ngayDuyetCongDan = this.parent.ngayDuyetCongDan;
+      if (isArrayAllUndefined(ngayDuyetCongDan) && isArrayAllUndefined(value)) {
         return this.createError({
-          path: "ngayDuyetCongDan",
-          message: "Bắt buộc nhập khoảng thời gian Ngày duyệt Công dân",
+          path: "ngayDuyetDoiTuong",
+          message:
+            "Bắt buộc nhập khoảng thời gian Ngày duyệt Công dân hoặc Ngày duyệt đối tượng",
         });
-      }
-      // Kiểm tra từng phần tử trong mảng xem có đối tượng rỗng hay không
-      for (let i = 0; i < value.length; i++) {
-        if (!value[i]) {
-          return this.createError({
-            path: `ngayDuyetCongDan`,
-            message: "Bắt buộc nhập khoảng thời gian Ngày duyệt Công dân",
-          });
-        }
       }
       return true;
     }),
-  // ngayDuyetCongDanDen: Yup.string()
-  //   .nullable()
-  //   // .required("Bắt buộc nhập")
-  //   .test("ngayDuyetCongDanDen", "xxx", function (value) {
-  //     const ngayDuyetCongDanTu = this.parent.ngayDuyetCongDanTu;
-  //     if (value && ngayDuyetCongDanTu) {
-  //       const startDateMoment = moment(ngayDuyetCongDanTu, "DD-MM-YYYY");
-  //       const endDateMoment = moment(value, "DD-MM-YYYY");
-  //       const startDateValidMoment = moment(
-  //         endDateMoment.subtract(3, "months").format("DD-MM-YYYY"),
-  //         "DD-MM-YYYY"
-  //       );
-  //       if (startDateMoment.isBefore(startDateValidMoment)) {
-  //         return this.createError({
-  //           path: "ngayDuyetCongDanDen",
-  //           message: "Chỉ được phép tìm kiếm trong vòng 3 tháng",
-  //         });
-  //       }
-  //       if (
-  //         moment(value, "DD-MM-YYYY").isBefore(
-  //           moment(ngayDuyetCongDanTu, "DD-MM-YYYY")
-  //         )
-  //       ) {
-  //         return this.createError({
-  //           path: "ngayDuyetCongDanDen",
-  //           message: "Đến ngày phải sau từ ngày",
-  //         });
-  //       }
-  //     }
-  //     return true;
-  //   }),
+  loaiHopNhat: Yup.string()
+    .nullable()
+    .test("loaiHopNhat", "xxx", function (value) {
+      const loaiBaoCao = this.parent.loaiBaoCao;
+      if (loaiBaoCao === "2" && !value) {
+        return this.createError({
+          path: "loaiHopNhat",
+          message: "Bắt buộc nhập",
+        });
+      }
+      return true;
+    }),
 });

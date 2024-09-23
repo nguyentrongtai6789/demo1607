@@ -19,30 +19,32 @@ export interface ISearchValues {
   donViId: number | null;
   loaiBaoCao: string;
   loaiXuatFile: string;
-  ngayDuyetCongDanDen: string;
-  ngayDuyetCongDanTu: string;
-  ngayDuyetDoiTuongDen: string;
-  ngayDuyetDoiTuongTu: string;
+  ngayDuyetCongDan: string[];
+  ngayDuyetDoiTuong: string[];
   phamViTimKiem: string;
+  loaiHopNhat: string;
 }
 
 export interface ISearchForm {
   setSearchValues: Dispatch<SetStateAction<ISearchValues | null>>;
+  setLoaiBaoCao: Dispatch<SetStateAction<string>>;
 }
 
-export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
-  const initialValues: any = {
+export const SearchForm: React.FC<ISearchForm> = ({
+  setSearchValues,
+  setLoaiBaoCao,
+}) => {
+  const { t } = useTranslation();
+
+  const initialValues: ISearchValues = {
     donViId: 11728,
-    loaiBaoCao: "",
+    loaiBaoCao: "1",
     loaiXuatFile: "",
     ngayDuyetCongDan: ["", ""],
-    ngayDuyetDoiTuongDen: "",
-    ngayDuyetDoiTuongTu: "",
-    ngayDuyetCongDanDen: "",
-    phamViTimKiem: "",
+    ngayDuyetDoiTuong: ["", ""],
+    phamViTimKiem: "DT",
+    loaiHopNhat: "",
   };
-
-  const { t } = useTranslation();
 
   return (
     <div className="search-form-wrapper">
@@ -50,9 +52,15 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
         <div className="search-from-title">{t("searchCondition")}</div>
         <Formik
           initialValues={initialValues}
-          onSubmit={(values: any) => {
-            console.log(values);
-            // setSearchValues({ ...values });
+          onSubmit={(values: ISearchValues) => {
+            const newValues = {
+              ...values,
+              ngayDuyetCongDanTu: values.ngayDuyetCongDan[0],
+              ngayDuyetCongDanDen: values.ngayDuyetCongDan[1],
+              ngayDuyetDoiTuongTu: values.ngayDuyetDoiTuong[0],
+              ngayDuyetDoiTuongDen: values.ngayDuyetDoiTuong[1],
+            };
+            setSearchValues({ ...newValues });
           }}
           validationSchema={validateSearchForm}
         >
@@ -68,7 +76,15 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       name={"loaiBaoCao"}
                       maDanhMuc={"LOAI-BAO-CAO"}
                       isRequired
-                      allowClear
+                      onChange={(value: any) => {
+                        if (value) {
+                          setFieldValue("loaiBaoCao", value);
+                          setLoaiBaoCao(value);
+                        } else {
+                          setFieldValue("loaiBaoCao", "");
+                          setLoaiBaoCao("");
+                        }
+                      }}
                     />
                   </Col>
                   <Col span={10}>
@@ -87,7 +103,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       component={DatePickerWithRangeCustom}
                       label={t("ngayPheDuyetCd")}
                       name={"ngayDuyetCongDan"}
-                      rangeTime={"90"} // khoảng thời gian được phép chọn tính theo ngày
+                      rangeTime={"1000"} // khoảng thời gian được phép chọn tính theo ngày
                     />
                   </Col>
                 </Row>
@@ -127,9 +143,8 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       isRequired
                       component={DatePickerWithRangeCustom}
                       label={t("ngayPheDuyetDt")}
-                      fieldName1={"ngayDuyetDoiTuongTu"}
-                      fieldName2={"ngayDuyetDoiTuongDen"}
-                      rangeTime={"10"} // khoảng thời gian được phép chọn
+                      name={"ngayDuyetDoiTuong"}
+                      rangeTime={"1000"} // khoảng thời gian được phép chọn tính theo ngày
                     />
                   </Col>
                 </Row>
@@ -152,6 +167,9 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       color="rgb(248, 51, 51)"
                       startIcon={<RetweetOutlined />}
                       className="delete-button"
+                      onClick={() => {
+                        setLoaiBaoCao("1");
+                      }}
                     >
                       {t("datLai")}
                     </ButtonCustom>

@@ -1,7 +1,7 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import React, { useState } from "react";
-import { IRecordTable } from "./TableResults";
+import { IRecordTable } from "./TableResultsTongHop";
 import { useTranslation } from "react-i18next";
 import IConCustom from "../../../../../customAntd/IConCustom";
 import { ModalConfirmCustom } from "../../../../../customAntd/ModalConfirmCustom";

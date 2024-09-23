@@ -3,11 +3,9 @@ import {
   ExportOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { GetProp, Space, Table, TableColumnsType, TableProps } from "antd";
-import { SorterResult } from "antd/es/table/interface";
+import { Space, Table, TableColumnsType, TableProps } from "antd";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import httpMethod from "../../../../../config/httpMethod";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import { ModalCustom } from "../../../../../customAntd/ModalCustom";
@@ -15,7 +13,7 @@ import PaginationCustom, {
   TableParams,
 } from "../../../../../customAntd/PaginationCustom";
 import { handleLoading, loadingCancel } from "../../../../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../../../../redux/store";
+import { useAppDispatch } from "../../../../../redux/store";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
@@ -43,9 +41,11 @@ export interface IRecordTable {
   congViecTiepTheo: string;
 }
 
-export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
+export const TableResultsDanhSach: FunctionComponent<IProps> = ({
+  searchValues,
+}) => {
   const { t } = useTranslation(["dictionnary", "button"]);
-  const { language } = useSelector((state: RootState) => state.auth);
+
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<IRecordTable[]>();
@@ -63,12 +63,8 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     dispatch(handleLoading());
     await httpMethod
       .post(
-        `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}`,
-        {
-          ...searchValues,
-          sortDirection: tableParams.sortOrder,
-          sortField: tableParams.sortField,
-        }
+        `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}&sort=${tableParams.sortField}:${tableParams.sortOrder}`,
+        searchValues
       )
       .then((res: any) => {
         if (res?.data?.code === 200) {
@@ -156,123 +152,67 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       },
     },
     {
-      title: "Số CMND",
-      dataIndex: "soCmnd",
-      key: "soCmnd",
-      width: 150,
+      title: "Đơn vị",
+      dataIndex: "donVi",
+      key: "donVi",
+      width: 200,
       sorter: true,
       showSorterTooltip: false,
       sortDirections: ["ascend", "descend"],
     },
     {
+      title: "Số CMND",
+      dataIndex: "tongHoSo",
+      key: "tongHoSo",
+      width: 150,
+      sorter: true,
+      showSorterTooltip: false,
+    },
+    {
       title: "Họ và tên",
-      dataIndex: "hoVaTen",
-      key: "hoVaTen",
-      width: 200,
+      dataIndex: "hopNhatCongDan",
+      key: "hopNhatCongDan",
+      width: 120,
       sorter: true,
       showSorterTooltip: false,
     },
     {
       title: "Ngày sinh",
-      dataIndex: "ngaySinh",
-      key: "ngaySinh",
-      width: 150,
+      dataIndex: "hopNhatDoiTuong",
+      key: "hopNhatDoiTuong",
+      width: 120,
       sorter: true,
       showSorterTooltip: false,
     },
     {
       title: "Giới tính",
-      dataIndex: "gioiTinh",
-      key: "gioiTinh",
-      width: 150,
+      dataIndex: "hopNhatCongDanDoiTuong",
+      key: "hopNhatCongDanDoiTuong",
+      width: 120,
       sorter: true,
       showSorterTooltip: false,
     },
     {
-      title: "Nơi sinh",
-      dataIndex: "noiSinh",
-      key: "noiSinh",
-      width: 150,
+      title: "Họ tên cha",
+      dataIndex: "khongHopNhatCongDanDoiTuong",
+      key: "khongHopNhatCongDanDoiTuong",
+      width: 130,
       sorter: true,
       showSorterTooltip: false,
     },
     {
-      title: "Thường trú",
-      dataIndex: "thuongTru",
-      key: "thuongTru",
-      width: 300,
+      title: "Họ tên mẹ",
+      dataIndex: "khongHopNhatCongDanDoiTuong",
+      key: "khongHopNhatCongDanDoiTuong",
+      width: 130,
       sorter: true,
       showSorterTooltip: false,
     },
     {
-      title: "Họ và tên cha",
-      dataIndex: "hoVaTenCha",
-      key: "hoVaTenCha",
-      width: 150,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Họ và tên mẹ",
-      dataIndex: "hoVaTenMe",
-      key: "hoVaTenMe",
-      width: 150,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Họ và tên vợ chồng",
-      dataIndex: "hoVaTenVoChong",
-      key: "hoVaTenVoChong",
-      width: 200,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Ngày nhập",
-      dataIndex: "ngayNhap",
-      key: "ngayNhap",
-      width: 150,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Đơn vị",
-      dataIndex: "donVi",
-      key: "donVi",
-      width: 300,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Công việc đã thực hiện",
-      dataIndex: "congViec",
-      key: "congViec",
-      width: 300,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Kết quả",
-      dataIndex: "ketQuaCongViec",
-      key: "ketQuaCongViec",
-      width: 150,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Công việc thực hiện tiếp theo",
-      dataIndex: "congViecTiepTheo",
-      key: "congViecTiepTheo",
-      width: 300,
-      sorter: true,
-      showSorterTooltip: false,
-    },
-    {
-      title: "Công việc thực hiện tiếp theo",
-      dataIndex: "congViecTiepTheo",
-      key: "congViecTiepTheo",
-      width: 300,
+      title: "Họ tên vợ chồng",
+      dataIndex: "khongHopNhatCongDanDoiTuong",
+      key: "khongHopNhatCongDanDoiTuong",
+      width: 130,
       sorter: true,
       showSorterTooltip: false,
     },
@@ -280,7 +220,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       title: "Thao tác",
       key: "operation",
       fixed: "right",
-      width: 160,
+      width: 120,
       render: (record: IRecordTable) => <Action record={record} />,
     },
   ];
@@ -306,7 +246,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             )}
             columns={columns}
             dataSource={data}
-            scroll={{ x: "2500px", y: "500px" }}
+            scroll={{ x: "1300px", y: "500px" }}
             bordered
             pagination={false}
             onChange={handleTableChange}
@@ -357,5 +297,3 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     </>
   );
 };
-
-export default TableResults;
