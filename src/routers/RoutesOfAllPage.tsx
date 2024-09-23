@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 import { lazy } from "react";
 import { RoutesQuanLy } from "./RoutesQuanLy";
 import { RoutesTraCuu } from "./RoutesTraCuu";
+import { RoutesThongKe } from "./RoutesThongKe";
 
 const Page404 = lazy(() => import("../pages/page404"));
 
@@ -18,6 +19,7 @@ const RoutesOfAllPage: RouteObject[] = [
   },
   ...RoutesQuanLy,
   ...RoutesTraCuu,
+  ...RoutesThongKe,
 ];
 
 export default RoutesOfAllPage;

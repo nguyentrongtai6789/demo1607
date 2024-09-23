@@ -1,7 +1,26 @@
-import { Pagination, PaginationProps, Select, SelectProps } from "antd";
+import {
+  GetProp,
+  Pagination,
+  PaginationProps,
+  Select,
+  SelectProps,
+  TableProps,
+} from "antd";
+import { SorterResult } from "antd/es/table/interface";
 import React, { Dispatch, SetStateAction } from "react";
-import { TableParams } from "../pages/QuanLyHoSoCmnd9So/components/TableResults";
 import { useTranslation } from "react-i18next";
+
+export type TablePaginationConfig = Exclude<
+  GetProp<TableProps, "pagination">,
+  boolean
+>;
+
+export interface TableParams {
+  pagination: TablePaginationConfig;
+  sortField?: SorterResult<any>["field"];
+  sortOrder?: "asc" | "desc";
+  filters?: Parameters<GetProp<TableProps, "onChange">>[1];
+}
 
 interface IProps extends PaginationProps {
   setTableParams: Dispatch<SetStateAction<TableParams>>;

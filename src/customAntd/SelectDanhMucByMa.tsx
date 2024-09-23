@@ -1,9 +1,11 @@
 import { Select, SelectProps } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { AxiosError, AxiosResponse } from "axios";
-import { ErrorMessage, FieldProps } from "formik";
+import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import httpMethod, { URL } from "../config/httpMethod";
+import i18n from "../i18n/i18n";
 
 export interface SelectCustomProps
   extends FieldProps,
@@ -12,44 +14,62 @@ export interface SelectCustomProps
   label?: string;
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
-  api: string;
+  style?: React.CSSProperties;
+  maDanhMuc: string;
+  listGiaTri?: string[];
   allowClear?: boolean;
 }
 
-export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
+export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
   field,
-  form: { errors, touched },
+  form,
   isRequired,
   label,
   styleWrapper,
   placeholder,
   disabled,
   allowClear,
-  size,
-  api,
   onChange,
+  size,
+  maDanhMuc,
+  listGiaTri,
+  style,
   ...rest
 }) => {
+  const { errors, touched } = form;
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { t } = useTranslation("translation ");
 
   useEffect(() => {
     setLoading(true);
     httpMethod
-      .post(`${URL}/${api}`)
+      .get(`${URL}/danh-muc/${maDanhMuc}`)
       .then((res: AxiosResponse) => {
-        setOptions(
-          res.data.data.map((item: any) => ({
-            value: item.id || item.ma || item.giaTri,
-            label: item.tenDonVi,
-          }))
-        );
+        if (!listGiaTri) {
+          setOptions(
+            res.data.data.map((item: any) => ({
+              value: item.giaTri,
+              label: item.ten || item.moTa,
+            }))
+          );
+        } else {
+          const filteredData = res.data.data.filter((item: any) =>
+            listGiaTri.includes(item.giaTri)
+          );
+          setOptions(
+            filteredData.map((item: any) => ({
+              value: item.giaTri,
+              label: item.ten || item.moTa,
+            }))
+          );
+        }
       })
       .catch((error: AxiosError) => {})
       .finally(() => {
         setLoading(false);
       });
-  }, [api]);
+  }, [i18n.language]);
 
   const handleOnChange = (value: any) => {
     const changeEvent = {
@@ -69,7 +89,6 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
         </span>
         <Select
           {...rest}
-          showSearch
           placeholder={placeholder}
           allowClear={allowClear || false}
           disabled={disabled}
@@ -78,11 +97,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
           loading={loading}
           onChange={onChange || handleOnChange}
           value={field.value}
-          filterOption={(input, option) =>
-            ((option?.label as string) ?? ("" as string))
-              .toLowerCase()
-              .includes(input.toLowerCase())
-          }
+          style={style}
           status={errors[field.name] && touched[field.name] ? "error" : ""}
         />
         <div>

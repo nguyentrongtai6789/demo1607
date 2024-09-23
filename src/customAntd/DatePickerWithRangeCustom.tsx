@@ -1,9 +1,9 @@
 import { DatePicker, DatePickerProps } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { RangePickerProps } from "antd/es/date-picker";
+import dayjs from "dayjs";
 import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 interface RangePickerCustomProps
@@ -13,24 +13,24 @@ interface RangePickerCustomProps
   label?: string;
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
-  fieldName1: string;
-  fieldName2: string;
   rangeTime: string;
 }
 export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
-  form: { errors, touched, setFieldValue, values, getFieldMeta },
+  form,
   field,
   isRequired,
   label,
   styleWrapper,
   size,
   onChange,
-  fieldName1,
-  fieldName2,
   rangeTime,
   ...rest
 }) => {
   const { RangePicker } = DatePicker;
+
+  const { name } = field;
+
+  const { errors, touched, setFieldValue, values, getFieldMeta } = form;
 
   const disabledDate: DatePickerProps["disabledDate"] = (current, { from }) => {
     if (from) {
@@ -40,22 +40,15 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
   };
 
   const handleOnChange = (value: any) => {
-    const formatValue1 = (value && value[0].format("DD/MM/YYYY")) || null;
-    const formatValue2 = (value && value[1].format("DD/MM/YYYY")) || null;
-    const changeEvent1 = {
+    const formatValue1 = (value && value[0].format("DD/MM/YYYY")) || "";
+    const formatValue2 = (value && value[1].format("DD/MM/YYYY")) || "";
+    const changeEvent = {
       target: {
-        name: fieldName1,
-        value: formatValue1,
+        name: name,
+        value: [formatValue1, formatValue2],
       },
     };
-    const changeEvent2 = {
-      target: {
-        name: fieldName2,
-        value: formatValue2,
-      },
-    };
-    field.onChange(changeEvent1);
-    field.onChange(changeEvent2);
+    field.onChange(changeEvent);
   };
 
   const [value, setValue] = useState<(dayjs.Dayjs | null)[]>([null, null]);
@@ -63,14 +56,22 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
   const { t } = useTranslation("datePicker");
 
   useEffect(() => {
-    const value1 = getFieldMeta(fieldName1).value;
-    const value2 = getFieldMeta(fieldName2).value;
-    const formatValue1 =
-      typeof value1 === "string" ? dayjs(value1, "DD/MM/YYYY") : null;
-    const formatValue2 =
-      typeof value2 === "string" ? dayjs(value2, "DD/MM/YYYY") : null;
-    setValue([formatValue1, formatValue2]);
-  }, [getFieldMeta(fieldName1).value, getFieldMeta(fieldName2).value]);
+    const value = getFieldMeta(name).value as string[];
+    if (!value) {
+      return;
+    }
+    const value1 = value[0];
+    const value2 = value[1];
+    if (value1 && value2) {
+      const formatValue1 =
+        typeof value1 === "string" ? dayjs(value1, "DD/MM/YYYY") : null;
+      const formatValue2 =
+        typeof value2 === "string" ? dayjs(value2, "DD/MM/YYYY") : null;
+      setValue([formatValue1, formatValue2]);
+    } else {
+      setValue([null, null]);
+    }
+  }, [getFieldMeta(name).value]);
 
   return (
     <>
@@ -78,20 +79,29 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
         <span>
           {label || ""} {isRequired && <span style={{ color: "red" }}>*</span>}
         </span>
-        <div style={{ width: "100%", display: "flex" }}>
-          <RangePicker
-            {...rest}
-            picker="date"
-            onChange={onChange || handleOnChange}
-            disabledDate={disabledDate}
-            value={[value[0], value[1]]}
-            format={"DD/MM/YYYY"}
-            placeholder={[t("fromDate"), t("toDate")]}
-            id={{
-              start: "startInput",
-              end: "endInput",
-            }}
-          />
+        <RangePicker
+          {...rest}
+          picker="date"
+          onChange={handleOnChange || onChange}
+          disabledDate={disabledDate}
+          value={[value[0], value[1]]}
+          format={"DD/MM/YYYY"}
+          placeholder={[t("fromDate"), t("toDate")]}
+          id={{
+            start: "startInput",
+            end: "endInput",
+          }}
+          status={errors[name] && touched[name] ? "error" : ""}
+        />
+        <div>
+          {errors[name] && touched[name] && (
+            <span
+              style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
+              className="validate-error"
+            >
+              {errors[name] as string}
+            </span>
+          )}
         </div>
       </div>
     </>

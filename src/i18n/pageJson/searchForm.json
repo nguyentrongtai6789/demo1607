@@ -1,0 +1,20 @@
+{
+  "vi": {
+    "loaiBaoCao": "Loại báo cáo",
+    "donVi": "Đơn vị",
+    "ngayPheDuyetCd": "Ngày phê duyệt công dân",
+    "phamViTimKiem": "Phạm vi tìm kiếm",
+    "loaiXuatFile": "Loại xuất file",
+    "ngayPheDuyetDt": "Ngày phê duyệt đối tượng",
+    "loaiHopNhat": "Loại hợp nhất"
+  },
+  "en": {
+    "loaiBaoCao": "ປະເພດລາຍງານ",
+    "donVi": "ໜ່ວຍ",
+    "ngayPheDuyetCd": "ວັນທີອະນຸມັດສັນຊາດ",
+    "phamViTimKiem": "ໄລຍະການຄົ້ນຫາ",
+    "loaiXuatFile": "ປະເພດຜົນຜະລິດໄຟລ໌",
+    "ngayPheDuyetDt": "ວັນທີອະນຸມັດວັດຖຸ",
+    "loaiHopNhat": "ປະເພດ fusion"
+  }
+}

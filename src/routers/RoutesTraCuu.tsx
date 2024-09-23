@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 const QuanLyHoSoCmnd9So = lazy(
-  () => import("../pages/QuanLyHoSoCmnd9So/index")
+  () => import("../pages/laoEid/quanLy/QuanLyHoSoCmnd9So")
 );
 
 export const RoutesTraCuu: RouteObject[] = [
