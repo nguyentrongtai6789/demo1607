@@ -1,20 +1,22 @@
 {
   "vi": {
-    "listed": "Tìm kiếm",
-    "reset": "Đặt lại",
-    "addNew": "Thêm mới",
-    "approve": "Phê duyệt",
-    "exportFile": "Xuất file",
-    "expandMenu": "Mở rộng Menu",
-    "collapseMenu": "Thu gọn Menu"
+    "timKiem": "Tìm kiếm",
+    "datLai": "Đặt lại",
+    "themMoi": "Thêm mới",
+    "pheDuyet": "Phê duyệt",
+    "xuatFile": "Xuất file",
+    "moRongMenu": "Mở rộng menu",
+    "thuGonMenu": "Thu gọn Menu",
+    "inBaoCao": "In báo cáo"
   },
   "en": {
-    "listed": "Listed",
-    "reset": "Reset",
-    "addNew": "Add new",
-    "approve": "Approve",
-    "exportFile": "Export file",
-    "expandMenu": "Expand Menu",
-    "collapseMenu": "Collapse Menu"
+    "timKiem": "ຊອກຫາ",
+    "datLai": "ຣີເຊັດ",
+    "themMoi": "ເພີ່ມໃຫມ່",
+    "pheDuyet": "ອະນຸມັດ",
+    "xuatFile": "ໄຟລ໌ສົ່ງອອກ",
+    "moRongMenu": "ຂະຫຍາຍເມນູ",
+    "thuGonMenu": "ຫຍໍ້ເມນູ",
+    "inBaoCao": "ພິມບົດລາຍງານ"
   }
 }

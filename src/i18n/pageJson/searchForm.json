@@ -9,12 +9,12 @@
     "loaiHopNhat": "Loại hợp nhất"
   },
   "en": {
-    "loaiBaoCao": "Report type",
-    "donVi": "Unit",
-    "ngayPheDuyetCd": "Citizen approval date from",
-    "phamViTimKiem": "Search range",
-    "loaiXuatFile": "File output type",
-    "ngayPheDuyetDt": "Object approval date",
-    "loaiHopNhat": "Merge type"
+    "loaiBaoCao": "ປະເພດລາຍງານ",
+    "donVi": "ໜ່ວຍ",
+    "ngayPheDuyetCd": "ວັນທີອະນຸມັດສັນຊາດ",
+    "phamViTimKiem": "ໄລຍະການຄົ້ນຫາ",
+    "loaiXuatFile": "ປະເພດຜົນຜະລິດໄຟລ໌",
+    "ngayPheDuyetDt": "ວັນທີອະນຸມັດວັດຖຸ",
+    "loaiHopNhat": "ປະເພດ fusion"
   }
 }

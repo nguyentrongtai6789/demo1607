@@ -17,11 +17,12 @@ export interface SelectCustomProps
   style?: React.CSSProperties;
   maDanhMuc: string;
   listGiaTri?: string[];
+  allowClear?: boolean;
 }
 
 export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
   field,
-  form: { errors, touched },
+  form,
   isRequired,
   label,
   styleWrapper,
@@ -35,6 +36,7 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
   style,
   ...rest
 }) => {
+  const { errors, touched } = form;
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation("translation ");
@@ -73,7 +75,7 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
     const changeEvent = {
       target: {
         name: field.name,
-        value: value,
+        value: value ? value : "",
       },
     };
     field.onChange(changeEvent);
@@ -88,7 +90,7 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
         <Select
           {...rest}
           placeholder={placeholder}
-          allowClear={allowClear}
+          allowClear={allowClear || false}
           disabled={disabled}
           size={size ? size : "small"}
           options={options}
@@ -96,13 +98,14 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
           onChange={handleOnChange || onChange}
           value={field.value}
           style={style}
+          status={errors[field.name] && touched[field.name] ? "error" : ""}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
             <span
               style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
             >
-              <ErrorMessage name={field.name || ""} />
+              {errors[field.name] as string}
             </span>
           )}
         </div>

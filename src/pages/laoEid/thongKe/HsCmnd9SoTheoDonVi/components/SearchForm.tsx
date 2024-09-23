@@ -10,24 +10,20 @@ import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import { DatePickerWithRangeCustom } from "../../../../../customAntd/DatePickerWithRangeCustom";
-import { DatePickerWithTypeCustom } from "../../../../../customAntd/DatePickerWithTypeCustom";
-import { InputCustom } from "../../../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../../../customAntd/SelectCustom";
-import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
 import { SelectDanhMucByMa } from "../../../../../customAntd/SelectDanhMucByMa";
+import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
+import { validateSearchForm } from "./validation";
 
 export interface ISearchValues {
   donViId: number | null;
-  gioiTinhId: number | null;
-  hoVaTen: string | null;
-  hoVaTenCha: string | null;
-  hoVaTenMe: string | null;
-  ngayNhapTu: string | null;
-  ngayNhapDen: string | null;
-  phamViTimKiem: string | null;
-  soCmnd: string | null;
-  ngaySinh: string | null;
-  hoTenVoChong: string | null;
+  loaiBaoCao: string;
+  loaiXuatFile: string;
+  ngayDuyetCongDanDen: string;
+  ngayDuyetCongDanTu: string;
+  ngayDuyetDoiTuongDen: string;
+  ngayDuyetDoiTuongTu: string;
+  phamViTimKiem: string;
 }
 
 export interface ISearchForm {
@@ -35,19 +31,15 @@ export interface ISearchForm {
 }
 
 export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
-  const initialValues: any = {
+  const initialValues: ISearchValues = {
     donViId: 11728,
-    gioiTinhId: null,
-    hoVaTen: "",
-    hoVaTenCha: "",
-    hoVaTenMe: "",
-    ngayNhapTu: null,
-    ngayNhapDen: null,
-    phamViTimKiem: "DV",
-    soCmnd: "",
-    ngaySinh: "",
-    hoTenVoChong: "",
     loaiBaoCao: "",
+    loaiXuatFile: "",
+    ngayDuyetCongDanTu: "",
+    ngayDuyetDoiTuongDen: "",
+    ngayDuyetDoiTuongTu: "",
+    ngayDuyetCongDanDen: "",
+    phamViTimKiem: "DT",
   };
 
   const { t } = useTranslation();
@@ -60,9 +52,9 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
           initialValues={initialValues}
           onSubmit={(values: any) => {
             console.log(values);
-
             // setSearchValues({ ...values });
           }}
+          validationSchema={validateSearchForm}
         >
           {(propsFormik: FormikProps<any>) => {
             const { values, setValues, setFieldValue } = propsFormik;
@@ -76,6 +68,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       name={"loaiBaoCao"}
                       maDanhMuc={"LOAI-BAO-CAO"}
                       isRequired
+                      allowClear
                     />
                   </Col>
                   <Col span={10}>
@@ -85,6 +78,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       name={"donViId"}
                       label={t("donVi")}
                       isRequired
+                      allowClear
                     />
                   </Col>
                   <Col span={10}>
@@ -92,9 +86,9 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       isRequired
                       component={DatePickerWithRangeCustom}
                       label={t("ngayPheDuyetCd")}
-                      fieldName1={"ngayDuyetCdTu"}
-                      fieldName2={"ngayDuyetCdDen"}
-                      rangeTime={"10"} // khoảng thời gian được phép chọn
+                      fieldName1={"ngayDuyetCongDanTu"}
+                      fieldName2={"ngayDuyetCongDanDen"}
+                      rangeTime={"10"} // khoảng thời gian được phép chọn tính theo ngày
                     />
                   </Col>
                 </Row>
@@ -118,6 +112,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       name={"phamViTimKiem"}
                       valueNeedOfOption={"giaTri"}
                       isRequired
+                      allowClear
                     />
                   </Col>
                   <Col span={5}>
@@ -133,8 +128,8 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       isRequired
                       component={DatePickerWithRangeCustom}
                       label={t("ngayPheDuyetDt")}
-                      fieldName1={"ngayDuyetDtTu"}
-                      fieldName2={"ngayDuyetDtDen"}
+                      fieldName1={"ngayDuyetDoiTuongTu"}
+                      fieldName2={"ngayDuyetDoiTuongDen"}
                       rangeTime={"10"} // khoảng thời gian được phép chọn
                     />
                   </Col>
@@ -151,7 +146,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       htmlType="submit"
                       startIcon={<SearchOutlined />}
                     >
-                      {t("listed")}
+                      {t("timKiem")}
                     </ButtonCustom>
                     <ButtonCustom
                       htmlType="reset"
@@ -159,7 +154,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       startIcon={<RetweetOutlined />}
                       className="delete-button"
                     >
-                      {t("reset")}
+                      {t("datLai")}
                     </ButtonCustom>
                     <ButtonCustom
                       htmlType="button"

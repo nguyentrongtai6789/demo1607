@@ -13,6 +13,7 @@ export interface SelectCustomProps
   styleWrapper?: React.CSSProperties;
   size?: SizeType;
   api: string;
+  allowClear?: boolean;
 }
 
 export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
@@ -54,7 +55,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
     const changeEvent = {
       target: {
         name: field.name,
-        value: value,
+        value: value ? value : "",
       },
     };
     field.onChange(changeEvent);
@@ -70,7 +71,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
           {...rest}
           showSearch
           placeholder={placeholder}
-          allowClear={allowClear || true}
+          allowClear={allowClear || false}
           disabled={disabled}
           size={size ? size : "small"}
           options={options}
@@ -82,13 +83,14 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
               .toLowerCase()
               .includes(input.toLowerCase())
           }
+          status={errors[field.name] && touched[field.name] ? "error" : ""}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
             <span
               style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
             >
-              <ErrorMessage name={field.name || ""} />
+              {errors[field.name] as string}
             </span>
           )}
         </div>
