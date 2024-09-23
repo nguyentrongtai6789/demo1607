@@ -89,7 +89,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
           size={size ? size : "small"}
           options={options}
           loading={loading}
-          onChange={handleOnChange || onChange}
+          onChange={onChange || handleOnChange}
           value={field.value}
           style={style}
           status={errors[field.name] && touched[name] ? "error" : ""}
@@ -98,6 +98,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
           {errors[name] && touched[name] && (
             <span
               style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
+              className="validate-error"
             >
               {errors[name] as string}
             </span>

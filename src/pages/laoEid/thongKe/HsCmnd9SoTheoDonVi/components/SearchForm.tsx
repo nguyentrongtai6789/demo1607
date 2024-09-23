@@ -31,15 +31,15 @@ export interface ISearchForm {
 }
 
 export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
-  const initialValues: ISearchValues = {
+  const initialValues: any = {
     donViId: 11728,
     loaiBaoCao: "",
     loaiXuatFile: "",
-    ngayDuyetCongDanTu: "",
+    ngayDuyetCongDan: ["", ""],
     ngayDuyetDoiTuongDen: "",
     ngayDuyetDoiTuongTu: "",
     ngayDuyetCongDanDen: "",
-    phamViTimKiem: "DT",
+    phamViTimKiem: "",
   };
 
   const { t } = useTranslation();
@@ -86,9 +86,8 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       isRequired
                       component={DatePickerWithRangeCustom}
                       label={t("ngayPheDuyetCd")}
-                      fieldName1={"ngayDuyetCongDanTu"}
-                      fieldName2={"ngayDuyetCongDanDen"}
-                      rangeTime={"10"} // khoảng thời gian được phép chọn tính theo ngày
+                      name={"ngayDuyetCongDan"}
+                      rangeTime={"90"} // khoảng thời gian được phép chọn tính theo ngày
                     />
                   </Col>
                 </Row>

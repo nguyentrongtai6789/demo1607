@@ -1,10 +1,10 @@
 import { Select, SelectProps } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { AxiosError, AxiosResponse } from "axios";
-import { ErrorMessage, FieldProps } from "formik";
+import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
-import httpMethod, { URL } from "../config/httpMethod";
 import { useTranslation } from "react-i18next";
+import httpMethod, { URL } from "../config/httpMethod";
 import i18n from "../i18n/i18n";
 
 export interface SelectCustomProps
@@ -95,7 +95,7 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
           size={size ? size : "small"}
           options={options}
           loading={loading}
-          onChange={handleOnChange || onChange}
+          onChange={onChange || handleOnChange}
           value={field.value}
           style={style}
           status={errors[field.name] && touched[field.name] ? "error" : ""}
@@ -104,6 +104,7 @@ export const SelectDanhMucByMa: React.FC<SelectCustomProps> = ({
           {errors[field.name] && touched[field.name] && (
             <span
               style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
+              className="validate-error"
             >
               {errors[field.name] as string}
             </span>

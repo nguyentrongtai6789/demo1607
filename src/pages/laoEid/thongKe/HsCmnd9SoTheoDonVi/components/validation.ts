@@ -5,18 +5,26 @@ export const validateSearchForm = Yup.object().shape({
   donViId: Yup.string().required("Bắt buộc nhập").nullable(),
   phamViTimKiem: Yup.string().required("Bắt buộc nhập").nullable(),
   loaiBaoCao: Yup.string().required("Bắt buộc nhập").nullable(),
-  // ngayDuyetCongDanTu: Yup.string()
-  //   // .nullable()
-  //   .required("Bắt buộc nhập khoảng thời gian phê duyệt Công dân"),
-  // .test("ngayDuyetCongDanTu", "xxx", function (value) {
-  //   if (!value) {
-  //     return this.createError({
-  //       path: "ngayDuyetCongDanTu",
-  //       message: "Bắt buộc nhập khoảng thời gian phê duyệt Công dân ssss",
-  //     });
-  //   }
-  //   return true;
-  // }),
+  ngayDuyetCongDan: Yup.array()
+    .nullable()
+    .test("ngayDuyetCongDan", "xxx", function (value) {
+      if (!value || !value.length) {
+        return this.createError({
+          path: "ngayDuyetCongDan",
+          message: "Bắt buộc nhập khoảng thời gian Ngày duyệt Công dân",
+        });
+      }
+      // Kiểm tra từng phần tử trong mảng xem có đối tượng rỗng hay không
+      for (let i = 0; i < value.length; i++) {
+        if (!value[i]) {
+          return this.createError({
+            path: `ngayDuyetCongDan`,
+            message: "Bắt buộc nhập khoảng thời gian Ngày duyệt Công dân",
+          });
+        }
+      }
+      return true;
+    }),
   // ngayDuyetCongDanDen: Yup.string()
   //   .nullable()
   //   // .required("Bắt buộc nhập")

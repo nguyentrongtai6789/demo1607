@@ -76,7 +76,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
           size={size ? size : "small"}
           options={options}
           loading={loading}
-          onChange={handleOnChange || onChange}
+          onChange={onChange || handleOnChange}
           value={field.value}
           filterOption={(input, option) =>
             ((option?.label as string) ?? ("" as string))
@@ -89,6 +89,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
           {errors[field.name] && touched[field.name] && (
             <span
               style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
+              className="validate-error"
             >
               {errors[field.name] as string}
             </span>
