@@ -2,9 +2,9 @@ import i18n from "i18next";
 import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
-import httpMethod from "../config/httpMethod";
-import { JSONFE } from "./commonJson/_index";
-import { URL } from "../config/httpMethod";
+import httpMethod, { URL } from "../config/httpMethod";
+import { JSONCommonFE } from "./commonJson/_index";
+import { JSONPageFE } from "./pageJson/_index";
 
 export enum ELanguages {
   English = "English",
@@ -39,13 +39,15 @@ export const LanguageOptions: ILanguageOptions[] = [
 ];
 
 export const combineTranslation = (language: string, translationData: any) => {
-  const allJSONFE = JSONFE(language);
+  const allJSONCommonFE = JSONCommonFE(language);
+  const allJSONPageFE = JSONPageFE(language);
   //đoạn này là merge file JSON tự defined ở FE với JSON lấy ở BE
   //nếu trùng nhau thì sẽ lấy ở BE
   return {
     ..._.merge(
       {
-        ...allJSONFE,
+        ...allJSONCommonFE,
+        ...allJSONPageFE,
       },
       translationData // file JSON theo từng namespace mà BE trả ra, namespace thường sẽ là tên từng màn hoặc từng common
     ),

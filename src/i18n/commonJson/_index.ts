@@ -4,12 +4,11 @@ import button from "./button.json";
 import tooltip from "./tooltip.json";
 import pagination from "./pagination.json";
 import datePicker from "./datePicker.json";
-import searchForm from "../pageJson/searchForm.json";
 
 //chia ra từng file JSON của từng màn và từng common (để tìm kiếm và chỉnh sửa cho dễ)
 //sau đó tiến hành merge lại thành 1 file chung ở FE:
 
-export const JSONFE = (language: string) => {
+export const JSONCommonFE = (language: string) => {
   switch (language) {
     case "en":
       return {
@@ -19,7 +18,6 @@ export const JSONFE = (language: string) => {
           ...tooltip.en,
           ...pagination.en,
           ...datePicker.en,
-          ...searchForm.en,
         }),
       };
     case "vi":
@@ -30,7 +28,6 @@ export const JSONFE = (language: string) => {
           ...tooltip.vi,
           ...pagination.vi,
           ...datePicker.vi,
-          ...searchForm.vi,
         }),
       };
     case "la":
@@ -41,7 +38,6 @@ export const JSONFE = (language: string) => {
           ...tooltip.la,
           ...pagination.la,
           ...datePicker.la,
-          ...searchForm.la,
         }),
       };
   }
