@@ -43,19 +43,19 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
   const optionsPageSize: SelectProps["options"] = [
     {
       value: 5,
-      label: `5 ${t("record")} / ${t("page")}`,
+      label: `5 ${t("banGhi")} / ${t("trang")}`,
     },
     {
       value: 10,
-      label: `10 ${t("record")} / ${t("page")}`,
+      label: `10 ${t("banGhi")} / ${t("trang")}`,
     },
     {
       value: 20,
-      label: `20 ${t("record")} / ${t("page")}`,
+      label: `20 ${t("banGhi")} / ${t("trang")}`,
     },
     {
       value: 50,
-      label: `50 ${t("record")} / ${t("page")}`,
+      label: `50 ${t("banGhi")} / ${t("trang")}`,
     },
   ];
 
@@ -73,8 +73,8 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
             ? showTotal
             : (total, range) => (
                 <>
-                  {t("from")} {range[0]} {t("to")} {range[1]} {t("of")}
-                  {total} {t("record")}
+                  {t("tu")} {range[0]} {t("den")} {range[1]} {t("trongTongSo")}
+                  {total} {t("banGhi")}
                 </>
               )
         }

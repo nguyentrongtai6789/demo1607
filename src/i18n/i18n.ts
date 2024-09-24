@@ -2,23 +2,20 @@ import i18n from "i18next";
 import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
-import httpMethod from "../config/httpMethod";
-import login from "./commonJson/login.json";
-import button from "./commonJson/button.json";
-import tooltip from "./commonJson/tooltip.json";
-import pagination from "./commonJson/pagination.json";
-import datePicker from "./commonJson/datePicker.json";
-import header from "./commonJson/header.json";
-import searchForm from "./pageJson/searchForm.json";
+import httpMethod, { URL } from "../config/httpMethod";
+import { JSONCommonFE } from "./commonJson/_index";
+import { JSONPageFE } from "./pageJson/_index";
 
 export enum ELanguages {
   English = "English",
   Vietnamese = "Tiếng Việt",
+  Laos = "ພາສາລາວ",
 }
 
 export const languages = {
   en: ELanguages.English,
   vi: ELanguages.Vietnamese,
+  la: ELanguages.Laos,
 };
 
 interface ILanguageOptions {
@@ -35,53 +32,42 @@ export const LanguageOptions: ILanguageOptions[] = [
     value: "vi",
     label: ELanguages.Vietnamese,
   },
+  {
+    value: "la",
+    label: ELanguages.Laos,
+  },
 ];
 
 export const combineTranslation = (language: string, translationData: any) => {
-  switch (language) {
-    case "en":
-      return {
-        ..._.merge(
-          {
-            ...login.en,
-            ...button.en,
-            ...tooltip.en,
-            ...pagination.en,
-            ...datePicker.en,
-            ...header.en,
-            ...searchForm.en,
-          },
-          translationData
-        ),
-      };
-    case "vi":
-      return {
-        ..._.merge(
-          {
-            ...login.vi,
-            ...button.vi,
-            ...tooltip.vi,
-            ...pagination.vi,
-            ...datePicker.vi,
-            ...header.vi,
-            ...searchForm.vi,
-          },
-          translationData
-        ),
-      };
-  }
+  const allJSONCommonFE = JSONCommonFE(language);
+  const allJSONPageFE = JSONPageFE(language);
+  //đoạn này là merge file JSON tự defined ở FE với JSON lấy ở BE
+  //nếu trùng nhau thì sẽ lấy ở BE
+  return {
+    ..._.merge(
+      {
+        ...allJSONCommonFE,
+        ...allJSONPageFE,
+      },
+      translationData // file JSON theo từng namespace mà BE trả ra, namespace thường sẽ là tên từng màn hoặc từng common
+    ),
+  };
 };
 
 const loadResources = async (url: string) => {
   const [lng] = url.split("/");
-  return httpMethod
-    .get(`http://localhost:8080/api/demo-translation/${url}`)
-    .then((res) => {
-      return combineTranslation(lng, res.data);
-    })
-    .catch(() => {
-      return combineTranslation(lng, {});
-    });
+  return (
+    httpMethod
+      // .get(`http://localhost:8080/api/demo-translation/${url}`) //sau này đúng sẽ là api này
+      .get(`${URL}/phan-he-he-thong`) // đây là demo vì chưa có api thật
+      .then((res) => {
+        // return combineTranslation(lng, res.data); //sau này đúng sẽ là cái này
+        return combineTranslation(lng, {}); //đây là demo vì chưa có api thật
+      })
+      .catch(() => {
+        return combineTranslation(lng, {});
+      })
+  );
 };
 
 const backendOptions = {
@@ -112,7 +98,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    defaultNS: "translation",
+    defaultNS: "translation", // nếu ko truyền name space nào vào thì mặc định sẽ truyền namespace này về BE
     backend: backendOptions,
   });
 

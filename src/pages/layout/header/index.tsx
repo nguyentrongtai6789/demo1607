@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import logoHeader from "../../../assets/images/logoHeader.png";
 
 export default () => {
-  const { t, i18n } = useTranslation("header");
+  const { t, i18n } = useTranslation(["header"]);
 
   const { username } = useSelector((state: RootState) => state.auth);
 
@@ -26,21 +26,21 @@ export default () => {
     {
       label: (
         <span>
-          {t("username")}: {username}
+          {t("tenDangNhap")}: {username}
         </span>
       ),
       key: "0",
       type: "group",
     },
     {
-      label: <span>{t("unit")}</span>,
+      label: <span>{t("donVi")}:</span>,
       key: "1",
       type: "group",
     },
     {
       label: (
         <span>
-          {t("language")}: {currentLanguage}
+          {t("ngonNgu")}: {currentLanguage}
         </span>
       ),
       key: "2",
@@ -71,6 +71,19 @@ export default () => {
             </span>
           ),
         },
+        {
+          key: "2-3",
+          label: (
+            <span
+              onClick={() => {
+                dispatch(handleChangeLanguage(LanguageOptions[2].value));
+                i18n.changeLanguage(LanguageOptions[2].value);
+              }}
+            >
+              {LanguageOptions[2].label}
+            </span>
+          ),
+        },
       ],
     },
     {
@@ -82,7 +95,7 @@ export default () => {
           }}
           width="100%"
         >
-          {t("logOut")}
+          {t("dangXuat")}
         </ButtonCustom>
       ),
       key: "3",

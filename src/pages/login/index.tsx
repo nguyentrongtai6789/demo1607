@@ -32,7 +32,7 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { i18n, t } = useTranslation("login");
+  const { i18n, t } = useTranslation(["login"]);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
@@ -49,11 +49,11 @@ export const Login: React.FC = (props) => {
       .then((res: AxiosResponse) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
-          NotificationCustom(t("loginSuccess"), "success");
+          NotificationCustom(t("dangNhapThanhCong"), "success");
           window.location.href = `${from}`;
         }
         if (res.data.error === "201") {
-          return NotificationCustom(t("wrongPasswordOrUsername"), "error");
+          return NotificationCustom(t("saiTaiKhoanMatKhau"), "error");
         }
       })
       .catch((error: AxiosError) => {})
@@ -82,7 +82,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={InputCustom}
                   name={"username"}
-                  placeholder={t("username")}
+                  placeholder={t("tenDangNhap")}
                   size="middle"
                   prefix={<UserOutlined />}
                   styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
@@ -90,7 +90,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={InputCustom}
                   disabled={false}
-                  placeholder={t("password")}
+                  placeholder={t("matKhau")}
                   type="password"
                   size="middle"
                   name="password"
@@ -101,7 +101,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={SelectCustom}
                   name={"loginOption"}
-                  placeholder={t("selectSubsystem")}
+                  placeholder={t("chonPhanHe")}
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
@@ -110,7 +110,7 @@ export const Login: React.FC = (props) => {
                   }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
-                  {t("logIn")}
+                  {t("dangNhap")}
                 </ButtonCustom>
                 <div>
                   <Select
@@ -121,7 +121,6 @@ export const Login: React.FC = (props) => {
                       marginTop: "5px",
                     }}
                     size="small"
-                    // dropdownStyle={{ height: "25px" }}
                     onChange={(value: string) => {
                       dispatch(handleChangeLanguage(value));
                       i18n.changeLanguage(value);
