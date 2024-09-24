@@ -49,11 +49,11 @@ export const Login: React.FC = (props) => {
       .then((res: AxiosResponse) => {
         if (res.headers.authorization) {
           dispatch(loginSuccess(res.data));
-          NotificationCustom(t("loginSuccess"), "success");
+          NotificationCustom(t("dangNhapThanhCong"), "success");
           window.location.href = `${from}`;
         }
         if (res.data.error === "201") {
-          return NotificationCustom(t("wrongPasswordOrUsername"), "error");
+          return NotificationCustom(t("saiTaiKhoanMatKhau"), "error");
         }
       })
       .catch((error: AxiosError) => {})
@@ -101,7 +101,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={SelectCustom}
                   name={"loginOption"}
-                  placeholder={t("selectSubsystem")}
+                  placeholder={t("chonPhanHe")}
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
@@ -121,7 +121,6 @@ export const Login: React.FC = (props) => {
                       marginTop: "5px",
                     }}
                     size="small"
-                    // dropdownStyle={{ height: "25px" }}
                     onChange={(value: string) => {
                       dispatch(handleChangeLanguage(value));
                       i18n.changeLanguage(value);

@@ -3,13 +3,8 @@ import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
 import httpMethod from "../config/httpMethod";
-import login from "./commonJson/login.json";
-import button from "./commonJson/button.json";
-import tooltip from "./commonJson/tooltip.json";
-import pagination from "./commonJson/pagination.json";
-import datePicker from "./commonJson/datePicker.json";
-import searchForm from "./pageJson/searchForm.json";
 import { JSONFE } from "./commonJson/_index";
+import { URL } from "../config/httpMethod";
 
 export enum ELanguages {
   English = "English",
@@ -59,14 +54,18 @@ export const combineTranslation = (language: string, translationData: any) => {
 
 const loadResources = async (url: string) => {
   const [lng] = url.split("/");
-  return httpMethod
-    .get(`http://localhost:8080/api/demo-translation/${url}`)
-    .then((res) => {
-      return combineTranslation(lng, res.data);
-    })
-    .catch(() => {
-      return combineTranslation(lng, {});
-    });
+  return (
+    httpMethod
+      // .get(`http://localhost:8080/api/demo-translation/${url}`) //sau này đúng sẽ là api này
+      .get(`${URL}/phan-he-he-thong`) // đây là demo vì chưa có api thật
+      .then((res) => {
+        // return combineTranslation(lng, res.data); //sau này đúng sẽ là cái này
+        return combineTranslation(lng, {}); //đây là demo vì chưa có api thật
+      })
+      .catch(() => {
+        return combineTranslation(lng, {});
+      })
+  );
 };
 
 const backendOptions = {
