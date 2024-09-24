@@ -43,12 +43,12 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     hoTenVoChong: "",
   };
 
-  const { t } = useTranslation(["quanLyHoSoCmnd9So", "sidebarMenu"]);
+  const { t } = useTranslation(["quanLyHoSoCmnd9So"]);
 
   return (
     <div className="search-form-wrapper">
       <div className="search-form">
-        <div className="search-from-title">{t("searchCondition")}</div>
+        <div className="search-from-title">{t("dieuKienTimKiem")}</div>
         <Formik
           initialValues={initialValues}
           onSubmit={(values: ISearchValues) => {
@@ -64,7 +64,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={SelectDonViCustom}
                       api={"ds-don-vi-tw-gioi-han-tinh-huyen"}
-                      label={t("unit")}
+                      label={t("donVi")}
                       name={"donViId"}
                       isRequired
                     />
@@ -73,28 +73,28 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={InputCustom}
                       name={"soCmnd"}
-                      label={t("identityCardNumber")}
+                      label={t("soCmnd")}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={InputCustom}
                       name={"hoVaTen"}
-                      label={t("fullName")}
+                      label={t("hoVaTen")}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={DatePickerWithTypeCustom}
                       name={"ngaySinh"}
-                      label={t("dateOfBirth")}
+                      label={t("ngaySinh")}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={SelectCustom}
                       api={"danh-muc-gioi-tinh"}
-                      label={t("gender")}
+                      label={t("gioiTinh")}
                       name={"gioiTinhId"}
                       valueNeedOfOption={"id"}
                     />
@@ -105,7 +105,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                     <Field
                       component={SelectCustom}
                       api={"danh-muc-pham-vi-tim-kiem"}
-                      label={t("searchRange")}
+                      label={t("phamViTimKiem")}
                       name={"phamViTimKiem"}
                       valueNeedOfOption={"giaTri"}
                       isRequired
@@ -121,21 +121,21 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("motherName")}
+                      label={t("hoTenMe")}
                       name={"hoTenMe"}
                     />
                   </Col>
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("husbandWifeName")}
+                      label={t("hoTenVoChong")}
                       name={"hoTenVoChong"}
                     />
                   </Col>
                   <Col span={8}>
                     <Field
                       component={DatePickerWithRangeCustom}
-                      label={t("dateInput")}
+                      label={t("ngayNhap")}
                       fieldName1={"ngayNhapTu"}
                       fieldName2={"ngayNhapDen"}
                       rangeTime={"10"} // khoảng thời gian được phép chọn
@@ -154,7 +154,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       htmlType="submit"
                       startIcon={<SearchOutlined />}
                     >
-                      {t("listed")}
+                      {t("timKiem")}
                     </ButtonCustom>
                     <ButtonCustom
                       htmlType="reset"
@@ -162,7 +162,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       startIcon={<RetweetOutlined />}
                       className="delete-button"
                     >
-                      {t("reset")}
+                      {t("datLai")}
                     </ButtonCustom>
                   </Space>
                 </Row>

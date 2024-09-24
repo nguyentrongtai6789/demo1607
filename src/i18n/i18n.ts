@@ -98,7 +98,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    defaultNS: "translation",
+    defaultNS: "translation", // nếu ko truyền name space nào vào thì mặc định sẽ truyền namespace này về BE
     backend: backendOptions,
   });
 
