@@ -44,7 +44,7 @@ export interface IRecordTable {
 }
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
-  const { t } = useTranslation(["dictionnary", "button"]);
+  const { t } = useTranslation(["button"]);
   const { language } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -142,7 +142,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
 
   const columns: TableColumnsType<IRecordTable> = [
     {
-      title: "STT",
+      title: t("soThuTu"),
       width: 50,
       render: (value: any, record: IRecordTable, index: number) => {
         return (
@@ -156,7 +156,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       },
     },
     {
-      title: "Số CMND",
+      title: t("soCmnd"),
       dataIndex: "soCmnd",
       key: "soCmnd",
       width: 150,
@@ -165,7 +165,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       sortDirections: ["ascend", "descend"],
     },
     {
-      title: "Họ và tên",
+      title: t("hoVaTen"),
       dataIndex: "hoVaTen",
       key: "hoVaTen",
       width: 200,
@@ -173,7 +173,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       showSorterTooltip: false,
     },
     {
-      title: "Ngày sinh",
+      title: t("ngaySinh"),
       dataIndex: "ngaySinh",
       key: "ngaySinh",
       width: 150,
@@ -181,7 +181,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       showSorterTooltip: false,
     },
     {
-      title: "Giới tính",
+      title: t("gioiTinh"),
       dataIndex: "gioiTinh",
       key: "gioiTinh",
       width: 150,
@@ -189,7 +189,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       showSorterTooltip: false,
     },
     {
-      title: "Nơi sinh",
+      title: t("noiSinh"),
       dataIndex: "noiSinh",
       key: "noiSinh",
       width: 150,
@@ -291,7 +291,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     <>
       <div style={{ padding: "15px", marginBottom: "25px" }}>
         <div className="table-results">
-          <div className="table-results-title">{t("Search Results")}</div>
+          <div className="table-results-title">{t("ketQuaTimKiem")}</div>
           <Table
             title={() => (
               <>
@@ -300,7 +300,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
                   width="145px"
                   onClick={() => setOpenModalThemMoi(true)}
                 >
-                  {t("addNew")}
+                  {t("themMoi")}
                 </ButtonCustom>
               </>
             )}
@@ -330,10 +330,10 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       <div className="button-bottom-wrapper">
         <Space className="space-button">
           <ButtonCustom startIcon={<CheckOutlined />}>
-            {t("approve")}
+            {t("pheDuyet")}
           </ButtonCustom>
           <ButtonCustom startIcon={<ExportOutlined />}>
-            {t("exportFile")}
+            {t("xuatFile")}
           </ButtonCustom>
         </Space>
       </div>

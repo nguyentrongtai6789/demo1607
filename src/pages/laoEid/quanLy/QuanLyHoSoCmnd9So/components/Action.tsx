@@ -24,7 +24,7 @@ export const Action: React.FC<IProps> = ({ record }) => {
             background: "unset",
             border: "unset",
           }}
-          tooltip={t("viewDetail")}
+          tooltip={t("xemChiTiet")}
         />
         <IConCustom
           iCon={<EditOutlined />}
@@ -32,7 +32,7 @@ export const Action: React.FC<IProps> = ({ record }) => {
             background: "unset",
             border: "unset",
           }}
-          tooltip={t("edit")}
+          tooltip={t("sua")}
         />
         <IConCustom
           iCon={<DeleteOutlined />}
@@ -43,7 +43,7 @@ export const Action: React.FC<IProps> = ({ record }) => {
           onClick={() => {
             setOpenModalConfirm(true);
           }}
-          tooltip={t("delete")}
+          tooltip={t("xoa")}
         />
       </Space>
       <ModalConfirmCustom
