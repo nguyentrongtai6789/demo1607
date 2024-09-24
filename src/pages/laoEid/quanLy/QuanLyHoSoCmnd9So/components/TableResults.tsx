@@ -3,19 +3,16 @@ import {
   ExportOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { GetProp, Space, Table, TableColumnsType, TableProps } from "antd";
-import { SorterResult } from "antd/es/table/interface";
+import { Space, Table, TableColumnsType, TableProps } from "antd";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import httpMethod from "../../../../../config/httpMethod";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import { ModalCustom } from "../../../../../customAntd/ModalCustom";
 import PaginationCustom, {
   TableParams,
 } from "../../../../../customAntd/PaginationCustom";
-import { handleLoading, loadingCancel } from "../../../../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../../../../redux/store";
+import useLoading from "../../../../../customHooks/UseLoading";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
@@ -45,8 +42,8 @@ export interface IRecordTable {
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
   const { t } = useTranslation(["button"]);
-  const { language } = useSelector((state: RootState) => state.auth);
-  const dispatch = useAppDispatch();
+
+  const { setLoading } = useLoading();
 
   const [data, setData] = useState<IRecordTable[]>();
 
@@ -60,7 +57,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
   });
 
   const fecthData = async () => {
-    dispatch(handleLoading());
+    setLoading(true);
     await httpMethod
       .post(
         `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}`,
@@ -88,7 +85,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
         console.log(error);
       })
       .finally(() => {
-        dispatch(loadingCancel());
+        setLoading(false);
       });
   };
 

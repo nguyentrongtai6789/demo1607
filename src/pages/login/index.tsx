@@ -22,6 +22,7 @@ import "./styles.scss";
 import { useSelector } from "react-redux";
 import httpMethod from "../../config/httpMethod";
 import { useEffect } from "react";
+import useLoading from "../../customHooks/UseLoading";
 
 interface ILoginValues {
   username: string;
@@ -36,6 +37,8 @@ export const Login: React.FC = (props) => {
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
+  const { setLoading } = useLoading();
+
   let location = useLocation();
 
   let params = new URLSearchParams(location.search);
@@ -43,7 +46,7 @@ export const Login: React.FC = (props) => {
   let from = params.get("from") || `${process.env.PUBLIC_URL}/`;
 
   const handleLogin = async (values: ILoginValues) => {
-    dispatch(handleLoading());
+    setLoading(true);
     httpMethod
       .post(`${authenticate}`, values)
       .then((res: AxiosResponse) => {
@@ -58,7 +61,7 @@ export const Login: React.FC = (props) => {
       })
       .catch((error: AxiosError) => {})
       .finally(() => {
-        dispatch(loadingCancel());
+        setLoading(false);
       });
   };
 

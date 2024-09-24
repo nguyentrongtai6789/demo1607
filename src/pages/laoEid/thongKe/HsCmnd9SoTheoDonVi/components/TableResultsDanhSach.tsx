@@ -17,6 +17,7 @@ import { useAppDispatch } from "../../../../../redux/store";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
+import useLoading from "../../../../../customHooks/UseLoading";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -46,7 +47,7 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
 }) => {
   const { t } = useTranslation(["dictionnary", "button"]);
 
-  const dispatch = useAppDispatch();
+  const { setLoading } = useLoading();
 
   const [data, setData] = useState<IRecordTable[]>();
 
@@ -60,7 +61,7 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
   });
 
   const fecthData = async () => {
-    dispatch(handleLoading());
+    setLoading(true);
     await httpMethod
       .post(
         `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}&sort=${tableParams.sortField}:${tableParams.sortOrder}`,
@@ -84,7 +85,7 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
         console.log(error);
       })
       .finally(() => {
-        dispatch(loadingCancel());
+        setLoading(false);
       });
   };
 
