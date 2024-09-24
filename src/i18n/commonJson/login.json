@@ -1,8 +1,17 @@
 {
   "vi": {
-    "logIn": "Đăng nhập"
+    "dangNhap": "Đăng nhập",
+    "tenDangNhap": "Tên đăng nhập",
+    "matKhau": "Mật khẩu"
   },
   "en": {
-    "logIn": "Login"
+    "dangNhap": "Login",
+    "tenDangNhap": "Username",
+    "matKhau": "Password"
+  },
+  "la": {
+    "dangNhap": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
+    "tenDangNhap": "ຊື່ເຂົ້າສູ່ລະບົບ",
+    "matKhau": "ລະຫັດຜ່ານ"
   }
 }

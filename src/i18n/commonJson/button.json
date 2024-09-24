@@ -10,6 +10,16 @@
     "inBaoCao": "In báo cáo"
   },
   "en": {
+    "timKiem": "Search",
+    "datLai": "Reset",
+    "themMoi": "Add new",
+    "pheDuyet": "Approve",
+    "xuatFile": "Export file",
+    "moRongMenu": "Expand Menu",
+    "thuGonMenu": "Collapse Menu",
+    "inBaoCao": "Print report"
+  },
+  "la": {
     "timKiem": "ຊອກຫາ",
     "datLai": "ຣີເຊັດ",
     "themMoi": "ເພີ່ມໃຫມ່",

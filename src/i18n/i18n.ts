@@ -8,17 +8,19 @@ import button from "./commonJson/button.json";
 import tooltip from "./commonJson/tooltip.json";
 import pagination from "./commonJson/pagination.json";
 import datePicker from "./commonJson/datePicker.json";
-import header from "./commonJson/header.json";
 import searchForm from "./pageJson/searchForm.json";
+import { JSONFE } from "./commonJson/_index";
 
 export enum ELanguages {
   English = "English",
   Vietnamese = "Tiếng Việt",
+  Laos = "ພາສາລາວ",
 }
 
 export const languages = {
   en: ELanguages.English,
   vi: ELanguages.Vietnamese,
+  la: ELanguages.Laos,
 };
 
 interface ILanguageOptions {
@@ -35,41 +37,24 @@ export const LanguageOptions: ILanguageOptions[] = [
     value: "vi",
     label: ELanguages.Vietnamese,
   },
+  {
+    value: "la",
+    label: ELanguages.Laos,
+  },
 ];
 
 export const combineTranslation = (language: string, translationData: any) => {
-  switch (language) {
-    case "en":
-      return {
-        ..._.merge(
-          {
-            ...login.en,
-            ...button.en,
-            ...tooltip.en,
-            ...pagination.en,
-            ...datePicker.en,
-            ...header.en,
-            ...searchForm.en,
-          },
-          translationData
-        ),
-      };
-    case "vi":
-      return {
-        ..._.merge(
-          {
-            ...login.vi,
-            ...button.vi,
-            ...tooltip.vi,
-            ...pagination.vi,
-            ...datePicker.vi,
-            ...header.vi,
-            ...searchForm.vi,
-          },
-          translationData
-        ),
-      };
-  }
+  const allJSONFE = JSONFE(language);
+  //đoạn này là merge file JSON tự defined ở FE với JSON lấy ở BE
+  //nếu trùng nhau thì sẽ lấy ở BE
+  return {
+    ..._.merge(
+      {
+        ...allJSONFE,
+      },
+      translationData // file JSON theo từng namespace mà BE trả ra, namespace thường sẽ là tên từng màn hoặc từng common
+    ),
+  };
 };
 
 const loadResources = async (url: string) => {

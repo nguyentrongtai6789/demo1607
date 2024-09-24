@@ -32,7 +32,7 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { i18n, t } = useTranslation("login");
+  const { i18n, t } = useTranslation(["login"]);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 
@@ -82,7 +82,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={InputCustom}
                   name={"username"}
-                  placeholder={t("username")}
+                  placeholder={t("tenDangNhap")}
                   size="middle"
                   prefix={<UserOutlined />}
                   styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
@@ -90,7 +90,7 @@ export const Login: React.FC = (props) => {
                 <Field
                   component={InputCustom}
                   disabled={false}
-                  placeholder={t("password")}
+                  placeholder={t("matKhau")}
                   type="password"
                   size="middle"
                   name="password"
@@ -110,7 +110,7 @@ export const Login: React.FC = (props) => {
                   }}
                 />
                 <ButtonCustom htmlType="submit" width="100px">
-                  {t("logIn")}
+                  {t("dangNhap")}
                 </ButtonCustom>
                 <div>
                   <Select

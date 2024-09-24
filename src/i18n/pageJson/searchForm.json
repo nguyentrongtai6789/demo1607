@@ -9,6 +9,15 @@
     "loaiHopNhat": "Loại hợp nhất"
   },
   "en": {
+    "loaiBaoCao": "Export type",
+    "donVi": "Unit",
+    "ngayPheDuyetCd": "Citizen Approval Date",
+    "phamViTimKiem": "Search range",
+    "loaiXuatFile": "File output type",
+    "ngayPheDuyetDt": "Object approval date",
+    "loaiHopNhat": "Unified type"
+  },
+  "la": {
     "loaiBaoCao": "ປະເພດລາຍງານ",
     "donVi": "ໜ່ວຍ",
     "ngayPheDuyetCd": "ວັນທີອະນຸມັດສັນຊາດ",

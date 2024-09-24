@@ -71,6 +71,19 @@ export default () => {
             </span>
           ),
         },
+        {
+          key: "2-3",
+          label: (
+            <span
+              onClick={() => {
+                dispatch(handleChangeLanguage(LanguageOptions[2].value));
+                i18n.changeLanguage(LanguageOptions[2].value);
+              }}
+            >
+              {LanguageOptions[2].label}
+            </span>
+          ),
+        },
       ],
     },
     {
