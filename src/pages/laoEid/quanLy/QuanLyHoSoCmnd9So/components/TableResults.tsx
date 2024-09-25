@@ -16,12 +16,14 @@ import useLoading from "../../../../../customHooks/UseLoading";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
+import { isEmpty } from "lodash";
 
 export interface IProps {
   searchValues: ISearchValues | null;
 }
 
 export interface IRecordTable {
+  key: React.Key;
   id: number;
   soCmnd: string;
   soDinhDanh: string;
@@ -47,6 +49,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
 
   const [data, setData] = useState<IRecordTable[]>();
 
+  //các biến thông thường: pagination và sort
   const [tableParams, setTableParams] = useState<TableParams>({
     pagination: {
       current: 1,
@@ -56,8 +59,10 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     sortOrder: "asc",
   });
 
+  //tìm kiếm
   const fecthData = async () => {
     setLoading(true);
+    setIdsSelected([]);
     await httpMethod
       .post(
         `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}`,
@@ -69,7 +74,12 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       )
       .then((res: any) => {
         if (res?.data?.code === 200) {
-          setData(res?.data?.data);
+          setData(
+            res?.data?.data.map((item: IRecordTable, index: number) => ({
+              ...item,
+              key: item.id,
+            }))
+          );
           setTableParams({
             ...tableParams,
             pagination: {
@@ -81,28 +91,22 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           });
         }
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((error) => {})
       .finally(() => {
         setLoading(false);
       });
   };
 
+  //thay đổi khi click vào cột để sort
   const handleTableChange: TableProps["onChange"] = (
     pagination,
     filters,
     sorter
   ) => {
-    console.log(sorter);
     if (Array.isArray(sorter)) return;
     if (!sorter.column) return;
     setTableParams({
-      pagination: {
-        current: tableParams.pagination.current,
-        pageSize: tableParams.pagination.pageSize,
-      },
-      filters,
+      ...tableParams,
       sortOrder: sorter.order === "ascend" ? "asc" : "desc",
       sortField: sorter.field,
     });
@@ -137,6 +141,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     }
   }, [searchValues]);
 
+  //define các cột (trong 1 dòng)
   const columns: TableColumnsType<IRecordTable> = [
     {
       title: t("soThuTu"),
@@ -282,7 +287,18 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
     },
   ];
 
+  //list id selected
+  const [idsSelected, setIdsSelected] = useState<number[]>([]);
+
+  //đóng mở modal thêm mới
   const [openModalThemMoi, setOpenModalThemMoi] = useState<boolean>(false);
+
+  //các hàm thực hiện khi click chọn 1 record: (cần checkbox thì thêm cái này)
+  const rowSelection: TableProps<IRecordTable>["rowSelection"] = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: IRecordTable[]) => {
+      setIdsSelected(selectedRows.map((item) => item.id));
+    },
+  };
 
   return (
     <>
@@ -307,6 +323,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             bordered
             pagination={false}
             onChange={handleTableChange}
+            rowSelection={rowSelection} // cần checkbox thì xong cái này
           />
           <PaginationCustom
             current={tableParams.pagination?.current}
@@ -326,7 +343,12 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       </div>
       <div className="button-bottom-wrapper">
         <Space className="space-button">
-          <ButtonCustom startIcon={<CheckOutlined />}>
+          <ButtonCustom
+            startIcon={<CheckOutlined />}
+            onClick={() => {
+              console.log(idsSelected);
+            }}
+          >
             {t("pheDuyet")}
           </ButtonCustom>
           <ButtonCustom startIcon={<ExportOutlined />}>
