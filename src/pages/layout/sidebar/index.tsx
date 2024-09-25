@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
 
-  const { t } = useTranslation("sidebarMenu");
+  const { t } = useTranslation("translation");
 
   const danhSachChucNang = JSON.parse(
     localStorage.getItem("danhSachChucNang") || "[]"

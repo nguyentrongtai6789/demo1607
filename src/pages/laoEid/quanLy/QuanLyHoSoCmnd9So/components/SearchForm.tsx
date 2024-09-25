@@ -43,7 +43,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     hoTenVoChong: "",
   };
 
-  const { t } = useTranslation(["quanLyHoSoCmnd9So"]);
+  const { t } = useTranslation("translation");
 
   return (
     <div className="search-form-wrapper">
@@ -114,7 +114,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                   <Col span={4}>
                     <Field
                       component={InputCustom}
-                      label={t("fatherName")}
+                      label={t("hoTenCha")}
                       name={"hoTenCha"}
                     />
                   </Col>

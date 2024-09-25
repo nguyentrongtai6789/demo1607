@@ -57,7 +57,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           format={"DD/MM/YYYY"}
           value={formattedValue}
           {...rest}
-          placeholder={t("selectDate")}
+          placeholder={t("chonNgay")}
         />
       );
     }
@@ -69,7 +69,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           value={formattedValue}
           picker={type}
           {...rest}
-          placeholder={t("selectMonth")}
+          placeholder={t("chonThang")}
         />
       );
     }
@@ -79,7 +79,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           picker={type}
           value={formattedValue}
           onChange={onChange}
-          placeholder={t("selectYear")}
+          placeholder={t("chonNam")}
           {...rest}
         />
       );
@@ -137,9 +137,9 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
               }}
               size={size || "small"}
             >
-              <Option value="date">{t("date")}</Option>
-              <Option value="month">{t("month")}</Option>
-              <Option value="year">{t("year")}</Option>
+              <Option value="date">{t("ngay")}</Option>
+              <Option value="month">{t("thang")}</Option>
+              <Option value="year">{t("nam")}</Option>
             </Select>
           </div>
           <div style={{ width: "60%", marginLeft: "3px" }}>

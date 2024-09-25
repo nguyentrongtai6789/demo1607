@@ -13,7 +13,7 @@ interface IProps {
 
 export const Action: React.FC<IProps> = ({ record }) => {
   const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
-  const { t } = useTranslation(["tooltip"]);
+  const { t } = useTranslation(["translation"]);
 
   return (
     <>

@@ -54,6 +54,7 @@ const authSlice = createSlice({
       state.countLoading = state.countLoading + 1;
     },
     loadingCancel: (state: IAuthState, action) => {
+      if (state.countLoading === 0) return;
       state.countLoading = state.countLoading - 1;
       if (state.countLoading === 0) {
         state.loading = false;

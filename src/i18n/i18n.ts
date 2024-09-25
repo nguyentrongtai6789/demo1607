@@ -5,6 +5,15 @@ import { initReactI18next } from "react-i18next";
 import httpMethod, { URL } from "../config/httpMethod";
 import { JSONCommonFE } from "./commonJson/_index";
 import { JSONPageFE } from "./pageJson/_index";
+import header from "./pageJson/header.json";
+import quanLyHoSoCmnd9So from "./pageJson/quanLyHoSoCmnd9So.json";
+import searchForm from "./pageJson/searchForm.json";
+import tableResult from "./pageJson/tableResult.json";
+import button from "./commonJson/button.json";
+import datePicker from "./commonJson/datePicker.json";
+import login from "./commonJson/login.json";
+import pagination from "./commonJson/pagination.json";
+import tooltip from "./commonJson/tooltip.json";
 
 export enum ELanguages {
   English = "English",
@@ -37,6 +46,22 @@ export const LanguageOptions: ILanguageOptions[] = [
     label: ELanguages.Laos,
   },
 ];
+
+export const allJSONFE = {
+  translation: {
+    //common
+    ...button.vi,
+    ...datePicker.vi,
+    ...login.vi,
+    ...pagination.vi,
+    ...tooltip.vi,
+    //page
+    ...header.vi,
+    ...quanLyHoSoCmnd9So.vi,
+    ...searchForm.vi,
+    ...tableResult.vi,
+  },
+};
 
 export const combineTranslation = (language: string, translationData: any) => {
   const allJSONCommonFE = JSONCommonFE(language);
