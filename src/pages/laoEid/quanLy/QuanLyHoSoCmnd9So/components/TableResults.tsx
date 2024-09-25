@@ -85,8 +85,6 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             pagination: {
               ...tableParams.pagination,
               total: res.headers["x-total-count"],
-              // 200 is mock data, you should read it from server
-              // total: data.totalCount,
             },
           });
         }
