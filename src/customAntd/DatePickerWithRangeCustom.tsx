@@ -86,7 +86,7 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
           disabledDate={disabledDate}
           value={[value[0], value[1]]}
           format={"DD/MM/YYYY"}
-          placeholder={[t("fromDate"), t("toDate")]}
+          placeholder={[t("tuNgay"), t("denNgay")]}
           id={{
             start: "startInput",
             end: "endInput",

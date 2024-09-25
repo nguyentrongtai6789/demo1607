@@ -13,7 +13,8 @@ interface IProps {
 
 export const Action: React.FC<IProps> = ({ record }) => {
   const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
-  const { t } = useTranslation(["tooltip"]);
+  const { t } = useTranslation(["tooltip"]); // sau này nếu cần lấy json của màn nào thì truyền tên vào mảng này
+  // và cái tên đó là quy ước của BE và FE phải giống nhau
 
   return (
     <>
