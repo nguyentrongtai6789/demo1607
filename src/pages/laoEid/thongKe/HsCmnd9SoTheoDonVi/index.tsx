@@ -5,7 +5,7 @@ import { TableResultsTongHop } from "./components/TableResultsTongHop";
 import { TableResultsDanhSach } from "./components/TableResultsDanhSach";
 
 export default () => {
-  const { t } = useTranslation(["dictionnary"]);
+  const { t } = useTranslation(["translation"]);
 
   const [searchValues, setSearchValues] = useState<ISearchValues | null>(null);
 

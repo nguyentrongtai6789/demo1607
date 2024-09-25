@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import logoHeader from "../../../assets/images/logoHeader.png";
 
 export default () => {
-  const { t, i18n } = useTranslation(["header"]);
+  const { t, i18n } = useTranslation(["translation"]);
 
   const { username } = useSelector((state: RootState) => state.auth);
 

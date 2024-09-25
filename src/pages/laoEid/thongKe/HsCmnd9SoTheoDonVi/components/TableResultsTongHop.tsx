@@ -45,7 +45,7 @@ export interface IRecordTable {
 export const TableResultsTongHop: FunctionComponent<IProps> = ({
   searchValues,
 }) => {
-  const { t } = useTranslation(["dictionnary", "button"]);
+  const { t } = useTranslation(["translation"]);
 
   const [data, setData] = useState<IRecordTable[]>();
 
@@ -216,7 +216,7 @@ export const TableResultsTongHop: FunctionComponent<IProps> = ({
     <>
       <div style={{ padding: "15px", marginBottom: "25px" }}>
         <div className="table-results">
-          <div className="table-results-title">{t("Search Results")}</div>
+          <div className="table-results-title">{t("dieuKienTimKiem")}</div>
           <Table
             title={() => (
               <>
@@ -225,7 +225,7 @@ export const TableResultsTongHop: FunctionComponent<IProps> = ({
                   width="145px"
                   onClick={() => setOpenModalThemMoi(true)}
                 >
-                  {t("addNew")}
+                  {t("themMoi")}
                 </ButtonCustom>
               </>
             )}
@@ -255,10 +255,10 @@ export const TableResultsTongHop: FunctionComponent<IProps> = ({
       <div className="button-bottom-wrapper">
         <Space className="space-button">
           <ButtonCustom startIcon={<CheckOutlined />}>
-            {t("approve")}
+            {t("pheDuyet")}
           </ButtonCustom>
           <ButtonCustom startIcon={<ExportOutlined />}>
-            {t("exportFile")}
+            {t("xuatFile")}
           </ButtonCustom>
         </Space>
       </div>

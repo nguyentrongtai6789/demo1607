@@ -41,7 +41,7 @@ export interface IRecordTable {
 }
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
-  const { t } = useTranslation(["button"]);
+  const { t } = useTranslation(["translation"]);
 
   const { setLoading } = useLoading();
 

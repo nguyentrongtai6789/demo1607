@@ -53,7 +53,7 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
 
   const [value, setValue] = useState<(dayjs.Dayjs | null)[]>([null, null]);
 
-  const { t } = useTranslation("datePicker");
+  const { t } = useTranslation("translation");
 
   useEffect(() => {
     const value = getFieldMeta(name).value as string[];

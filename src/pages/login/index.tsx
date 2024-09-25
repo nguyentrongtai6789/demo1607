@@ -33,7 +33,7 @@ interface ILoginValues {
 export const Login: React.FC = (props) => {
   const dispatch = useAppDispatch();
 
-  const { i18n, t } = useTranslation(["login"]);
+  const { i18n, t } = useTranslation(["translation"]);
 
   const currentLanguage = languages[i18n.language as keyof typeof languages];
 

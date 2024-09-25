@@ -38,7 +38,7 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
     setTableParams,
   } = props;
 
-  const { t } = useTranslation(["pagination"]);
+  const { t } = useTranslation(["translation"]);
 
   const optionsPageSize: SelectProps["options"] = [
     {

@@ -40,7 +40,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
   const { errors, touched } = form;
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const { t } = useTranslation("translation ");
+  const { t } = useTranslation("translation");
 
   useEffect(() => {
     setLoading(true);
