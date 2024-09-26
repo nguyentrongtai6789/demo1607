@@ -77,7 +77,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           setData(
             res?.data?.data.map((item: IRecordTable, index: number) => ({
               ...item,
-              key: item.id,
+              key: item.id, // nếu cần checkbox thì cần phải có cái key này mới được
             }))
           );
           setTableParams({
@@ -321,7 +321,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             bordered
             pagination={false}
             onChange={handleTableChange}
-            rowSelection={rowSelection} // cần checkbox thì xong cái này
+            rowSelection={rowSelection} // cần checkbox thì thêm cái này
           />
           <PaginationCustom
             current={tableParams.pagination?.current}

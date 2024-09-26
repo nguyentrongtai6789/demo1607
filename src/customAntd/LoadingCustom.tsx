@@ -1,30 +1,9 @@
 export const LoadingCustom: React.FC<any> = () => {
-  document.addEventListener("DOMContentLoaded", (event) => {
-    //Removing article link when on mobiforge
-    if (
-      window.parent !== window &&
-      document.referrer.indexOf("https://mobiforge.com") === 0 &&
-      document.referrer.indexOf("http://mobiforge.com") === 0
-    ) {
-      const articleLink = document.getElementById(
-        "article-link"
-      ) as HTMLElement;
-      if (articleLink) {
-        articleLink.className = "fade-out";
-      }
-    }
-  });
   return (
     <>
       <div className="loading-wrapper">
         <div id="container">
-          <svg
-            id="svg-spinner"
-            xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
-            viewBox="0 0 48 48"
-          >
+          <svg id="svg-spinner" width="48" height="48" viewBox="0 0 48 48">
             <circle cx="24" cy="4" r="4" fill="#fff" />
             <circle cx="12.19" cy="7.86" r="3.7" fill="rgb(195, 205, 229)" />
             <circle cx="5.02" cy="17.68" r="3.4" fill="rgb(30, 82, 203)" />
