@@ -69,10 +69,14 @@ class Services {
   //gắn token vào header request:
   public attachTokenToHeader() {
     const token = localStorage.getItem("userToken");
+
+    const tokenTest =
+      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMzMxODYwMDY2NjYiLCJkb252aSI6eyJpZCI6MTAwMDIyOCwibG9naW4iOiIwMzMxODYwMDY2NjYiLCJmaXJzdE5hbWUiOm51bGwsImxhc3ROYW1lIjpudWxsLCJlbWFpbCI6bnVsbCwiYWN0aXZhdGVkIjp0cnVlLCJsYW5nS2V5IjpudWxsLCJpbWFnZVVybCI6bnVsbCwiZGlhQ2hpbmhJZCI6MSwibG9haVRrIjpudWxsLCJkb25WaUlkIjoxMTcyOCwiY2FuQm9JZCI6MTI4OSwicGhvbmdCYW5JZCI6ODEsImNhcFh1THkiOiJXIiwidGVuRG9uVmkiOiJD4bulYyBD4bqjbmggc8OhdCBRTEhDIHbhu4EgVFRYSCBU4bqhaSBUVyBIw6AgTuG7mWkiLCJ0ZW5DYW5CbyI6Ik5ndXnhu4VuIFRo4buLIFRow7l5IiwicXVhbkx5IjoiTiIsInRydXlDYXBJZCI6MTQyNzYyODgsIm1lc3NhZ2UiOm51bGwsImFkbWluIjp0cnVlfSwiZXhwIjoxNzI3NTE2MTcwfQ.tlyEycmVNP6wN4e7311_9S1jPoZFjwiHPTnnWW6zouuVicSM_o5YtrMUcNxVO6EZPHr_nO-gn7hNqXTw7XpvCA";
+
     this.axios.interceptors.request.use(
       function (config: any) {
         // Do something before request is sent
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${tokenTest}`;
         return config;
       },
       function (error: any) {

@@ -1,6 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import { handleLogin } from "./authActions";
-import httpMethod from "../config/httpMethod";
+import httpMethod from "../services/httpMethod";
 import { languages } from "../i18n/i18n";
 
 interface IAuthState {

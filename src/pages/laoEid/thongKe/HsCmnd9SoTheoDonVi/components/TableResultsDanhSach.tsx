@@ -2,7 +2,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { Table, TableColumnsType, TableProps } from "antd";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import httpMethod from "../../../../../config/httpMethod";
+import httpMethod from "../../../../../services/httpMethod";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import PaginationCustom, {
   TableParams,

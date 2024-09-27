@@ -4,7 +4,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { FieldProps } from "formik";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import httpMethod, { URL } from "../config/httpMethod";
+import httpMethod, { URL } from "../services/httpMethod";
 import i18n from "../i18n/i18n";
 
 export interface SelectCustomProps

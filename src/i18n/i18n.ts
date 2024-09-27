@@ -2,7 +2,7 @@ import i18n from "i18next";
 import HttpApi from "i18next-http-backend";
 import _ from "lodash";
 import { initReactI18next } from "react-i18next";
-import httpMethod, { URL } from "../config/httpMethod";
+import httpMethod, { URL } from "../services/httpMethod";
 import { JSONCommonFE } from "./commonJson/_index";
 import { JSONPageFE } from "./pageJson/_index";
 import header from "./pageJson/header.json";

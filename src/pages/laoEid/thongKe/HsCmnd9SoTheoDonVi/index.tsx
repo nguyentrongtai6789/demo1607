@@ -1,11 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ISearchValues, SearchForm } from "./components/SearchForm";
-import { TableResultsTongHop } from "./components/TableResultsTongHop";
 import { TableResultsDanhSach } from "./components/TableResultsDanhSach";
-import { Space } from "antd";
-import ButtonCustom from "../../../../customAntd/ButtonCustom";
-import { CheckOutlined, ExportOutlined } from "@ant-design/icons";
+import { TableResultsTongHop } from "./components/TableResultsTongHop";
 
 export default () => {
   const { t } = useTranslation(["translation"]);

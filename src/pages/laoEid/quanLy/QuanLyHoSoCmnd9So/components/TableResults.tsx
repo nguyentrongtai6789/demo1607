@@ -6,7 +6,7 @@ import {
 import { Space, Table, TableColumnsType, TableProps } from "antd";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import httpMethod from "../../../../../config/httpMethod";
+import httpMethod from "../../../../../services/httpMethod";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import { ModalCustom } from "../../../../../customAntd/ModalCustom";
 import PaginationCustom, {
