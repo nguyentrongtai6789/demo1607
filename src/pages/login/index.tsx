@@ -59,7 +59,7 @@ export const Login: React.FC = (props) => {
   };
 
   return (
-    <div className="login-page" style={{ textAlign: "center" }}>
+    <div className="login-page text-center">
       <div className="login-form">
         <Formik
           initialValues={{
