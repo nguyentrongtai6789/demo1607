@@ -43,26 +43,30 @@ export interface IRecordTable {
 }
 
 export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
-  const { t } = useTranslation(["translation"]);
+  const { t } = useTranslation(["translation"]); //translation là tên của namespace
+  // có thể chia namespace theo từng màn, nhưng ở đây chúng ta dùng cách là gộp tất cả các JSON ở FE thành 1 file chung duy nhất
+  // và ở BE cũng trả ra 1 file JSON duy nhất, như thế thì khi code sẽ được gợi ý các key trong file JSON mà ko cần tự mò
+  // (cái này đã được config rồi)
+  // còn nếu như chia theo namespace thì mình phải tìm đúng namespace mà chứa cái từ mình cần dịch, như vậy sẽ mất thời gian hơn
 
-  const { setLoading } = useLoading();
+  const { setLoading } = useLoading(); //đây là hook để kiểm soát biến loading duy nhất của toàn bộ project
 
   const [data, setData] = useState<IRecordTable[]>();
 
   //các biến thông thường: pagination và sort
   const [tableParams, setTableParams] = useState<TableParams>({
     pagination: {
-      current: 1,
-      pageSize: 10,
+      current: 1, //trang hiện tại
+      pageSize: 10, // số bản ghi trên 1 trang
     },
-    sortField: "soCmnd",
-    sortOrder: "asc",
+    sortField: "soCmnd", // tên trường sort
+    sortOrder: "asc", // giá trị sort
   });
 
   //tìm kiếm
   const fecthData = async () => {
-    setLoading(true);
-    setIdsSelected([]);
+    setLoading(true); // setLoading
+    setIdsSelected([]); // đặt list ids về rỗng
     await httpMethod
       .post(
         `${timKiem}?page=${tableParams.pagination?.current}&size=${tableParams.pagination?.pageSize}`,
@@ -305,6 +309,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
           <div className="table-results-title">{t("ketQuaTimKiem")}</div>
           <Table
             title={() => (
+              //đây là nút thêm mới
               <>
                 <ButtonCustom
                   startIcon={<PlusCircleOutlined />}
@@ -319,7 +324,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
             dataSource={data}
             scroll={{ x: "2500px", y: "500px" }}
             bordered
-            pagination={false}
+            pagination={false} // ko dùng phân trang mặc định của table
             onChange={handleTableChange}
             rowSelection={rowSelection} // cần checkbox thì thêm cái này
           />

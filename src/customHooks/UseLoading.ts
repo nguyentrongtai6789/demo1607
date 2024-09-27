@@ -1,8 +1,7 @@
+import { isNull } from "lodash";
 import { useEffect, useState } from "react";
 import { handleLoading, loadingCancel } from "../redux/authSlice";
-import { RootState, useAppDispatch } from "../redux/store";
-import { useSelector } from "react-redux";
-import { isNull } from "lodash";
+import { useAppDispatch } from "../redux/store";
 
 const useLoading = () => {
   const [loading, setLoading] = useState<boolean | null>(null);

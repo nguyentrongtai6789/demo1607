@@ -3,26 +3,19 @@ import { Select } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 // import httpMethod from "../../config/httpMethod";
+import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
 import { SelectCustom } from "../../customAntd/SelectCustom";
+import useLoading from "../../customHooks/UseLoading";
 import { LanguageOptions, languages } from "../../i18n/i18n";
-import {
-  handleChangeLanguage,
-  handleLoading,
-  loadingCancel,
-  loginSuccess,
-} from "../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { handleChangeLanguage, loginSuccess } from "../../redux/authSlice";
+import { useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import { useSelector } from "react-redux";
-import httpMethod from "../../config/httpMethod";
-import { useEffect } from "react";
-import useLoading from "../../customHooks/UseLoading";
 
 interface ILoginValues {
   username: string;
