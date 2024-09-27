@@ -55,10 +55,10 @@ export const SearchForm: React.FC<ISearchForm> = ({
           onSubmit={(values: ISearchValues) => {
             const newValues = {
               ...values,
-              ngayDuyetCongDanTu: values.ngayDuyetCongDan[0],
-              ngayDuyetCongDanDen: values.ngayDuyetCongDan[1],
-              ngayDuyetDoiTuongTu: values.ngayDuyetDoiTuong[0],
-              ngayDuyetDoiTuongDen: values.ngayDuyetDoiTuong[1],
+              // ngayDuyetCongDanTu: values.ngayDuyetCongDan[0],
+              // ngayDuyetCongDanDen: values.ngayDuyetCongDan[1],
+              // ngayDuyetDoiTuongTu: values.ngayDuyetDoiTuong[0],
+              // ngayDuyetDoiTuongDen: values.ngayDuyetDoiTuong[1],
             };
             setSearchValues({ ...newValues });
           }}
@@ -77,6 +77,7 @@ export const SearchForm: React.FC<ISearchForm> = ({
                       maDanhMuc={"LOAI-BAO-CAO"}
                       isRequired
                       onChange={(value: any) => {
+                        setSearchValues(null);
                         if (value) {
                           setFieldValue("loaiBaoCao", value);
                           setLoaiBaoCao(value);

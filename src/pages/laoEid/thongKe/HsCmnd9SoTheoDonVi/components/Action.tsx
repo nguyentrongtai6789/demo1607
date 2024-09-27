@@ -23,19 +23,6 @@ export const Action: React.FC<IProps> = ({ record }) => {
           className="border-none bg-transparent"
           tooltip={t("xemChiTiet")}
         />
-        <IConCustom
-          iCon={<EditOutlined />}
-          className="border-none bg-transparent"
-          tooltip={t("sua")}
-        />
-        <IConCustom
-          iCon={<DeleteOutlined />}
-          className="border-none bg-transparent"
-          onClick={() => {
-            setOpenModalConfirm(true);
-          }}
-          tooltip={t("xoa")}
-        />
       </Space>
       <ModalConfirmCustom
         open={openModalConfirm}

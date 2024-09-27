@@ -1,8 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ISearchValues, SearchForm } from "./components/SearchForm";
 import { TableResultsTongHop } from "./components/TableResultsTongHop";
 import { TableResultsDanhSach } from "./components/TableResultsDanhSach";
+import { Space } from "antd";
+import ButtonCustom from "../../../../customAntd/ButtonCustom";
+import { CheckOutlined, ExportOutlined } from "@ant-design/icons";
 
 export default () => {
   const { t } = useTranslation(["translation"]);
@@ -23,10 +26,16 @@ export default () => {
             setLoaiBaoCao={setLoaiBaoCao}
           />
           {loaiBaoCao !== "2" && (
-            <TableResultsTongHop searchValues={searchValues} />
+            <TableResultsTongHop
+              searchValues={searchValues}
+              loaiBaoCao={loaiBaoCao}
+            />
           )}
           {loaiBaoCao === "2" && (
-            <TableResultsDanhSach searchValues={searchValues} />
+            <TableResultsDanhSach
+              searchValues={searchValues}
+              loaiBaoCao={loaiBaoCao}
+            />
           )}
         </div>
       </div>
