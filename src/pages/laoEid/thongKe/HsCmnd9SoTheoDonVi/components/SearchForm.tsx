@@ -149,13 +149,7 @@ export const SearchForm: React.FC<ISearchForm> = ({
                   </Col>
                 </Row>
                 <Row>
-                  <Space
-                    size={10}
-                    style={{
-                      width: "100%",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <Space size={10} className="w-full justify-center">
                     <ButtonCustom
                       htmlType="submit"
                       startIcon={<SearchOutlined />}

@@ -79,7 +79,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span style={{ color: "red" }}>*</span>}
+          {label || ""} {isRequired && <span className="text-red-500">*</span>}
         </span>
         <Select
           {...rest}
@@ -96,10 +96,7 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
         />
         <div>
           {errors[name] && touched[name] && (
-            <span
-              style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
-              className="validate-error"
-            >
+            <span className="validate-error text-red-500 text-xs italic">
               {errors[name] as string}
             </span>
           )}

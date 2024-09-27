@@ -60,9 +60,7 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
   ];
 
   return (
-    <div
-      style={{ display: "flex", justifyContent: "end", fontStyle: "italic" }}
-    >
+    <div className="flex italic justify-end">
       <Pagination
         style={style || { marginTop: "5px" }}
         current={current}
@@ -81,13 +79,7 @@ const PaginationCustom: React.FC<IProps> = (props: IProps) => {
         showSizeChanger={showSizeChanger || false}
         onChange={onChange}
       />
-      <div
-        style={{
-          alignItems: "center",
-          display: "flex",
-          marginTop: "5px",
-        }}
-      >
+      <div className="flex align-center mt-1">
         <Select
           value={pageSize}
           options={optionsPageSize}

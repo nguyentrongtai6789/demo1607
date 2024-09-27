@@ -12,12 +12,10 @@ import { ModalCustom } from "../../../../../customAntd/ModalCustom";
 import PaginationCustom, {
   TableParams,
 } from "../../../../../customAntd/PaginationCustom";
-import { handleLoading, loadingCancel } from "../../../../../redux/authSlice";
-import { useAppDispatch } from "../../../../../redux/store";
+import useLoading from "../../../../../customHooks/UseLoading";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
-import useLoading from "../../../../../customHooks/UseLoading";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -230,7 +228,7 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
 
   return (
     <>
-      <div style={{ padding: "15px", marginBottom: "25px" }}>
+      <div className="p-4 mb-6">
         <div className="table-results">
           <div className="table-results-title">{t("dieuKienTimKiem")}</div>
           <Table

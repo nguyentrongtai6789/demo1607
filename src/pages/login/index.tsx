@@ -90,7 +90,6 @@ export const Login: React.FC = (props) => {
                   type="password"
                   size="middle"
                   name="password"
-                  style={{ marginBottom: "5px" }}
                   prefix={<LockOutlined />}
                   styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
                 />
@@ -101,9 +100,7 @@ export const Login: React.FC = (props) => {
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
-                  style={{
-                    width: "100%",
-                  }}
+                  className="w-full"
                 />
                 <ButtonCustom htmlType="submit" width="100px">
                   {t("dangNhap")}
@@ -112,10 +109,7 @@ export const Login: React.FC = (props) => {
                   <Select
                     options={LanguageOptions}
                     placeholder={currentLanguage}
-                    style={{
-                      width: 150,
-                      marginTop: "5px",
-                    }}
+                    className="w-40 mt-2"
                     size="small"
                     onChange={(value: string) => {
                       dispatch(handleChangeLanguage(value));

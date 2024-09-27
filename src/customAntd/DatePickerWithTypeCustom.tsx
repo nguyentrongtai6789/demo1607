@@ -154,10 +154,10 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span style={{ color: "red" }}>*</span>}
+          {label || ""} {isRequired && <span className="text-red-50">*</span>}
         </span>
-        <div style={{ width: "100%", display: "flex" }}>
-          <div style={{ width: "40%" }}>
+        <div className="flex">
+          <div className="w-5/12">
             <Select
               value={type}
               onChange={(value) => {
@@ -177,7 +177,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
               <Option value="year">{t("nam")}</Option>
             </Select>
           </div>
-          <div style={{ width: "60%", marginLeft: "3px" }}>
+          <div className="ml-1">
             <PickerWithType type={type} onChange={onChange || handleOnChange} />
           </div>
         </div>

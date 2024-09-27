@@ -11,7 +11,7 @@ export default () => {
         <div
           style={{ fontSize: "30px", fontWeight: "500", fontStyle: "italic" }}
         >
-          Not found
+          {t("notFound")}
         </div>
       </div>
     </div>

@@ -16,7 +16,6 @@ import useLoading from "../../../../../customHooks/UseLoading";
 import { Action } from "./Action";
 import { timKiem } from "./api";
 import { ISearchValues } from "./SearchForm";
-import { isEmpty } from "lodash";
 
 export interface IProps {
   searchValues: ISearchValues | null;
@@ -285,7 +284,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
       key: "operation",
       fixed: "right",
       width: 160,
-      render: (record: IRecordTable) => <Action record={record} />,
+      render: (record: IRecordTable) => <Action record={record} />, // truyền record vào Component <Action/>
     },
   ];
 
@@ -304,7 +303,7 @@ export const TableResults: FunctionComponent<IProps> = ({ searchValues }) => {
 
   return (
     <>
-      <div style={{ padding: "15px", marginBottom: "25px" }}>
+      <div className="p-4 mb-6">
         <div className="table-results">
           <div className="table-results-title">{t("ketQuaTimKiem")}</div>
           <Table
