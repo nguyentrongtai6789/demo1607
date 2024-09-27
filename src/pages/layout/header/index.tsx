@@ -1,16 +1,15 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, MenuProps, Space } from "antd";
+import { Avatar, Dropdown, MenuProps } from "antd";
 import { Header } from "antd/es/layout/layout";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import logoLAeID from "../../../assets/images/logoLAeID.png";
 import ButtonCustom from "../../../customAntd/ButtonCustom";
+import { LanguageOptions, languages } from "../../../i18n/i18n";
 import { handleChangeLanguage, handleLogout } from "../../../redux/authSlice";
 import { RootState, useAppDispatch } from "../../../redux/store";
 import "./styles.scss";
-import { LanguageOptions, languages } from "../../../i18n/i18n";
-import { useTranslation } from "react-i18next";
-import logoHeader from "../../../assets/images/logoHeader.png";
-
 export default () => {
   const { t, i18n } = useTranslation(["translation"]);
 
@@ -104,7 +103,10 @@ export default () => {
 
   return (
     <Header>
-      <img src={logoHeader} alt="" style={{ height: "64px", width: 550 }} />
+      <img src={logoLAeID} alt="" className="h-16 w-max" />
+      <h1 className="text-white text-2xl font-semibold flex items-center ml-5 uppercase">
+        {t("headerTittle")}
+      </h1>
       <div>
         <Dropdown
           menu={{ items: menuAvatar }}
