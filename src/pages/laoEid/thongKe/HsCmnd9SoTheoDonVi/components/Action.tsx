@@ -20,17 +20,17 @@ export const Action: React.FC<IProps> = ({ record }) => {
       <Space size={20} className="space-button-table-action">
         <IConCustom
           iCon={<EyeOutlined />}
-          className="border-none"
+          className="border-none bg-transparent"
           tooltip={t("xemChiTiet")}
         />
         <IConCustom
           iCon={<EditOutlined />}
-          className="border-none"
+          className="border-none bg-transparent"
           tooltip={t("sua")}
         />
         <IConCustom
           iCon={<DeleteOutlined />}
-          className="border-none"
+          className="border-none bg-transparent"
           onClick={() => {
             setOpenModalConfirm(true);
           }}

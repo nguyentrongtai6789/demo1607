@@ -21,16 +21,16 @@ export const Action: React.FC<IProps> = ({ record }) => {
         <IConCustom
           iCon={<EyeOutlined />}
           tooltip={t("xemChiTiet")}
-          className="border-none"
+          className="border-none bg-transparent"
         />
         <IConCustom
           iCon={<EditOutlined />}
           tooltip={t("sua")}
-          className="border-none"
+          className="border-none bg-transparent"
         />
         <IConCustom
           iCon={<DeleteOutlined />}
-          className="border-none"
+          className="border-none bg-transparent"
           onClick={() => {
             setOpenModalConfirm(true);
           }}
