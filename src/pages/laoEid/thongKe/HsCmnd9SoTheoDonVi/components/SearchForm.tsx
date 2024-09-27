@@ -6,14 +6,17 @@ import {
 } from "@ant-design/icons";
 import { Col, Row, Space } from "antd";
 import { Field, Form, Formik, FormikProps } from "formik";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
 import { DatePickerWithRangeCustom } from "../../../../../customAntd/DatePickerWithRangeCustom";
 import { SelectCustom } from "../../../../../customAntd/SelectCustom";
 import { SelectDanhMucByMa } from "../../../../../customAntd/SelectDanhMucByMa";
 import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
+import { handleExport } from "../../../../../customhHelperFunction";
+import { xuatFile } from "./api";
 import { validateSearchForm } from "./validation";
+import useLoading from "../../../../../customHooks/UseLoading";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -36,6 +39,8 @@ export const SearchForm: React.FC<ISearchForm> = ({
 }) => {
   const { t } = useTranslation();
 
+  const { setLoading } = useLoading();
+
   const initialValues: ISearchValues = {
     donViId: 11728,
     loaiBaoCao: "1",
@@ -46,6 +51,10 @@ export const SearchForm: React.FC<ISearchForm> = ({
     loaiHopNhat: "",
   };
 
+  const [submitCase, setSubmitCase] = useState<"timKiem" | "xuatFile" | null>(
+    null
+  );
+
   return (
     <div className="search-form-wrapper">
       <div className="search-form">
@@ -55,12 +64,28 @@ export const SearchForm: React.FC<ISearchForm> = ({
           onSubmit={(values: ISearchValues) => {
             const newValues = {
               ...values,
-              ngayDuyetCongDanTu: values.ngayDuyetCongDan[0],
-              ngayDuyetCongDanDen: values.ngayDuyetCongDan[1],
-              ngayDuyetDoiTuongTu: values.ngayDuyetDoiTuong[0],
-              ngayDuyetDoiTuongDen: values.ngayDuyetDoiTuong[1],
+              // ngayDuyetCongDanTu: values.ngayDuyetCongDan[0],
+              // ngayDuyetCongDanDen: values.ngayDuyetCongDan[1],
+              // ngayDuyetDoiTuongTu: values.ngayDuyetDoiTuong[0],
+              // ngayDuyetDoiTuongDen: values.ngayDuyetDoiTuong[1],
             };
-            setSearchValues({ ...newValues });
+
+            switch (submitCase) {
+              case "timKiem":
+                setSearchValues({ ...newValues });
+                break;
+              case "xuatFile":
+                setLoading(true);
+                handleExport(
+                  { ...newValues },
+                  values.loaiBaoCao,
+                  "tenFileDemo",
+                  xuatFile
+                ).then(() => {
+                  setLoading(false);
+                });
+                break;
+            }
           }}
           validationSchema={validateSearchForm}
         >
@@ -77,6 +102,7 @@ export const SearchForm: React.FC<ISearchForm> = ({
                       maDanhMuc={"LOAI-BAO-CAO"}
                       isRequired
                       onChange={(value: any) => {
+                        setSearchValues(null);
                         if (value) {
                           setFieldValue("loaiBaoCao", value);
                           setLoaiBaoCao(value);
@@ -153,6 +179,9 @@ export const SearchForm: React.FC<ISearchForm> = ({
                     <ButtonCustom
                       htmlType="submit"
                       startIcon={<SearchOutlined />}
+                      onClick={() => {
+                        setSubmitCase("timKiem");
+                      }}
                     >
                       {t("timKiem")}
                     </ButtonCustom>
@@ -174,8 +203,11 @@ export const SearchForm: React.FC<ISearchForm> = ({
                       {t("inBaoCao")}
                     </ButtonCustom>
                     <ButtonCustom
-                      htmlType="button"
+                      htmlType="submit"
                       startIcon={<ExportOutlined />}
+                      onClick={() => {
+                        setSubmitCase("xuatFile");
+                      }}
                     >
                       {t("xuatFile")}
                     </ButtonCustom>

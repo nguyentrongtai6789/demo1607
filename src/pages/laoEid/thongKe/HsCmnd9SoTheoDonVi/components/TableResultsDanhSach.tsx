@@ -1,14 +1,9 @@
-import {
-  CheckOutlined,
-  ExportOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
-import { Space, Table, TableColumnsType, TableProps } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { Table, TableColumnsType, TableProps } from "antd";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import httpMethod from "../../../../../config/httpMethod";
+import httpMethod from "../../../../../services/httpMethod";
 import ButtonCustom from "../../../../../customAntd/ButtonCustom";
-import { ModalCustom } from "../../../../../customAntd/ModalCustom";
 import PaginationCustom, {
   TableParams,
 } from "../../../../../customAntd/PaginationCustom";
@@ -19,6 +14,7 @@ import { ISearchValues } from "./SearchForm";
 
 export interface IProps {
   searchValues: ISearchValues | null;
+  loaiBaoCao: string;
 }
 
 export interface IRecordTable {
@@ -42,6 +38,7 @@ export interface IRecordTable {
 
 export const TableResultsDanhSach: FunctionComponent<IProps> = ({
   searchValues,
+  loaiBaoCao,
 }) => {
   const { t } = useTranslation(["translation"]);
 
@@ -135,6 +132,10 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
     }
   }, [searchValues]);
 
+  useEffect(() => {
+    setData([]);
+  }, [loaiBaoCao]);
+
   const columns: TableColumnsType<IRecordTable> = [
     {
       title: "STT",
@@ -219,12 +220,10 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
       title: "Thao tác",
       key: "operation",
       fixed: "right",
-      width: 120,
+      width: 60,
       render: (record: IRecordTable) => <Action record={record} />,
     },
   ];
-
-  const [openModalThemMoi, setOpenModalThemMoi] = useState<boolean>(false);
 
   return (
     <>
@@ -234,11 +233,7 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
           <Table
             title={() => (
               <>
-                <ButtonCustom
-                  startIcon={<PlusCircleOutlined />}
-                  width="145px"
-                  onClick={() => setOpenModalThemMoi(true)}
-                >
+                <ButtonCustom startIcon={<PlusCircleOutlined />} width="145px">
                   {t("themMoi")}
                 </ButtonCustom>
               </>
@@ -266,33 +261,6 @@ export const TableResultsDanhSach: FunctionComponent<IProps> = ({
           />
         </div>
       </div>
-      <div className="button-bottom-wrapper">
-        <Space className="space-button">
-          <ButtonCustom startIcon={<CheckOutlined />}>
-            {t("pheDuyet")}
-          </ButtonCustom>
-          <ButtonCustom startIcon={<ExportOutlined />}>
-            {t("xuatFile")}
-          </ButtonCustom>
-        </Space>
-      </div>
-      <ModalCustom open={openModalThemMoi} title="CẬP NHẬT HỒ SƠ CMND 9 SỐ">
-        <div>ABC</div>
-        <div>ABC</div>
-        <div>ABC</div>
-        <div>ABC</div>
-        <div>ABC</div>
-        <div>ABC</div>
-        <div>ABC</div>
-        <div className="button-bottom-wrapper">
-          <Space className="space-button">
-            <ButtonCustom onClick={() => setOpenModalThemMoi(false)}>
-              Đóng
-            </ButtonCustom>
-            <ButtonCustom width="200px">Xem thông tin tại HT CCCD</ButtonCustom>
-          </Space>
-        </div>
-      </ModalCustom>
     </>
   );
 };

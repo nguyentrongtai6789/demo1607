@@ -1,4 +1,4 @@
-import { URL_AUTH } from "../../config/httpMethod";
+import { URL_AUTH } from "../../services/httpMethod";
 
 export const phanHeHeThong = `phan-he-he-thong`;
 

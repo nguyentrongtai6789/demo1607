@@ -3,7 +3,7 @@ import { SizeType } from "antd/es/config-provider/SizeContext";
 import { AxiosError, AxiosResponse } from "axios";
 import { ErrorMessage, FieldProps } from "formik";
 import { useEffect, useState } from "react";
-import httpMethod, { URL } from "../config/httpMethod";
+import httpMethod, { URL } from "../services/httpMethod";
 
 export interface SelectCustomProps
   extends FieldProps,

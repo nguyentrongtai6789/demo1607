@@ -5,7 +5,7 @@ import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 // import httpMethod from "../../config/httpMethod";
-import httpMethod from "../../config/httpMethod";
+import httpMethod from "../../services/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
