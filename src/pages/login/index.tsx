@@ -3,26 +3,19 @@ import { Select } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 // import httpMethod from "../../config/httpMethod";
+import httpMethod from "../../config/httpMethod";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import { InputCustom } from "../../customAntd/InputCustom";
 import NotificationCustom from "../../customAntd/NotificationCustom";
 import { SelectCustom } from "../../customAntd/SelectCustom";
+import useLoading from "../../customHooks/UseLoading";
 import { LanguageOptions, languages } from "../../i18n/i18n";
-import {
-  handleChangeLanguage,
-  handleLoading,
-  loadingCancel,
-  loginSuccess,
-} from "../../redux/authSlice";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { handleChangeLanguage, loginSuccess } from "../../redux/authSlice";
+import { useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
-import { useSelector } from "react-redux";
-import httpMethod from "../../config/httpMethod";
-import { useEffect } from "react";
-import useLoading from "../../customHooks/UseLoading";
 
 interface ILoginValues {
   username: string;
@@ -66,7 +59,7 @@ export const Login: React.FC = (props) => {
   };
 
   return (
-    <div className="login-page" style={{ textAlign: "center" }}>
+    <div className="login-page text-center">
       <div className="login-form">
         <Formik
           initialValues={{
@@ -97,7 +90,6 @@ export const Login: React.FC = (props) => {
                   type="password"
                   size="middle"
                   name="password"
-                  style={{ marginBottom: "5px" }}
                   prefix={<LockOutlined />}
                   styleInput={{ border: "1px solid rgb(41, 38, 152)" }}
                 />
@@ -108,9 +100,7 @@ export const Login: React.FC = (props) => {
                   size="middle"
                   api={phanHeHeThong}
                   valueNeedOfOption={"giaTri"}
-                  style={{
-                    width: "100%",
-                  }}
+                  className="w-full"
                 />
                 <ButtonCustom htmlType="submit" width="100px">
                   {t("dangNhap")}
@@ -119,10 +109,7 @@ export const Login: React.FC = (props) => {
                   <Select
                     options={LanguageOptions}
                     placeholder={currentLanguage}
-                    style={{
-                      width: 150,
-                      marginTop: "5px",
-                    }}
+                    className="w-40 mt-2"
                     size="small"
                     onChange={(value: string) => {
                       dispatch(handleChangeLanguage(value));

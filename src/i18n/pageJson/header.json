@@ -1,14 +1,17 @@
 {
   "vi": {
     "ngonNgu": "Ngôn ngữ",
-    "dangXuat": "Đăng xuất"
+    "dangXuat": "Đăng xuất",
+    "headerTittle": "Hệ thống quản lý dân cư, căn cước công dân"
   },
   "en": {
     "ngonNgu": "Language",
-    "dangXuat": "Log out"
+    "dangXuat": "Log out",
+    "headerTittle": "Population management system, citizen identification card"
   },
   "la": {
     "ngonNgu": "ພາສາ",
-    "dangXuat": "ອອກຈາກລະບົບ"
+    "dangXuat": "ອອກຈາກລະບົບ",
+    "headerTittle": "ລະບົບ​ການ​ຈັດ​ການ​ປະ​ຊາກອກ​ຂອງ​ປະ​ຊາກາດ, ບັນ​ຊ້າ​ຂອງ​ສັນ​ຍາລັກ"
   }
 }

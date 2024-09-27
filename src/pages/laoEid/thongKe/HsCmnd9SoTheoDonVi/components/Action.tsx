@@ -1,11 +1,11 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import React, { useState } from "react";
-import { IRecordTable } from "./TableResultsTongHop";
 import { useTranslation } from "react-i18next";
 import IConCustom from "../../../../../customAntd/IConCustom";
 import { ModalConfirmCustom } from "../../../../../customAntd/ModalConfirmCustom";
 import NotificationCustom from "../../../../../customAntd/NotificationCustom";
+import { IRecordTable } from "./TableResultsTongHop";
 
 interface IProps {
   record: IRecordTable;
@@ -20,26 +20,17 @@ export const Action: React.FC<IProps> = ({ record }) => {
       <Space size={20} className="space-button-table-action">
         <IConCustom
           iCon={<EyeOutlined />}
-          style={{
-            background: "unset",
-            border: "unset",
-          }}
+          className="border-none bg-transparent"
           tooltip={t("xemChiTiet")}
         />
         <IConCustom
           iCon={<EditOutlined />}
-          style={{
-            background: "unset",
-            border: "unset",
-          }}
+          className="border-none bg-transparent"
           tooltip={t("sua")}
         />
         <IConCustom
           iCon={<DeleteOutlined />}
-          style={{
-            background: "unset",
-            border: "unset",
-          }}
+          className="border-none bg-transparent"
           onClick={() => {
             setOpenModalConfirm(true);
           }}

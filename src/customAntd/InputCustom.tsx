@@ -1,6 +1,6 @@
 import { Input, InputProps } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
-import { ErrorMessage, FieldProps } from "formik";
+import { FieldProps } from "formik";
 
 export interface InputCustomProps extends FieldProps, Omit<InputProps, "form"> {
   isRequired?: boolean;
@@ -31,7 +31,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
         <div style={styleWrapper || { marginBottom: "5px" }}>
           <span>
             {label || ""}{" "}
-            {isRequired && <span style={{ color: "red" }}>*</span>}
+            {isRequired && <span className="text-red-500">*</span>}
           </span>
           <Input.Password
             {...field}
@@ -44,10 +44,8 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           />
           <div>
             {errors[field.name] && touched[field.name] && (
-              <span
-                style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
-              >
-                <ErrorMessage name={field.name || ""} />
+              <span className="validate-error text-red-500 text-xs italic">
+                {errors[field.name] as string}
               </span>
             )}
           </div>
@@ -59,7 +57,7 @@ export const InputCustom: React.FC<InputCustomProps> = ({
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span style={{ color: "red" }}>*</span>}
+          {label || ""} {isRequired && <span className="text-red-500">*</span>}
         </span>
         <Input
           {...field}
@@ -69,13 +67,12 @@ export const InputCustom: React.FC<InputCustomProps> = ({
           disabled={disabled}
           size={size ? size : "small"}
           style={styleInput}
+          status={errors[field.name] && touched[field.name] ? "error" : ""}
         />
         <div>
           {errors[field.name] && touched[field.name] && (
-            <span
-              style={{ fontStyle: "italic", color: "red", fontSize: "12px" }}
-            >
-              <ErrorMessage name={field.name || ""} />
+            <span className="validate-error text-red-500 text-xs italic">
+              {errors[field.name] as string}
             </span>
           )}
         </div>
