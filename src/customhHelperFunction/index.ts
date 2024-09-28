@@ -38,7 +38,7 @@ export const handleExport = async (
       break;
   }
 
-  if (res.status === 200) {
+  if (res?.status === 200) {
     DownloadFile.getDownloadBinaryFile(
       res.data,
       `${tenFile}_${getDateTimeNow()}.${typeFile}`
