@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
