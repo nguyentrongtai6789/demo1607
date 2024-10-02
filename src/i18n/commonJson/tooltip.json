@@ -2,16 +2,22 @@
   "vi": {
     "xemChiTiet": "Xem chi tiết",
     "sua": "Chỉnh sửa",
-    "xoa": "Xoá"
+    "xoa": "Xoá",
+    "huy": "Huỷ",
+    "dongY": "Đồng ý"
   },
   "en": {
     "xemChiTiet": "View detail",
     "sua": "Edit",
-    "xoa": "Delete"
+    "xoa": "Delete",
+    "huy": "Cancal",
+    "dongY": "Yes"
   },
   "la": {
     "xemChiTiet": "ເບິ່ງລາຍລະອຽດ",
     "sua": "ແກ້ໄຂ",
-    "xoa": "ລຶບ"
+    "xoa": "ລຶບ",
+    "huy": "ຍົກເລີກ",
+    "dongY": "ເຫັນດີ"
   }
 }
