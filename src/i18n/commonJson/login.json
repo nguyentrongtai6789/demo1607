@@ -6,7 +6,8 @@
     "chonPhanHe": "Chọn phân hệ",
     "dangNhapThanhCong": "Đăng nhập thành công",
     "saiTaiKhoanMatKhau": "Sai tài khoản hoặc mật khẩu",
-    "notFound": "Không tìm thấy liên kết!"
+    "notFound": "Không tìm thấy liên kết!",
+    "loginTitle": "Bộ an ninh"
   },
   "en": {
     "dangNhap": "Login",
@@ -15,7 +16,8 @@
     "chonPhanHe": "Select subsystem",
     "dangNhapThanhCong": "Login successfully",
     "saiTaiKhoanMatKhau": "Wrong password or username",
-    "notFound": "Not found!"
+    "notFound": "Not found!",
+    "loginTitle": "Ministry of Security"
   },
   "la": {
     "dangNhap": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
@@ -24,6 +26,7 @@
     "chonPhanHe": "ເລືອກລະບົບຍ່ອຍ",
     "dangNhapThanhCong": "ເຂົ້າສູ່ລະບົບສຳເລັດແລ້ວ",
     "saiTaiKhoanMatKhau": "ບັນຊີ ຫຼືລະຫັດຜ່ານຜິດ",
-    "notFound": "ບໍ່ພົບລິ້ງ!"
+    "notFound": "ບໍ່ພົບລິ້ງ!",
+    "loginTitle": "ກະຊວງປ້ອງກັນຄວາມສະຫງົບ"
   }
 }

@@ -16,6 +16,7 @@ import { handleChangeLanguage, loginSuccess } from "../../redux/authSlice";
 import { useAppDispatch } from "../../redux/store";
 import { authenticate, phanHeHeThong } from "./api";
 import "./styles.scss";
+import logoLaeid from "../../assets/images/logoLAeID.png";
 
 interface ILoginValues {
   username: string;
@@ -60,6 +61,19 @@ export const Login: React.FC = (props) => {
 
   return (
     <div className="login-page text-center">
+      <div>
+        <div className="w-full flex justify-center">
+          <img src={logoLaeid} alt="" className="w-auto h-40 mt-10" />
+        </div>
+        <h1 className="text-4xl uppercase mt-5 font-bold title-login">
+          {t("loginTitle")}
+        </h1>
+        <h1 className="mt-80 text-2xl font-bold text-red-600 uppercase">
+          {t("headerTittle")}
+        </h1>
+        <h1 className="mt-5 text-4xl font-bold text-red-600">LAeID3A</h1>
+      </div>
+
       <div className="login-form">
         <Formik
           initialValues={{
