@@ -15,6 +15,7 @@ function App() {
   const code = urlParams.get("code");
   const client_id = urlParams.get("client_id");
 
+  //demo
   http: useEffect(() => {
     dispatch(
       handleCheckAuth({
