@@ -18,6 +18,8 @@ export default () => {
   const { userInfo } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
+    console.log(userInfo);
+
     if (userInfo) {
       setMenu(userInfo.menu);
     }

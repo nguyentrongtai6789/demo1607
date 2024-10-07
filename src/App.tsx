@@ -15,16 +15,16 @@ function App() {
   const code = urlParams.get("code");
   const client_id = urlParams.get("client_id");
 
-  useEffect(() => {
+  http: useEffect(() => {
     dispatch(
       handleCheckAuth({
         code: code || "",
-        clientId: client_id || "",
+        clientId: client_id || "laeid3a-web",
         lang: language,
         urlPrefix: "http://localhost:3033/lao-eid/",
       })
     );
-  }, []);
+  }, [code]);
 
   return (
     <Suspense fallback={<LoadingCustom />}>
