@@ -83,6 +83,7 @@ const authSlice = createSlice({
         state.loading = false;
         if (payload.status === 200) {
           localStorage.setItem("userInfo", JSON.stringify(payload.data));
+          state.userInfo = payload.data;
         }
         if (payload?.response?.status === 401) {
           NotificationCustom(
