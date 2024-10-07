@@ -33,12 +33,12 @@ function protectedLoader({ request }: LoaderFunctionArgs) {
   const useToken = localStorage.getItem("userInfo");
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get("code");
-  const client_id = urlParams.get("client_id");
 
-  if (!useToken && (!code || !client_id)) {
-    let params = new URLSearchParams();
-    params.set("from", new URL(request.url).pathname);
-    return redirect(`https://laeid3a.teca.vn/dang-nhap` + params.toString());
+  if (!useToken && !code) {
+    let params = new URL(request.url).pathname;
+    return redirect(
+      `https://la-sso.teca.vn/auth?client_id=laeid3a-web&redirect_uri=http://localhost:3033${params}`
+    );
   }
   return null;
 }
