@@ -1,22 +1,27 @@
 import { Menu, MenuProps } from "antd";
-import { useTranslation } from "react-i18next";
-import "./styles.scss";
-import { Link, useLocation } from "react-router-dom";
+import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./styles.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { isEmpty } from "lodash";
 
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
 
-  const { t } = useTranslation("translation");
+  // const menu = JSON.parse(localStorage.getItem("userInfo") || "[]").menu;
+
+  const [menu, setMenu] = useState<any[]>([]);
+
+  const [selectedKey, setSelectedKey] = useState<string>("");
 
   const { userInfo } = useSelector((state: RootState) => state.auth);
 
-  const menu = JSON.parse(localStorage.getItem("userInfo") || "[]").menu;
-
-  const [selectedKey, setSelectedKey] = useState<string>("");
+  useEffect(() => {
+    if (userInfo) {
+      setMenu(userInfo.menu);
+    }
+  }, [userInfo]);
 
   const items: MenuItem[] = !isEmpty(menu)
     ? menu.map((item: any) => ({
@@ -38,7 +43,7 @@ export default () => {
   const checkOpenKey = () => {
     if (isEmpty(menu)) return;
     for (let i = 0; i <= menu.length - 1; i++) {
-      for (let j = 0; j <= menu[i].children.length - 1; j++) {
+      for (let j = 0; j <= menu[i]?.children?.length - 1; j++) {
         if (baseUrl.includes(menu[i].children[j].path)) {
           setSelectedKey(String(menu[i].children[j].key));
           return;
@@ -58,10 +63,6 @@ export default () => {
   if (isEmpty(menu)) {
     return <></>;
   }
-
-  useEffect(() => {
-    console.log(selectedKey);
-  }, [selectedKey]);
 
   return (
     <>
