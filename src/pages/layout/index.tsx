@@ -1,11 +1,15 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Tooltip } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ButtonCustom from "../../customAntd/ButtonCustom";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import { useAppDispatch } from "../../redux/store";
+import { handleCheckAuth } from "../../redux/authActions";
+import queryString from "query-string";
+
 const { Sider } = Layout;
 
 export default () => {

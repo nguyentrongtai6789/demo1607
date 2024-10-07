@@ -90,7 +90,7 @@ export default () => {
         <ButtonCustom
           onClick={() => {
             dispatch(handleLogout());
-            navigate(`${process.env.PUBLIC_URL}/login`);
+            window.location.href = "https://laeid3a.teca.vn/dang-nhap";
           }}
           width="100%"
         >

@@ -16,6 +16,7 @@ const RoutesOfAllPage: RouteObject[] = [
   {
     path: "",
     element: <TrangChu />,
+    index: true,
   },
   ...RoutesQuanLy,
   ...RoutesTraCuu,

@@ -20,29 +20,28 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ConfigProvider
-        theme={{
-          token: {
-            borderRadius: 2,
-            colorText: "#001529",
+  // <React.StrictMode>
+  <Provider store={store}>
+    <ConfigProvider
+      theme={{
+        token: {
+          borderRadius: 2,
+          colorText: "#001529",
+        },
+        components: {
+          Table: {
+            rowHoverBg: "#d8d7d7",
+            headerBg: "#d8d7d7",
           },
-          components: {
-            Table: {
-              rowHoverBg: "#d8d7d7",
-              headerBg: "#d8d7d7",
-            },
-            Layout: {
-              headerBg: "#002768",
-            },
+          Layout: {
+            headerBg: "#002768",
           },
-        }}
-      >
-        <App />
-      </ConfigProvider>
-    </Provider>
-  </React.StrictMode>
+        },
+      }}
+    >
+      <App />
+    </ConfigProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

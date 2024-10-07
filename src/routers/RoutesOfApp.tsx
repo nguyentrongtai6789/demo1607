@@ -30,11 +30,11 @@ function protectedLoader({ request }: LoaderFunctionArgs) {
   // If the user is not logged in and tries to access `/protected`, we redirect
   // them to `/login` with a `from` parameter that allows login to redirect back
   // to this page upon successful authentication
-  const useToken = localStorage.getItem("userToken");
-  if (!useToken) {
-    let params = new URLSearchParams();
-    params.set("from", new URL(request.url).pathname);
-    return redirect(`${process.env.PUBLIC_URL}/login?` + params.toString());
-  }
+  // const useToken = localStorage.getItem("userToken");
+  // if (!useToken) {
+  //   let params = new URLSearchParams();
+  //   params.set("from", new URL(request.url).pathname);
+  //   return redirect(`https://laeid3a.teca.vn/dang-nhap` + params.toString());
+  // }
   return null;
 }

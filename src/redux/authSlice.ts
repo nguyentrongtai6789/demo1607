@@ -1,7 +1,8 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { handleLogin } from "./authActions";
+import { handleCheckAuth } from "./authActions";
 import httpMethod from "../services/httpMethod";
 import { languages } from "../i18n/i18n";
+import NotificationCustom from "../customAntd/NotificationCustom";
 
 interface IAuthState {
   loading: boolean;
@@ -75,14 +76,25 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(handleLogin.pending, (state: IAuthState, action) => {
+      .addCase(handleCheckAuth.pending, (state: IAuthState, action) => {
         state.loading = true;
       })
-      .addCase(handleLogin.fulfilled, (state: IAuthState, { payload }) => {
+      .addCase(handleCheckAuth.fulfilled, (state: IAuthState, { payload }) => {
         state.loading = false;
-        // state.userToken = payload.userToken;
+        if (payload.status === 200) {
+          localStorage.setItem("userInfo", JSON.stringify(payload.data));
+        }
+        if (payload?.response?.status === 401) {
+          NotificationCustom(
+            "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!",
+            "error"
+          );
+          setTimeout(() => {
+            window.location.href = "https://laeid3a.teca.vn/dang-nhap";
+          }, 1000);
+        }
       })
-      .addCase(handleLogin.rejected, (state: IAuthState, action) => {
+      .addCase(handleCheckAuth.rejected, (state: IAuthState, { payload }) => {
         state.loading = false;
       });
   },
