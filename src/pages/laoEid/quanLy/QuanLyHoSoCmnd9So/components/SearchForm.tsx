@@ -9,6 +9,7 @@ import { DatePickerWithTypeCustom } from "../../../../../customAntd/DatePickerWi
 import { InputCustom } from "../../../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
+import httpMethod from "../../../../../services/httpMethod";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -44,6 +45,13 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
   };
 
   const { t } = useTranslation("translation");
+
+  const handleTest = async () => {
+    const res = await httpMethod.get(
+      "http://localhost:8088/cccdApp/api/danh-muc-gioi-tinh"
+    );
+    console.log(res);
+  };
 
   return (
     <div className="search-form-wrapper">
@@ -157,6 +165,15 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       className="delete-button"
                     >
                       {t("datLai")}
+                    </ButtonCustom>
+                    <ButtonCustom
+                      htmlType="button"
+                      width="200px"
+                      onClick={() => {
+                        handleTest();
+                      }}
+                    >
+                      Test Access token
                     </ButtonCustom>
                   </Space>
                 </Row>
