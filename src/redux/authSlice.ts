@@ -84,8 +84,6 @@ const authSlice = createSlice({
         if (payload.status === 200) {
           localStorage.setItem("userInfo", JSON.stringify(payload.data));
           state.userInfo = payload.data;
-          console.log(process.env.PUBLIC_URL);
-
           window.location.href = payload.pathname
             ? `${payload.pathname}`
             : `${process.env.PUBLIC_URL}/`;
