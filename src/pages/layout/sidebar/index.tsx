@@ -9,21 +9,11 @@ import { RootState } from "../../../redux/store";
 export default () => {
   type MenuItem = Required<MenuProps>["items"][number];
 
-  // const menu = JSON.parse(localStorage.getItem("userInfo") || "[]").menu;
-
-  const [menu, setMenu] = useState<any[]>([]);
+  const [menu, setMenu] = useState<any[]>(
+    JSON.parse(localStorage.getItem("userInfo") || "[]").menu
+  );
 
   const [selectedKey, setSelectedKey] = useState<string>("");
-
-  const { userInfo } = useSelector((state: RootState) => state.auth);
-
-  useEffect(() => {
-    console.log(userInfo);
-
-    if (userInfo) {
-      setMenu(userInfo.menu);
-    }
-  }, [userInfo]);
 
   const items: MenuItem[] = !isEmpty(menu)
     ? menu.map((item: any) => ({

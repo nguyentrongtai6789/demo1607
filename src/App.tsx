@@ -17,14 +17,18 @@ function App() {
 
   //demo
   http: useEffect(() => {
-    dispatch(
-      handleCheckAuth({
-        code: code || "",
-        clientId: client_id || "laeid3a-web",
-        lang: language,
-        urlPrefix: "http://localhost:3033/lao-eid/",
-      })
-    );
+    if (code)
+      dispatch(
+        handleCheckAuth({
+          value: {
+            code: code || "",
+            clientId: client_id || "laeid3a-web",
+            lang: language,
+            urlPrefix: "http://localhost:3033/lao-eid/",
+          },
+          pathname: window.location.pathname,
+        })
+      );
   }, [code]);
 
   return (
