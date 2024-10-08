@@ -71,7 +71,6 @@ const authSlice = createSlice({
         "danhSachChucNang",
         JSON.stringify(action.payload.danhSachChucNang)
       );
-      httpMethod.attachTokenToHeader();
     },
   },
   extraReducers: (builder) => {

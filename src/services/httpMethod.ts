@@ -23,13 +23,14 @@ class Services {
         return Promise.resolve(response);
       },
       function (error: AxiosError) {
-        const language = localStorage.getItem("language");
+        const language = localStorage.getItem("language") || "en";
         //các lỗi chung sẽ bắt ở đây
         //token hết hạn
         if (error?.response?.status === 401) {
+          localStorage.clear();
           setTimeout(() => {
-            window.location.href = `${process.env.PUBLIC_URL}/login`;
-          }, 1500);
+            window.location.href = `https://laeid3a.teca.vn/dang-nhap`;
+          }, 2000);
           switch (language) {
             case "vi":
               return NotificationCustom(
@@ -84,7 +85,9 @@ class Services {
 
   //gắn token vào header request:
   public attachTokenToHeader() {
-    const token = localStorage.getItem("userToken");
+    const token = JSON.parse(
+      localStorage.getItem("userInfo") || '{"access_token": ""}'
+    )?.access_token;
     this.axios.interceptors.request.use(
       function (config: any) {
         // Do something before request is sent
