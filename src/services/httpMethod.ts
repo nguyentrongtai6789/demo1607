@@ -88,11 +88,10 @@ class Services {
     const token = JSON.parse(
       localStorage.getItem("userInfo") || '{"access_token": ""}'
     )?.access_token;
-    const tokenTestAuthor = "acs";
     this.axios.interceptors.request.use(
       function (config: any) {
         // Do something before request is sent
-        config.headers.Authorization = `Bearer ${tokenTestAuthor}`;
+        config.headers.Authorization = `Bearer ${token}`;
         return config;
       },
       function (error: any) {
