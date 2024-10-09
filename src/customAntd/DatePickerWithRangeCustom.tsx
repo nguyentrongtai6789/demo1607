@@ -77,7 +77,8 @@ export const DatePickerWithRangeCustom: React.FC<RangePickerCustomProps> = ({
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span className="text-red-500">*</span>}
+          <span className="font-semibold"> {label || ""}</span>
+          {isRequired && <span className="text-red-500">*</span>}
         </span>
         <RangePicker
           {...rest}

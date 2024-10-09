@@ -10,7 +10,7 @@ const Page404 = lazy(() => import("../pages/page404"));
 
 export const router = createBrowserRouter([
   {
-    path: `${process.env.PUBLIC_URL}`,
+    path: `${process.env.PUBLIC_URL}/`,
     element: <Layout />,
     children: RoutesOfAllPage,
     loader: protectedLoader,

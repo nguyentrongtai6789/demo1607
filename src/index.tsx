@@ -13,6 +13,7 @@ import "../src/styles/table.scss";
 import "../src/styles/notification.scss";
 import "../src/styles/modalConfirm.scss";
 import "../src/styles/modalCustom.scss";
+
 import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(

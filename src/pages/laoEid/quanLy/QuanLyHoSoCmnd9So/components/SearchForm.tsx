@@ -10,6 +10,7 @@ import { InputCustom } from "../../../../../customAntd/InputCustom";
 import { SelectCustom } from "../../../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
 import httpMethod from "../../../../../services/httpMethod";
+import { DatepickerCustom } from "../../../../../customAntd/DatePickerCustom";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -60,6 +61,8 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values: ISearchValues) => {
+            console.log(values);
+            return;
             setSearchValues({ ...values });
           }}
         >
@@ -93,18 +96,18 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                   </Col>
                   <Col span={4}>
                     <Field
-                      component={DatePickerWithTypeCustom}
-                      name={"ngaySinh"}
-                      label={t("ngaySinh")}
-                    />
-                  </Col>
-                  <Col span={4}>
-                    <Field
                       component={SelectCustom}
                       api={"danh-muc-gioi-tinh"}
                       label={t("gioiTinh")}
                       name={"gioiTinhId"}
                       valueNeedOfOption={"id"}
+                    />
+                  </Col>
+                  <Col span={4}>
+                    <Field
+                      component={DatePickerWithTypeCustom}
+                      name={"ngaySinh"}
+                      label={t("ngaySinh")}
                     />
                   </Col>
                 </Row>
@@ -140,13 +143,20 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       name={"hoTenVoChong"}
                     />
                   </Col>
-                  <Col span={8}>
+                  <Col span={4}>
                     <Field
-                      component={DatePickerWithRangeCustom}
-                      label={t("ngayNhap")}
-                      fieldName1={"ngayNhapTu"}
-                      fieldName2={"ngayNhapDen"}
-                      rangeTime={"10"} // khoảng thời gian được phép chọn
+                      component={DatepickerCustom}
+                      label={"Ngày nhập từ"}
+                      name={"ngayNhapTu"}
+                      isRequired
+                    />
+                  </Col>
+                  <Col span={4}>
+                    <Field
+                      component={DatepickerCustom}
+                      label={"Ngày nhập đến"}
+                      name={"ngayNhapDen"}
+                      isRequired
                     />
                   </Col>
                 </Row>
