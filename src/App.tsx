@@ -14,7 +14,6 @@ function App() {
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get("code");
   const client_id = urlParams.get("client_id");
-
   //demo
   http: useEffect(() => {
     if (code)
@@ -22,9 +21,9 @@ function App() {
         handleCheckAuth({
           value: {
             code: code || "",
-            clientId: client_id || "laeid3a-web",
+            clientId: client_id || `${process.env.REACT_APP_CLIENT_ID}`,
             lang: language,
-            urlPrefix: "http://localhost:3033/lao-eid/",
+            urlPrefix: `${process.env.REACT_APP_URL_PREFIX}`,
           },
           pathname: window.location.pathname,
         })

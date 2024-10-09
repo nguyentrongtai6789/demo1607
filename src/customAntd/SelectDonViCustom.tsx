@@ -65,7 +65,8 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span className="text-red-500">*</span>}
+          <span className="font-semibold"> {label || ""}</span>{" "}
+          {isRequired && <span className="text-red-500 font-bold"> *</span>}
         </span>
         <Select
           {...rest}
@@ -87,9 +88,9 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
         />
         <div>
           {errors[field.name] && touched[field.name] && (
-            <span className="validate-error text-red-500 text-xs italic">
+            <div className="validate-error text-red-500 text-xs italic">
               {errors[field.name] as string}
-            </span>
+            </div>
           )}
         </div>
       </div>

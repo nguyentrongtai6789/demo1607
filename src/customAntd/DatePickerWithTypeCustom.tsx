@@ -1,11 +1,13 @@
-import { DatePicker, DatePickerProps, Select } from "antd";
+import { CalendarOutlined } from "@ant-design/icons";
+import { DatePicker, DatePickerProps, Input, Select } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
+import { PickerLocale } from "antd/es/date-picker/generatePicker";
+import en from "antd/es/date-picker/locale/en_US";
 import dayjs from "dayjs";
 import { FieldProps } from "formik";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import en from "antd/es/date-picker/locale/en_US";
-import { PickerLocale } from "antd/es/date-picker/generatePicker";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -16,7 +18,7 @@ export interface DatePickerCustomProps
   size?: SizeType;
 }
 export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
-  form: { touched, errors, resetForm, values, initialValues },
+  form: { touched, errors, resetForm, values, initialValues, setFieldValue },
   field,
   isRequired,
   label,
@@ -32,6 +34,8 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
   const [type, setType] = useState<PickerType>("date");
 
   const { t } = useTranslation(["translation"]);
+
+  const [openCalender, setOpenCalender] = useState<boolean>(false);
 
   const localeCustom: PickerLocale = {
     ...en,
@@ -65,62 +69,24 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
     },
   };
 
-  const PickerWithType = ({
-    type,
-    onChange,
-  }: {
-    type: PickerType;
-    onChange: any;
-  }) => {
-    const formattedValue = field.value
-      ? dayjs(
-          field.value,
-          type === "date"
-            ? "DD/MM/YYYY"
-            : type === "month"
-            ? "MM/YYYY"
-            : type === "year"
-            ? "YYYY"
-            : ""
-        )
-      : null;
-    if (type === "date") {
-      return (
-        <DatePicker
-          onChange={onChange}
-          format={"DD/MM/YYYY"}
-          value={formattedValue}
-          {...rest}
-          placeholder={t("chonNgay")}
-          locale={localeCustom}
-        />
-      );
-    }
-    if (type === "month") {
-      return (
-        <DatePicker
-          onChange={onChange}
-          format={"MM/YYYY"}
-          value={formattedValue}
-          picker={type}
-          {...rest}
-          placeholder={t("chonThang")}
-        />
-      );
-    }
-    if (type === "year") {
-      return (
-        <DatePicker
-          picker={type}
-          value={formattedValue}
-          onChange={onChange}
-          placeholder={t("chonNam")}
-          {...rest}
-        />
-      );
-    }
-    return <></>;
-  };
+  const regexNgayThangNam = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+
+  const regexThangNam = /^(0[1-9]|1[0-2])-\d{4}$/;
+
+  const regexNam = /^(18\d{2}|19\d{2}|20\d{2}|21\d{2})$/;
+
+  const formattedValue = field.value
+    ? dayjs(
+        field.value,
+        type === "date"
+          ? "DD-MM-YYYY"
+          : type === "month"
+          ? "MM-YYYY"
+          : type === "year"
+          ? "YYYY"
+          : ""
+      )
+    : null;
 
   useEffect(() => {
     if (values === initialValues) {
@@ -128,36 +94,15 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
     }
   }, [values]);
 
-  const handleOnChange = (value: any) => {
-    const formatValue =
-      (value &&
-        value.format(
-          type === "date"
-            ? "DD/MM/YYYY"
-            : type === "month"
-            ? "MM/YYYY"
-            : type === "year"
-            ? "YYYY"
-            : ""
-        )) ||
-      null;
-    const changeEvent = {
-      target: {
-        name: field.name,
-        value: formatValue || "",
-      },
-    };
-    field.onChange(changeEvent);
-  };
-
   return (
     <>
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
-          {label || ""} {isRequired && <span className="text-red-50">*</span>}
+          <span className="font-semibold"> {label || ""}</span>
+          {isRequired && <span className="text-red-50 font-bold"> *</span>}
         </span>
-        <div className="flex">
-          <div className="w-5/12">
+        <div className="flex w-full">
+          <div className="w-1/3">
             <Select
               value={type}
               onChange={(value) => {
@@ -170,17 +115,155 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
                 };
                 field.onChange(changeEvent);
               }}
-              size={size || "small"}
+              style={{ height: "23.5px" }}
             >
               <Option value="date">{t("ngay")}</Option>
               <Option value="month">{t("thang")}</Option>
               <Option value="year">{t("nam")}</Option>
             </Select>
           </div>
-          <div className="ml-1">
-            <PickerWithType type={type} onChange={onChange || handleOnChange} />
+          <div className="ml-1 w-2/3">
+            <Input
+              {...field}
+              allowClear={true}
+              status={errors[field.name] && touched[field.name] ? "error" : ""}
+              autoComplete="off"
+              onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (
+                  type === "date" &&
+                  !regexNgayThangNam.test(event.target.value)
+                ) {
+                  setFieldValue(field.name, "");
+                }
+                if (
+                  type === "month" &&
+                  !regexThangNam.test(event.target.value)
+                ) {
+                  setFieldValue(field.name, "");
+                }
+
+                if (type === "year" && !regexNam.test(event.target.value)) {
+                  setFieldValue(field.name, "");
+                }
+              }}
+              size="small"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                let value = event.target.value;
+                if (type === "date") {
+                  if (value.length < 5 && value.length > 2) {
+                    value = value.slice(0, 2) + "-" + value.slice(2);
+                  }
+                  if (value.length === 5) {
+                    value = value.slice(0, 5) + "-" + value.slice(5, 9);
+                  }
+                  if (value.length > 10) {
+                    return;
+                  }
+                }
+                if (type === "month") {
+                  if (value.length === 3) {
+                    value = value.slice(0, 2) + "-" + value.slice(2);
+                  }
+                  if (value.length > 7) {
+                    return;
+                  }
+                }
+                if (type === "year") {
+                  if (value.length > 4) return;
+                }
+                const changeEvent = {
+                  target: {
+                    name: field.name,
+                    value: value.startsWith("0")
+                      ? value
+                      : moment(
+                          value,
+                          type === "date"
+                            ? "DD-MM-YYYY"
+                            : type === "month"
+                            ? "MM-YYYY"
+                            : type === "year"
+                            ? "YYYY"
+                            : ""
+                        ).isValid()
+                      ? value
+                      : "",
+                  },
+                };
+                field.onChange(changeEvent);
+              }}
+              addonAfter={
+                <>
+                  <CalendarOutlined
+                    onClick={() => {
+                      setOpenCalender(true);
+                    }}
+                  />
+                  <DatePicker
+                    id="xxx"
+                    className="datePicker-custom"
+                    onChange={(value: any) => {
+                      const formatValue =
+                        (value &&
+                          value.format(
+                            type === "date"
+                              ? "DD-MM-YYYY"
+                              : type === "month"
+                              ? "MM-YYYY"
+                              : type === "year"
+                              ? "YYYY"
+                              : ""
+                          )) ||
+                        null;
+                      const changeEvent = {
+                        target: {
+                          name: field.name,
+                          value: formatValue || "",
+                        },
+                      };
+                      field.onChange(changeEvent);
+                    }}
+                    format={
+                      type === "date"
+                        ? "DD-MM-YYYY"
+                        : type === "month"
+                        ? "MM-YYYY"
+                        : type === "year"
+                        ? "YYYY"
+                        : ""
+                    }
+                    value={
+                      dayjs(
+                        formattedValue,
+                        type === "date"
+                          ? "DD-MM-YYYY"
+                          : type === "month"
+                          ? "MM-YYYY"
+                          : type === "year"
+                          ? "YYYY"
+                          : ""
+                      ).isValid()
+                        ? formattedValue
+                        : null
+                    }
+                    picker={type}
+                    open={openCalender}
+                    locale={localeCustom}
+                    onOpenChange={() => {
+                      setOpenCalender(false);
+                    }}
+                  />
+                </>
+              }
+            />
           </div>
         </div>
+        {errors[field.name] && touched[field.name] && (
+          <div className="validate-error text-red-500 text-xs italic flex w-full">
+            <div className="w-1/3"></div>
+            <div className="ml-1 w-2/3"> {errors[field.name] as string}</div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -87,17 +87,19 @@
 //   background: #555; /* Màu thanh cuộn khi hover */
 // }
 
+.validate-error {
+  animation-name: slideDown;
+  animation-duration: 0.2s;
+  font-weight: 600;
+}
+
 @keyframes slideDown {
-  from {
+  0% {
     transform: translateY(-100%);
     opacity: 0;
   }
-  to {
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
-}
-
-.validate-error {
-  animation: slideDown 1s forwards;
 }
