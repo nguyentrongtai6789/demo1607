@@ -29,8 +29,6 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
 }) => {
   type PickerType = "date" | "month" | "year";
 
-  const [type, setType] = useState<PickerType>("date");
-
   const { t } = useTranslation(["translation"]);
 
   const [openCalender, setOpenCalender] = useState<boolean>(false);
@@ -69,28 +67,7 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
 
   const regexNgayThangNam = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
 
-  const regexThangNam = /^(0[1-9]|1[0-2])-\d{4}$/;
-
-  const regexNam = /^(18\d{2}|19\d{2}|20\d{2}|21\d{2})$/;
-
-  const formattedValue = field.value
-    ? dayjs(
-        field.value,
-        type === "date"
-          ? "DD-MM-YYYY"
-          : type === "month"
-          ? "MM-YYYY"
-          : type === "year"
-          ? "YYYY"
-          : ""
-      )
-    : null;
-
-  useEffect(() => {
-    if (values === initialValues) {
-      setType("date");
-    }
-  }, [values]);
+  const formattedValue = field.value ? dayjs(field.value, "DD-MM-YYYY") : null;
 
   return (
     <>
@@ -105,53 +82,28 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
             {...field}
             allowClear={true}
             onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (
-                type === "date" &&
-                !regexNgayThangNam.test(event.target.value)
-              ) {
+              if (!regexNgayThangNam.test(event.target.value)) {
                 setFieldValue(field.name, "");
               }
             }}
             size="small"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               let value = event.target.value;
-              if (type === "date") {
-                if (value.length < 5 && value.length > 2) {
-                  value = value.slice(0, 2) + "-" + value.slice(2);
-                }
-                if (value.length === 5) {
-                  value = value.slice(0, 5) + "-" + value.slice(5, 9);
-                }
-                if (value.length > 10) {
-                  return;
-                }
+              if (value.length < 5 && value.length > 2) {
+                value = value.slice(0, 2) + "-" + value.slice(2);
               }
-              if (type === "month") {
-                if (value.length === 3) {
-                  value = value.slice(0, 2) + "-" + value.slice(2);
-                }
-                if (value.length > 7) {
-                  return;
-                }
+              if (value.length === 5) {
+                value = value.slice(0, 5) + "-" + value.slice(5, 9);
               }
-              if (type === "year") {
-                if (value.length > 4) return;
+              if (value.length > 10) {
+                return;
               }
               const changeEvent = {
                 target: {
                   name: field.name,
                   value: value.startsWith("0")
                     ? value
-                    : moment(
-                        value,
-                        type === "date"
-                          ? "DD-MM-YYYY"
-                          : type === "month"
-                          ? "MM-YYYY"
-                          : type === "year"
-                          ? "YYYY"
-                          : ""
-                      ).isValid()
+                    : moment(value, "DD-MM-YYYY").isValid()
                     ? value
                     : "",
                 },
@@ -170,17 +122,7 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
                   className="datePicker-custom"
                   onChange={(value: any) => {
                     const formatValue =
-                      (value &&
-                        value.format(
-                          type === "date"
-                            ? "DD-MM-YYYY"
-                            : type === "month"
-                            ? "MM-YYYY"
-                            : type === "year"
-                            ? "YYYY"
-                            : ""
-                        )) ||
-                      null;
+                      (value && value.format("DD-MM-YYYY")) || null;
                     const changeEvent = {
                       target: {
                         name: field.name,
@@ -189,30 +131,13 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
                     };
                     field.onChange(changeEvent);
                   }}
-                  format={
-                    type === "date"
-                      ? "DD-MM-YYYY"
-                      : type === "month"
-                      ? "MM-YYYY"
-                      : type === "year"
-                      ? "YYYY"
-                      : ""
-                  }
+                  format={"DD-MM-YYYY"}
                   value={
-                    dayjs(
-                      formattedValue,
-                      type === "date"
-                        ? "DD-MM-YYYY"
-                        : type === "month"
-                        ? "MM-YYYY"
-                        : type === "year"
-                        ? "YYYY"
-                        : ""
-                    ).isValid()
+                    dayjs(formattedValue, "DD-MM-YYYY").isValid()
                       ? formattedValue
                       : null
                   }
-                  picker={type}
+                  picker={"date"}
                   open={openCalender}
                   locale={localeCustom}
                   onOpenChange={() => {
