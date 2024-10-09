@@ -1,5 +1,5 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { DatePicker, DatePickerProps, Input, Modal, Select } from "antd";
+import { DatePicker, DatePickerProps, Input, Select } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { PickerLocale } from "antd/es/date-picker/generatePicker";
 import en from "antd/es/date-picker/locale/en_US";
@@ -8,7 +8,6 @@ import { FieldProps } from "formik";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ModalCustom } from "./ModalCustom";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -29,8 +28,6 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
   ...rest
 }) => {
   type PickerType = "date" | "month" | "year";
-
-  const { Option } = Select;
 
   const [type, setType] = useState<PickerType>("date");
 
@@ -226,13 +223,11 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
             }
             status={errors[field.name] && touched[field.name] ? "error" : ""}
           />
-          <div>
-            {errors[field.name] && touched[field.name] && (
-              <div className="validate-error text-red-500 text-xs italic">
-                {errors[field.name] as string}
-              </div>
-            )}
-          </div>
+          {errors[field.name] && touched[field.name] && (
+            <div className="validate-error text-red-500 text-xs italic">
+              {errors[field.name] as string}
+            </div>
+          )}
         </div>
       </div>
     </>

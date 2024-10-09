@@ -73,9 +73,9 @@ export const InputCustom: React.FC<InputCustomProps> = ({
         />
         <div>
           {errors[field.name] && touched[field.name] && (
-            <span className="validate-error text-red-500 text-xs italic">
+            <div className="validate-error text-red-500 text-xs italic">
               {errors[field.name] as string}
-            </span>
+            </div>
           )}
         </div>
       </div>

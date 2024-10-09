@@ -97,9 +97,9 @@ export const SelectCustom: React.FC<SelectCustomProps> = ({
         />
         <div>
           {errors[name] && touched[name] && (
-            <span className="validate-error text-red-500 text-xs italic">
+            <div className="validate-error text-red-500 text-xs italic">
               {errors[name] as string}
-            </span>
+            </div>
           )}
         </div>
       </div>

@@ -5,4 +5,5 @@ export const validateSearchForm = Yup.object().shape({
   donViId: Yup.string().required("Bắt buộc nhập").nullable(),
   hoVaTen: Yup.string().required("Bắt buộc nhập").nullable(),
   ngayNhapTu: Yup.string().required("Bắt buộc nhập").nullable(),
+  ngaySinh: Yup.string().required("Bắt buộc nhập").nullable(),
 });

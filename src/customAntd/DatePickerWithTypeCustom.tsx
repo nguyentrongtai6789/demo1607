@@ -101,8 +101,8 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
           <span className="font-semibold"> {label || ""}</span>
           {isRequired && <span className="text-red-50 font-bold"> *</span>}
         </span>
-        <div className="flex">
-          <div className="w-6/12">
+        <div className="flex w-full">
+          <div className="w-1/3">
             <Select
               value={type}
               onChange={(value) => {
@@ -122,10 +122,11 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
               <Option value="year">{t("nam")}</Option>
             </Select>
           </div>
-          <div className="ml-1">
+          <div className="ml-1 w-2/3">
             <Input
               {...field}
               allowClear={true}
+              status={errors[field.name] && touched[field.name] ? "error" : ""}
               autoComplete="off"
               onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
                 if (
@@ -257,6 +258,12 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
             />
           </div>
         </div>
+        {errors[field.name] && touched[field.name] && (
+          <div className="validate-error text-red-500 text-xs italic flex w-full">
+            <div className="w-1/3"></div>
+            <div className="ml-1 w-2/3"> {errors[field.name] as string}</div>
+          </div>
+        )}
       </div>
     </>
   );
