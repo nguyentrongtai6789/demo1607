@@ -99,7 +99,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
           <span className="font-semibold"> {label || ""}</span>
-          {isRequired && <span className="text-red-50">*</span>}
+          {isRequired && <span className="text-red-50 font-bold"> *</span>}
         </span>
         <div className="flex">
           <div className="w-6/12">
@@ -126,6 +126,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
             <Input
               {...field}
               allowClear={true}
+              autoComplete="off"
               onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
                 if (
                   type === "date" &&

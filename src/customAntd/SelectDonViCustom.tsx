@@ -66,7 +66,7 @@ export const SelectDonViCustom: React.FC<SelectCustomProps> = ({
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
           <span className="font-semibold"> {label || ""}</span>{" "}
-          {isRequired && <span className="text-red-500">*</span>}
+          {isRequired && <span className="text-red-500 font-bold"> *</span>}
         </span>
         <Select
           {...rest}

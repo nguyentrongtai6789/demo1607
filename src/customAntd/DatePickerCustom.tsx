@@ -100,7 +100,7 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
           <span className="font-semibold"> {label || ""}</span>
-          {isRequired && <span className="text-red-500"> *</span>}
+          {isRequired && <span className="text-red-500 font-bold"> *</span>}
         </span>
         <div>
           <Input
@@ -221,18 +221,16 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
                   onOpenChange={() => {
                     setOpenCalender(!openCalender);
                   }}
-                  status={
-                    errors[field.name] && touched[field.name] ? "error" : ""
-                  }
                 />
               </>
             }
+            status={errors[field.name] && touched[field.name] ? "error" : ""}
           />
           <div>
             {errors[field.name] && touched[field.name] && (
-              <span className="validate-error text-red-500 text-xs italic">
+              <div className="validate-error text-red-500 text-xs italic">
                 {errors[field.name] as string}
-              </span>
+              </div>
             )}
           </div>
         </div>

@@ -11,6 +11,7 @@ import { SelectCustom } from "../../../../../customAntd/SelectCustom";
 import { SelectDonViCustom } from "../../../../../customAntd/SelectDonViCustom";
 import httpMethod from "../../../../../services/httpMethod";
 import { DatepickerCustom } from "../../../../../customAntd/DatePickerCustom";
+import { validateSearchForm } from "./validation";
 
 export interface ISearchValues {
   donViId: number | null;
@@ -37,7 +38,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
     hoVaTen: "",
     hoVaTenCha: "",
     hoVaTenMe: "",
-    ngayNhapTu: null,
+    ngayNhapTu: "",
     ngayNhapDen: null,
     phamViTimKiem: "DV",
     soCmnd: "",
@@ -65,6 +66,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
             return;
             setSearchValues({ ...values });
           }}
+          validationSchema={validateSearchForm}
         >
           {(propsFormik: FormikProps<any>) => {
             const { values, setValues, setFieldValue } = propsFormik;

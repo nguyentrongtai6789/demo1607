@@ -58,11 +58,12 @@ export const InputCustom: React.FC<InputCustomProps> = ({
       <div style={styleWrapper || { marginBottom: "5px" }}>
         <span>
           <span className="font-semibold"> {label || ""}</span>{" "}
-          {isRequired && <span className="text-red-500">*</span>}
+          {isRequired && <span className="text-red-500 font-bold"> *</span>}
         </span>
         <Input
           {...field}
           {...rest}
+          autoComplete="off"
           placeholder={placeholder}
           allowClear={allowClear}
           disabled={disabled}
