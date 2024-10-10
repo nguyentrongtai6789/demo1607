@@ -9,6 +9,10 @@
   }
 }
 
+.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+  background: grey !important;
+}
+
 .delete-button {
   &:hover {
     background: rgb(202, 33, 33) !important;

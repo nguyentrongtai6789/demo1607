@@ -103,6 +103,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       label={t("gioiTinh")}
                       name={"gioiTinhId"}
                       valueNeedOfOption={"id"}
+                      disabled
                     />
                   </Col>
                   <Col span={4}>
@@ -110,6 +111,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       component={DatePickerWithTypeCustom}
                       name={"ngaySinh"}
                       label={t("ngaySinh")}
+                      disabled
                     />
                   </Col>
                 </Row>
@@ -143,6 +145,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       component={InputCustom}
                       label={t("hoTenVoChong")}
                       name={"hoTenVoChong"}
+                      disabled
                     />
                   </Col>
                   <Col span={4}>
@@ -151,6 +154,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       label={"Ngày nhập từ"}
                       name={"ngayNhapTu"}
                       isRequired
+                      disabled
                     />
                   </Col>
                   <Col span={4}>
@@ -184,6 +188,7 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       onClick={() => {
                         handleTest();
                       }}
+                      disabled
                     >
                       Test Access token
                     </ButtonCustom>
