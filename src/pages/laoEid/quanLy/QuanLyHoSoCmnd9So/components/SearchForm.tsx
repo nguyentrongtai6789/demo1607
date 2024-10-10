@@ -111,7 +111,6 @@ export const SearchForm: React.FC<ISearchForm> = ({ setSearchValues }) => {
                       component={DatePickerWithTypeCustom}
                       name={"ngaySinh"}
                       label={t("ngaySinh")}
-                      disabled
                     />
                   </Col>
                 </Row>

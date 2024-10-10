@@ -197,8 +197,11 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
                   }}
                   style={
                     errors[field.name] && touched[field.name]
-                      ? { color: "#ff4d4f" }
-                      : {}
+                      ? {
+                          color: "#ff4d4f",
+                          cursor: disabled ? "not-allowed" : "",
+                        }
+                      : { cursor: disabled ? "not-allowed" : "" }
                   }
                 />
               </div>
