@@ -1,13 +1,14 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { DatePicker, DatePickerProps, Input, Select } from "antd";
+import { DatePicker, DatePickerProps } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { PickerLocale } from "antd/es/date-picker/generatePicker";
 import en from "antd/es/date-picker/locale/en_US";
 import dayjs from "dayjs";
 import { FieldProps } from "formik";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import MaskedTextInput from "react-text-mask";
 
 export interface DatePickerCustomProps
   extends FieldProps,
@@ -53,14 +54,13 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
         t("thang12"),
       ],
       shortWeekDays: [
+        t("chuNhat"),
         t("thu2"),
-        t("thu3"),
         t("thu3"),
         t("thu4"),
         t("thu5"),
         t("thu6"),
         t("thu7"),
-        t("chuNhat"),
       ],
     },
   };
@@ -77,77 +77,89 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
           {isRequired && <span className="text-red-500 font-bold"> *</span>}
         </span>
         <div>
-          <Input
-            autoComplete="off"
-            {...field}
-            allowClear={true}
-            onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (!regexNgayThangNam.test(event.target.value)) {
-                setFieldValue(field.name, "");
-              }
-            }}
-            size="small"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              let value = event.target.value;
-              if (value.length < 5 && value.length > 2) {
-                value = value.slice(0, 2) + "-" + value.slice(2);
-              }
-              if (value.length === 5) {
-                value = value.slice(0, 5) + "-" + value.slice(5, 9);
-              }
-              if (value.length > 10) {
-                return;
-              }
-              const changeEvent = {
-                target: {
-                  name: field.name,
-                  value: value.startsWith("0")
-                    ? value
-                    : moment(value, "DD-MM-YYYY").isValid()
-                    ? value
-                    : "",
-                },
-              };
-              field.onChange(changeEvent);
-            }}
-            addonAfter={
-              <>
-                <CalendarOutlined
-                  onClick={() => {
-                    setOpenCalender(!openCalender);
-                  }}
-                />
-                <DatePicker
-                  id="xxx"
-                  className="datePicker-custom"
-                  onChange={(value: any) => {
-                    const formatValue =
-                      (value && value.format("DD-MM-YYYY")) || null;
-                    const changeEvent = {
-                      target: {
-                        name: field.name,
-                        value: formatValue || "",
-                      },
-                    };
-                    field.onChange(changeEvent);
-                  }}
-                  format={"DD-MM-YYYY"}
-                  value={
-                    dayjs(formattedValue, "DD-MM-YYYY").isValid()
-                      ? formattedValue
-                      : null
-                  }
-                  picker={"date"}
-                  open={openCalender}
-                  locale={localeCustom}
-                  onOpenChange={() => {
-                    setOpenCalender(!openCalender);
-                  }}
-                />
-              </>
+          <div
+            className="flex datePicker-wrapper-custom w-full"
+            style={
+              errors[field.name] && touched[field.name]
+                ? { border: "1px solid #ff4d4f" }
+                : { border: "1px solid #d9d9d9" }
             }
-            status={errors[field.name] && touched[field.name] ? "error" : ""}
-          />
+          >
+            <div className="w-10/12">
+              <MaskedTextInput
+                {...field}
+                className="input-date-picker"
+                autoComplete="off"
+                type="text"
+                value={field.value}
+                mask={[
+                  /\d/,
+                  /\d/,
+                  "-",
+                  /\d/,
+                  /\d/,
+                  "-",
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                ]}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const value = event.target.value;
+                  const changeEvent = {
+                    target: {
+                      name: field.name,
+                      value: value.startsWith("0")
+                        ? value
+                        : moment(value, "DD-MM-YYYY").isValid()
+                        ? value
+                        : "",
+                    },
+                  };
+                  field.onChange(changeEvent);
+                }}
+              />
+            </div>
+            <div className="w-2/12 flex justify-center items-center">
+              <CalendarOutlined
+                onClick={() => {
+                  setOpenCalender(!openCalender);
+                }}
+                style={
+                  errors[field.name] && touched[field.name]
+                    ? { color: "#ff4d4f" }
+                    : {}
+                }
+              />
+            </div>
+            <DatePicker
+              id="xxx"
+              className="datePicker-custom"
+              onChange={(value: any) => {
+                const formatValue =
+                  (value && value.format("DD-MM-YYYY")) || null;
+                const changeEvent = {
+                  target: {
+                    name: field.name,
+                    value: formatValue || "",
+                  },
+                };
+                field.onChange(changeEvent);
+              }}
+              format={"DD-MM-YYYY"}
+              value={
+                dayjs(formattedValue, "DD-MM-YYYY").isValid()
+                  ? formattedValue
+                  : null
+              }
+              picker={"date"}
+              open={openCalender}
+              locale={localeCustom}
+              onOpenChange={() => {
+                setOpenCalender(!openCalender);
+              }}
+            />
+          </div>
           {errors[field.name] && touched[field.name] && (
             <div className="validate-error text-red-500 text-xs italic">
               {errors[field.name] as string}
