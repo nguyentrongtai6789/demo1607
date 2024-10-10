@@ -13,6 +13,7 @@ interface Props {
   htmlType?: ButtonHTMLType;
   startIcon?: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
 const ButtonCustom: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const ButtonCustom: React.FC<Props> = ({
   htmlType,
   startIcon,
   className,
+  disabled,
   ...rest
 }) => {
   return (
@@ -44,6 +46,7 @@ const ButtonCustom: React.FC<Props> = ({
       type={htmlType}
       {...rest}
       className={className}
+      disabled={disabled}
     >
       {children}
     </Button>
