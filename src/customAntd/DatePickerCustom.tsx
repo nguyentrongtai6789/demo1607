@@ -26,6 +26,7 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
   styleWrapper,
   size,
   onChange,
+  disabled,
   ...rest
 }) => {
   type PickerType = "date" | "month" | "year";
@@ -86,10 +87,13 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
             <div className="w-10/12" style={{ height: "23px" }}>
               <MaskedTextInput
                 {...field}
-                className="input-date-picker"
+                className={
+                  !disabled ? "input-date-picker" : "input-date-picker-disabled"
+                }
                 autoComplete="off"
                 type="text"
                 value={field.value}
+                disabled={disabled}
                 mask={[
                   /\d/,
                   /\d/,
@@ -118,15 +122,22 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
                 }}
               />
             </div>
-            <div className="w-2/12 flex justify-center items-center">
+            <div
+              className="w-2/12 flex justify-center items-center"
+              style={disabled ? { backgroundColor: "rgba(0, 0, 0, 0.04)" } : {}}
+            >
               <CalendarOutlined
                 onClick={() => {
+                  if (disabled) return;
                   setOpenCalender(!openCalender);
                 }}
                 style={
                   errors[field.name] && touched[field.name]
-                    ? { color: "#ff4d4f" }
-                    : {}
+                    ? {
+                        color: "#ff4d4f",
+                        cursor: disabled ? "not-allowed" : "",
+                      }
+                    : { cursor: disabled ? "not-allowed" : "" }
                 }
               />
             </div>
