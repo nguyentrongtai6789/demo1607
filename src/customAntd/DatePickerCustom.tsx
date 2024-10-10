@@ -65,8 +65,6 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
     },
   };
 
-  const regexNgayThangNam = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
-
   const formattedValue = field.value ? dayjs(field.value, "DD-MM-YYYY") : null;
 
   return (
@@ -85,7 +83,7 @@ export const DatepickerCustom: React.FC<DatePickerCustomProps> = ({
                 : { border: "1px solid #d9d9d9" }
             }
           >
-            <div className="w-10/12">
+            <div className="w-10/12" style={{ height: "23px" }}>
               <MaskedTextInput
                 {...field}
                 className="input-date-picker"

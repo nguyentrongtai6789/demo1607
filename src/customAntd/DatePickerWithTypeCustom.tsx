@@ -109,7 +109,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
                 };
                 field.onChange(changeEvent);
               }}
-              style={{ height: "23.5px", width: "100%" }}
+              style={{ width: "100%", height: "24px" }}
             >
               <Option value="date">{t("ngay")}</Option>
               <Option value="month">{t("thang")}</Option>
@@ -125,7 +125,7 @@ export const DatePickerWithTypeCustom: React.FC<DatePickerCustomProps> = ({
                   : { border: "1px solid #d9d9d9" }
               }
             >
-              <div className="w-10/12">
+              <div className="w-10/12" style={{ height: "22.5px" }}>
                 <MaskedTextInput
                   {...field}
                   className="input-date-picker"
